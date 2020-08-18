@@ -1,5 +1,5 @@
-# [GAME-NAME]
-### [GAME DESCRIPTION]
+# ScavengARescape
+### An augmented reality escape room where the items in your environment help you escape.
 *This document describes our team social contract for this project*
 
 ## Roles
