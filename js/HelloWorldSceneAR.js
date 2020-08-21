@@ -10,6 +10,7 @@ import {
   ViroConstants,
   ViroBox,
   ViroMaterials,
+  ViroARPlaneSelector,
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
