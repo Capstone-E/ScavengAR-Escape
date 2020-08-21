@@ -11,7 +11,8 @@ import {
   ViroBox,
   ViroMaterials,
   ViroARTrackingTargets,
-  ViroARImageMarker
+  ViroARImageMarker,
+  ViroARCamera
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -47,6 +48,15 @@ export default class HelloWorldSceneAR extends Component {
             materials={['grid']}
           />
         </ViroARImageMarker>
+        <ViroARCamera>
+            <ViroBox 
+              position={[-0.7, -2, -3.2]}
+              scale={[.5,.5,.5]}
+              materials={['box']} 
+              rotation={[0, 45, 0]}
+              />
+        </ViroARCamera>
+        
 
       </ViroARScene>
     );
@@ -84,6 +94,9 @@ ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('./res/grid_bg.jpg'),
   },
+  box: {
+    diffuseTexture: require('./res/cardboard.jpg')
+  }
 });
 
 ViroARTrackingTargets.createTargets({
