@@ -19,6 +19,7 @@ export default class ScavengARescape extends Component {
     this.state = {
       gameState: false
     }
+    this.newGameScreen = this.newGameScreen.bind(this)
   }
 
   render() {
