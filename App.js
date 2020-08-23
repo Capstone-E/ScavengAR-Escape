@@ -28,7 +28,7 @@ export default class ScavengARescape extends Component {
     if (!gameState) {
       return this.newGameScreen();
     } else {
-      return <ViroARSceneNavigator initialScene={{ scene: MainArScene }} />;
+      return <ViroARSceneNavigator initialScene={{ scene: InitialARScene }} />;
     }
   }
 
