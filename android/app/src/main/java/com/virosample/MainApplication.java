@@ -1,4 +1,4 @@
-package com.virosample;
+package com.scavengarescape;
 
 import android.app.Application;
 
