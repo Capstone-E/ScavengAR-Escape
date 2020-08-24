@@ -85,9 +85,6 @@ ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('./res/grid_bg.jpg'),
   },
-  // box: {
-  //   diffuseTexture: require('./res/cardboard.jpg')
-  // }
 });
 
 ViroARTrackingTargets.createTargets({
