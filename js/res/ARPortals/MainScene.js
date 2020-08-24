@@ -17,6 +17,8 @@ import {
   Viro3DObject,
   ViroImage,
   ViroARPlaneSelector,
+  ViroARPlane,
+  ViroBox,
 } from 'react-viro';
 
 var createReactClass = require('create-react-class');
@@ -24,13 +26,14 @@ var MainScene = createReactClass({
   render: function () {
     return (
       <ViroARScene>
+        {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
         <ViroAmbientLight color="#ffffff" intensity={200} />
         <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
         >
-          <ViroPortal position={[0, 0, -1]} scale={[0.1, 0.1, 0.1]}>
+          <ViroPortal position={[-1, -1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/portal_ship/portal_ship.vrx')}
               resources={[
@@ -80,6 +83,7 @@ var MainScene = createReactClass({
             scale={[0.01, 0.01, 0.01]}
           />
         </ViroPortalScene>
+        {/* </ViroARPlane> */}
       </ViroARScene>
     );
   },
