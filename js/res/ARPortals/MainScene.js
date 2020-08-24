@@ -22,8 +22,18 @@ import {
 } from 'react-viro';
 
 var createReactClass = require('create-react-class');
-var MainScene = createReactClass({
-  render: function () {
+export default class MainScene extends Component {
+  constructor() {
+    super();
+
+    // initial state
+    this.state = {
+      text: ''
+    }
+
+  }
+
+  render() {
     return (
       <ViroARScene>
         {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
@@ -54,6 +64,18 @@ var MainScene = createReactClass({
             // resources={[require('../NoteOne/obj.mtl')]}
             type="OBJ"
             scale={[0.01, 0.01, 0.01]}
+          />
+          <Viro3DObject
+            source={require('../3dObjects/Key_B_02.obj')}
+            resources={[require('../3dObjects/Key_B_02.mtl')]}
+            type="OBJ"
+            scale={[0.1, 0.1, 0.1]}
+            onClick={this._onClick}
+            />
+          <ViroBox
+            position={[0, -0.5, -1]}
+            scale={[0.3, 0.3, 0.1]}
+            materials={['grid']}
           />
         </ViroPortalScene>
         <ViroAmbientLight color="#ffffff" intensity={200} />
@@ -86,7 +108,27 @@ var MainScene = createReactClass({
         {/* </ViroARPlane> */}
       </ViroARScene>
     );
-  },
-});
+  }
+
+  _onInitialized(state, reason) {
+    if (state == ViroConstants.TRACKING_NORMAL) {
+      this.setState({
+        text: 'Find the key!',
+      });
+    } else if (state == ViroConstants.TRACKING_NONE) {
+      this.setState({
+        text: 'oopsie',
+      });
+    }
+  }
+
+  _onClick() {
+    // this.setState({
+    //   text: 'You found the key'
+    // })
+  }
+};
+
+
 
 module.exports = MainScene;
