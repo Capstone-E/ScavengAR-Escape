@@ -12,7 +12,6 @@ import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 import { ViroARSceneNavigator } from 'react-viro';
 
 const InitialARScene = require('./js/HelloWorldSceneAR');
-const MainArScene = require('./js/res/ARPortals/MainScene');
 
 export default class ScavengARescape extends Component {
   constructor() {
