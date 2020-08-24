@@ -21,16 +21,14 @@ import {
   ViroBox,
 } from 'react-viro';
 
-var createReactClass = require('create-react-class');
 export default class MainScene extends Component {
   constructor() {
     super();
 
     // initial state
     this.state = {
-      text: ''
-    }
-
+      text: '',
+    };
   }
 
   render() {
@@ -77,7 +75,7 @@ export default class MainScene extends Component {
             type="OBJ"
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
-            />
+          />
           <ViroBox
             position={[0, -0.5, -1]}
             scale={[0.3, 0.3, 0.1]}
@@ -133,8 +131,6 @@ export default class MainScene extends Component {
     //   text: 'You found the key'
     // })
   }
-};
-
-
+}
 
 module.exports = MainScene;
