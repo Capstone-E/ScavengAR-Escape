@@ -8,8 +8,9 @@
  */
 
 import React, {Component} from 'react'
-import {Text, View, StyleSheet, TouchableHighlight} from 'react-native'
+import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
+import Inventory from './js/Inventory'
 
 const InitialARScene = require('./js/HelloWorldSceneAR')
 
@@ -27,7 +28,13 @@ export default class ScavengARescape extends Component {
     if (!gameState) {
       return this.newGameScreen()
     } else {
-      return <ViroARSceneNavigator initialScene={{scene: InitialARScene}} />
+      return (
+        <View style={{flex: 1}}>
+          <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ /> 
+          <ViroARSceneNavigator initialScene={{scene: InitialARScene}} />
+          <Inventory />
+        </View>
+      )
     }
   }
 

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet} from 'react-native';
 
 import {
   ViroARScene,
@@ -12,7 +12,7 @@ import {
   ViroMaterials,
   ViroARTrackingTargets,
   ViroARImageMarker,
-  ViroARCamera
+  // ViroARCamera
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -48,15 +48,6 @@ export default class HelloWorldSceneAR extends Component {
             materials={['grid']}
           />
         </ViroARImageMarker>
-        <ViroARCamera>
-            <ViroBox 
-              position={[-0.7, -2, -3.2]}
-              scale={[.5,.5,.5]}
-              materials={['box']} 
-              rotation={[0, 45, 0]}
-              />
-        </ViroARCamera>
-        
 
       </ViroARScene>
     );
@@ -94,9 +85,9 @@ ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('./res/grid_bg.jpg'),
   },
-  box: {
-    diffuseTexture: require('./res/cardboard.jpg')
-  }
+  // box: {
+  //   diffuseTexture: require('./res/cardboard.jpg')
+  // }
 });
 
 ViroARTrackingTargets.createTargets({
