@@ -21,6 +21,9 @@ import {
   ViroBox,
 } from 'react-viro';
 
+import HintButton from '../../HintButton';
+
+var createReactClass = require('create-react-class');
 export default class MainScene extends Component {
   constructor() {
     super();
@@ -35,6 +38,7 @@ export default class MainScene extends Component {
     return (
       <ViroARScene>
         {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
+        <HintButton />
         <ViroAmbientLight color="#ffffff" intensity={200} />
         <ViroPortalScene
           passable={true}
@@ -82,8 +86,8 @@ export default class MainScene extends Component {
             materials={['grid']}
           />
         </ViroPortalScene>
-        {/* <ViroAmbientLight color="#ffffff" intensity={200} /> */}
-        {/* <ViroPortalScene
+        <ViroAmbientLight color="#ffffff" intensity={200} />
+        <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
@@ -108,7 +112,7 @@ export default class MainScene extends Component {
             type="OBJ"
             scale={[0.01, 0.01, 0.01]}
           />
-        </ViroPortalScene> */}
+        </ViroPortalScene>
         {/* </ViroARPlane> */}
       </ViroARScene>
     );
