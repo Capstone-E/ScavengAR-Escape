@@ -48,16 +48,22 @@ var MainScene = createReactClass({
               }}
             />
           </ViroPortal>
-          <Viro360Image
-            source={require('../dock.jpg')}
-            // source={require('../NoteOne/tinker.obj')}
-            // resources={[require('../NoteOne/obj.mtl')]}
+          <Viro360Image source={require('../dock.jpg')} />
+          <Viro3DObject
+            source={require('../OBJ_CleaverKnife/CleaverKnife.obj')}
+            resources={[
+              require('../OBJ_CleaverKnife/CleaverKnife.mtl'),
+              require('../OBJ_CleaverKnife/CleaverKnife_AO.png'),
+              require('../OBJ_CleaverKnife/CleaverKnife_BaseColor.png'),
+              require('../OBJ_CleaverKnife/CleaverKnife_Metalness.png'),
+              require('../OBJ_CleaverKnife/CleaverKnife_Normal.png'),
+              require('../OBJ_CleaverKnife/CleaverKnife_Roughness.png'),
+            ]}
             type="OBJ"
-            scale={[0.01, 0.01, 0.01]}
           />
         </ViroPortalScene>
-        <ViroAmbientLight color="#ffffff" intensity={200} />
-        <ViroPortalScene
+        {/* <ViroAmbientLight color="#ffffff" intensity={200} /> */}
+        {/* <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
@@ -82,7 +88,7 @@ var MainScene = createReactClass({
             type="OBJ"
             scale={[0.01, 0.01, 0.01]}
           />
-        </ViroPortalScene>
+        </ViroPortalScene> */}
         {/* </ViroARPlane> */}
       </ViroARScene>
     );
