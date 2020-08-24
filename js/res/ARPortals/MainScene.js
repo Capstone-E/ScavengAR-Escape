@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native'
 
 import {
   ViroSceneNavigator,
@@ -18,33 +18,32 @@ import {
   ViroImage,
   ViroARPlaneSelector,
   ViroARPlane,
-  ViroBox,
-} from 'react-viro';
+  ViroBox
+} from 'react-viro'
 
-var createReactClass = require('create-react-class');
+import HintButton from '../../HintButton'
+
+var createReactClass = require('create-react-class')
 var MainScene = createReactClass({
-  render: function () {
+  render: function() {
     return (
       <ViroARScene>
         {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
+        <HintButton />
         <ViroAmbientLight color="#ffffff" intensity={200} />
-        <ViroPortalScene
-          passable={true}
-          dragType="FixedDistance"
-          onDrag={() => {}}
-        >
+        <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
           <ViroPortal position={[-1, -1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/portal_ship/portal_ship.vrx')}
               resources={[
                 require('./portal_res/portal_ship/portal_ship_diffuse.png'),
                 require('./portal_res/portal_ship/portal_ship_normal.png'),
-                require('./portal_res/portal_ship/portal_ship_specular.png'),
+                require('./portal_res/portal_ship/portal_ship_specular.png')
               ]}
               type="VRX"
               physicsBody={{
                 type: 'Kinematic',
-                userGravity: true,
+                userGravity: true
               }}
             />
           </ViroPortal>
@@ -57,36 +56,28 @@ var MainScene = createReactClass({
           />
         </ViroPortalScene>
         <ViroAmbientLight color="#ffffff" intensity={200} />
-        <ViroPortalScene
-          passable={true}
-          dragType="FixedDistance"
-          onDrag={() => {}}
-        >
+        <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
           <ViroPortal position={[0, -1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/portal_ship/portal_ship.vrx')}
               resources={[
                 require('./portal_res/portal_ship/portal_ship_diffuse.png'),
                 require('./portal_res/portal_ship/portal_ship_normal.png'),
-                require('./portal_res/portal_ship/portal_ship_specular.png'),
+                require('./portal_res/portal_ship/portal_ship_specular.png')
               ]}
               type="VRX"
               physicsBody={{
                 type: 'Kinematic',
-                userGravity: true,
+                userGravity: true
               }}
             />
           </ViroPortal>
-          <Viro360Image
-            source={require('../outside.jpg')}
-            type="OBJ"
-            scale={[0.01, 0.01, 0.01]}
-          />
+          <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
         </ViroPortalScene>
         {/* </ViroARPlane> */}
       </ViroARScene>
-    );
-  },
-});
+    )
+  }
+})
 
-module.exports = MainScene;
+module.exports = MainScene
