@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native'
 
 import {
   ViroSceneNavigator,
@@ -19,13 +19,15 @@ import {
   ViroImage,
   ViroARPlaneSelector,
   ViroARPlane,
-  ViroBox,
-} from 'react-viro';
+  ViroBox
+} from 'react-viro'
 
-var createReactClass = require('create-react-class');
+import HintButton from '../../HintButton'
+
+var createReactClass = require('create-react-class')
 export default class MainScene extends Component {
   constructor() {
-    super();
+    super()
 
     // initial state
     this.state = {
@@ -39,24 +41,21 @@ export default class MainScene extends Component {
     return (
       <ViroARScene>
         {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
+        <HintButton />
         <ViroAmbientLight color="#ffffff" intensity={200} />
-        <ViroPortalScene
-          passable={true}
-          dragType="FixedDistance"
-          onDrag={() => {}}
-        >
+        <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
           <ViroPortal position={[-1, -1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/portal_ship/portal_ship.vrx')}
               resources={[
                 require('./portal_res/portal_ship/portal_ship_diffuse.png'),
                 require('./portal_res/portal_ship/portal_ship_normal.png'),
-                require('./portal_res/portal_ship/portal_ship_specular.png'),
+                require('./portal_res/portal_ship/portal_ship_specular.png')
               ]}
               type="VRX"
               physicsBody={{
                 type: 'Kinematic',
-                userGravity: true,
+                userGravity: true
               }}
             />
           </ViroPortal>
@@ -78,54 +77,42 @@ export default class MainScene extends Component {
             type="OBJ"
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
-            />
-          <ViroBox
-            position={[0, -0.5, -1]}
-            scale={[0.3, 0.3, 0.1]}
-            materials={['grid']}
           />
+          <ViroBox position={[0, -0.5, -1]} scale={[0.3, 0.3, 0.1]} materials={['grid']} />
         </ViroPortalScene>
         <ViroAmbientLight color="#ffffff" intensity={200} />
-        <ViroPortalScene
-          passable={true}
-          dragType="FixedDistance"
-          onDrag={() => {}}
-        >
+        <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
           <ViroPortal position={[0, -1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/portal_ship/portal_ship.vrx')}
               resources={[
                 require('./portal_res/portal_ship/portal_ship_diffuse.png'),
                 require('./portal_res/portal_ship/portal_ship_normal.png'),
-                require('./portal_res/portal_ship/portal_ship_specular.png'),
+                require('./portal_res/portal_ship/portal_ship_specular.png')
               ]}
               type="VRX"
               physicsBody={{
                 type: 'Kinematic',
-                userGravity: true,
+                userGravity: true
               }}
             />
           </ViroPortal>
-          <Viro360Image
-            source={require('../outside.jpg')}
-            type="OBJ"
-            scale={[0.01, 0.01, 0.01]}
-          />
+          <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
         </ViroPortalScene>
         {/* </ViroARPlane> */}
       </ViroARScene>
-    );
+    )
   }
 
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text: 'Find the key!',
-      });
+        text: 'Find the key!'
+      })
     } else if (state == ViroConstants.TRACKING_NONE) {
       this.setState({
-        text: 'oopsie',
-      });
+        text: 'oopsie'
+      })
     }
   }
 
@@ -134,8 +121,6 @@ export default class MainScene extends Component {
       text: 'You found the key'
     })
   }
-};
+}
 
-
-
-module.exports = MainScene;
+module.exports = MainScene
