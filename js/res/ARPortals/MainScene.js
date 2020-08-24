@@ -6,6 +6,7 @@ import { StyleSheet } from 'react-native';
 
 import {
   ViroSceneNavigator,
+  ViroText,
   ViroScene,
   ViroARScene,
   ViroAmbientLight,
@@ -32,6 +33,8 @@ export default class MainScene extends Component {
     this.state = {
       text: '',
     };
+    this._onInitialized = this._onInitialized.bind(this);
+    this._onClick = this._onClick.bind(this);
   }
 
   render() {
@@ -72,6 +75,11 @@ export default class MainScene extends Component {
               require('../OBJ_CleaverKnife/CleaverKnife_Roughness.png'),
             ]}
             type="OBJ"
+          />
+          <ViroText
+            text={this.state.text}
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
           />
           <Viro3DObject
             source={require('../3dObjects/Key_B_02.obj')}
@@ -131,9 +139,9 @@ export default class MainScene extends Component {
   }
 
   _onClick() {
-    // this.setState({
-    //   text: 'You found the key'
-    // })
+    this.setState({
+      text: 'You found the key',
+    });
   }
 }
 
