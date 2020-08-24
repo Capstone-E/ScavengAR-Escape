@@ -83,7 +83,7 @@ export default class MainScene extends Component {
           />
           <Viro3DObject
             source={require('../3dObjects/Key_B_02.obj')}
-            resources={[require('../3dObjects/Key_B_02.mtl')]}
+            resources={[require('../3dObjects/Key_B_02.mtl'), require('../3dObjects/keyB_tx.bmp')]}
             type="OBJ"
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
