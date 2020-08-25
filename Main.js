@@ -8,6 +8,7 @@
  */
 
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
@@ -33,7 +34,8 @@ class Main extends Component {
   }
 
   newGameScreen() {
-    const gameState = this.state.gameState
+    const {gameState} = this.props
+    console.log('gameState in newGameScree', this.props)
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
@@ -117,4 +119,4 @@ var localStyles = StyleSheet.create({
   }
 })
 
-module.exports = ScavengARescape
+module.exports = Main

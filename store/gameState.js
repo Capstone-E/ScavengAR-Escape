@@ -10,6 +10,7 @@ const setGameStateAC = (gameState) => ({
 // THUNK CREATORS
 export const setGameState = (gameState) => (dispatch) => {
   try {
+    console.log('gameState', gameState)
     dispatch(setGameStateAC(gameState))
   } catch (err) {
     console.error(err)
@@ -26,10 +27,13 @@ const initialState = {
 // REDUCERS
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SET_GAMESTATE:
+    case SET_GAMESTATE: {
       return {
         ...state,
-        gameState: !action.gameState
+        gameState: action.gameState
       }
+    }
+    default:
+      return state
   }
 }
