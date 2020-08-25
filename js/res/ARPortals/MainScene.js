@@ -79,12 +79,14 @@ export default class MainScene extends Component {
         <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
           <ViroPortal position={[0, -3, -1]} scale={[0.01, 0.01, 0.01]}>
             <Viro3DObject
-              source={require('./portal_res/door/DragonJawPortal_OBJ/DragonJawPortal.obj')}
+              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/door/DragonJawPortal_OBJ/DragonJawPortal.mtl'),
-
+                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
-              type="OBJ"
+              type="VRX"
             />
           </ViroPortal>
           <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
