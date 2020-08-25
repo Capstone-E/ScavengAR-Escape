@@ -41,7 +41,7 @@ export default class MainScene extends Component {
     return (
       <ViroARScene>
         {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
-        <HintButton />
+        {/* <HintButton /> */}
         <ViroAmbientLight color="#ffffff" intensity={200} />
         <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
           <ViroPortal position={[-1, -1, -1]} scale={[0.1, 0.1, 0.1]}>
@@ -53,10 +53,6 @@ export default class MainScene extends Component {
                 require('./portal_res/portal_ship/portal_ship_specular.png')
               ]}
               type="VRX"
-              physicsBody={{
-                type: 'Kinematic',
-                userGravity: true
-              }}
             />
           </ViroPortal>
           <Viro360Image
@@ -91,10 +87,6 @@ export default class MainScene extends Component {
                 require('./portal_res/portal_ship/portal_ship_specular.png')
               ]}
               type="VRX"
-              physicsBody={{
-                type: 'Kinematic',
-                userGravity: true
-              }}
             />
           </ViroPortal>
           <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
