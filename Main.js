@@ -8,7 +8,7 @@
  */
 
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
@@ -17,25 +17,16 @@ import {setGameState} from './store/gameState'
 const InitialARScene = require('./js/HelloWorldSceneAR')
 const MainScene = require('./js/res/ARPortals/MainScene')
 
-class Main extends Component {
-  render() {
-    const {gameState} = this.props
-    if (!gameState) {
-      return this.newGameScreen()
-    } else {
-      return (
-        <View style={{flex: 1}}>
-          <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
-          <ViroARSceneNavigator initialScene={{scene: MainScene}} />
-          <Inventory />
-        </View>
-      )
-    }
-  }
+function Main() {
+  const game = useSelector((state) => state.game)
+  const dispatch = useDispatch()
 
-  newGameScreen() {
-    const {gameState} = this.props
-    console.log('gameState in newGameScree', this.props)
+  console.log('game in Main', game)
+
+  const toggleYesBtn = (gameState) => {
+    dispatch(setGameState(!gameState))
+  }
+  const newGameScreen = () => {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
@@ -43,7 +34,7 @@ class Main extends Component {
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={() => {
-              setGameState(!gameState)
+              toggleYesBtn()
             }}
           >
             <Text style={localStyles.buttonText}>Yes</Text>
@@ -52,19 +43,23 @@ class Main extends Component {
       </View>
     )
   }
+
+  if (game.gameState === false) {
+    return newGameScreen()
+  } else {
+    return (
+      <View style={{flex: 1}}>
+        <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
+        <Inventory />
+      </View>
+    )
+  }
 }
 
-const mapStateToProps = (state) => ({
-  gameState: state.gameState
-})
+export default Main
 
-const mapDispatchToProps = (dispatch) => ({
-  setGameState: (gameState) => dispatch(setGameState(gameState))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
-
-var localStyles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   viroContainer: {
     flex: 1,
     backgroundColor: 'black'
@@ -118,5 +113,3 @@ var localStyles = StyleSheet.create({
     borderColor: '#fff'
   }
 })
-
-module.exports = Main

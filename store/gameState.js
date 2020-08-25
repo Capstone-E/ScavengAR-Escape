@@ -10,7 +10,6 @@ const setGameStateAC = (gameState) => ({
 // THUNK CREATORS
 export const setGameState = (gameState) => (dispatch) => {
   try {
-    console.log('gameState', gameState)
     dispatch(setGameStateAC(gameState))
   } catch (err) {
     console.error(err)
