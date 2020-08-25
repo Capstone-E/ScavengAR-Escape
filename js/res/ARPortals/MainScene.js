@@ -31,7 +31,7 @@ export default class MainScene extends Component {
 
     // initial state
     this.state = {
-      text: ''
+      text: 'find the key'
     }
     this._onInitialized = this._onInitialized.bind(this)
     this._onClick = this._onClick.bind(this)
@@ -40,19 +40,17 @@ export default class MainScene extends Component {
   render() {
     return (
       <ViroARScene>
-        {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
         {/* <HintButton /> */}
         <ViroAmbientLight color="#ffffff" intensity={200} />
-        <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
-          <ViroPortal position={[-1, -1, -1]} scale={[0.1, 0.1, 0.1]}>
+        {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
+        {/* <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
+          <ViroPortal position={[0, -3, -3]} scale={[0.015, 0.015, 0.015]}>
             <Viro3DObject
-              source={require('./portal_res/portal_ship/portal_ship.vrx')}
+              source={require('./portal_res/door/Props.obj')}
               resources={[
-                require('./portal_res/portal_ship/portal_ship_diffuse.png'),
-                require('./portal_res/portal_ship/portal_ship_normal.png'),
-                require('./portal_res/portal_ship/portal_ship_specular.png')
+                require('./portal_res/door/Props.mtl'),
               ]}
-              type="VRX"
+              type="OBJ"
             />
           </ViroPortal>
           <Viro360Image
@@ -75,23 +73,23 @@ export default class MainScene extends Component {
             onClick={this._onClick}
           />
           <ViroBox position={[0, -0.5, -1]} scale={[0.3, 0.3, 0.1]} materials={['grid']} />
-        </ViroPortalScene>
+        </ViroPortalScene> */}
+        {/* </ViroARPlane> */}
         <ViroAmbientLight color="#ffffff" intensity={200} />
         <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
-          <ViroPortal position={[0, -1, -1]} scale={[0.1, 0.1, 0.1]}>
+          <ViroPortal position={[0, -3, -1]} scale={[0.01, 0.01, 0.01]}>
             <Viro3DObject
-              source={require('./portal_res/portal_ship/portal_ship.vrx')}
+              source={require('./portal_res/door/DragonJawPortal_OBJ/DragonJawPortal.obj')}
               resources={[
-                require('./portal_res/portal_ship/portal_ship_diffuse.png'),
-                require('./portal_res/portal_ship/portal_ship_normal.png'),
-                require('./portal_res/portal_ship/portal_ship_specular.png')
+                require('./portal_res/door/DragonJawPortal_OBJ/DragonJawPortal.mtl'),
+
               ]}
-              type="VRX"
+              type="OBJ"
             />
           </ViroPortal>
           <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
         </ViroPortalScene>
-        {/* </ViroARPlane> */}
+
       </ViroARScene>
     )
   }
@@ -109,9 +107,13 @@ export default class MainScene extends Component {
   }
 
   _onClick() {
+    //remove key from view (unrender)
     this.setState({
+      keyfound: true,
       text: 'You found the key'
     })
+    //change inventory state
+    //check box off todo list for hints
   }
 }
 
