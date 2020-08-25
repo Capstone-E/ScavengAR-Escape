@@ -40,7 +40,6 @@ export default class MainScene extends Component {
   render() {
     return (
       <ViroARScene>
-        {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
         {/* <HintButton /> */}
         <ViroAmbientLight color="#ffffff" intensity={200} />
         <ViroPortalScene
@@ -48,7 +47,7 @@ export default class MainScene extends Component {
           dragType="FixedDistance"
           onDrag={() => {}}
         >
-          <ViroPortal position={[-1, -1, -1]} scale={[0.1, 0.1, 0.1]}>
+          <ViroPortal position={[0, 0, 5]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/portal_ship/portal_ship.vrx')}
               resources={[
@@ -63,7 +62,7 @@ export default class MainScene extends Component {
               }}
             />
           </ViroPortal>
-          <Viro360Image source={require('../dock.jpg')} />
+          <Viro360Image source={require('../snowscape.jpg')} />
           <Viro3DObject
             source={require('../OBJ_CleaverKnife/CleaverKnife.obj')}
             resources={[
@@ -83,7 +82,10 @@ export default class MainScene extends Component {
           />
           <Viro3DObject
             source={require('../3dObjects/Key_B_02.obj')}
-            resources={[require('../3dObjects/Key_B_02.mtl'), require('../3dObjects/keyB_tx.bmp')]}
+            resources={[
+              require('../3dObjects/Key_B_02.mtl'),
+              require('../3dObjects/keyB_tx.bmp'),
+            ]}
             type="OBJ"
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
@@ -94,7 +96,7 @@ export default class MainScene extends Component {
             materials={['grid']}
           />
         </ViroPortalScene>
-        <ViroAmbientLight color="#ffffff" intensity={200} />
+
         <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
@@ -121,7 +123,6 @@ export default class MainScene extends Component {
             scale={[0.01, 0.01, 0.01]}
           />
         </ViroPortalScene>
-        {/* </ViroARPlane> */}
       </ViroARScene>
     );
   }
