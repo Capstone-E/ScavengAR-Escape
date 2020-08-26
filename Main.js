@@ -7,12 +7,13 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
 import {setGameState} from './store/gameState'
+import HintButton from './js/HintButton'
 
 const InitialARScene = require('./js/HelloWorldSceneAR')
 const MainScene = require('./js/res/ARPortals/MainScene')
@@ -20,8 +21,6 @@ const MainScene = require('./js/res/ARPortals/MainScene')
 function Main() {
   const game = useSelector((state) => state.game)
   const dispatch = useDispatch()
-
-  console.log('game in Main', game)
 
   const toggleYesBtn = (gameState) => {
     dispatch(setGameState(!gameState))
@@ -51,6 +50,7 @@ function Main() {
       <View style={{flex: 1}}>
         <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
         <ViroARSceneNavigator initialScene={{scene: MainScene}} />
+        <HintButton />
         <Inventory />
       </View>
     )
