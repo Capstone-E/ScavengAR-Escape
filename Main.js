@@ -7,14 +7,15 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React from 'react'
+import React, {Component} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
 import {setGameState} from './store/gameState'
 
-const MainScene = require('./js/MainScene')
+const InitialARScene = require('./js/HelloWorldSceneAR')
+const MainScene = require('./js/res/ARPortals/MainScene')
 
 function Main() {
   const game = useSelector((state) => state.game)
