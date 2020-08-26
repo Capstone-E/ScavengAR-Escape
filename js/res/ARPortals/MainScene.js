@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 
-import React, {Component} from 'react'
+import React, { Component } from 'react';
 
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native';
 
 import {
   ViroSceneNavigator,
@@ -24,12 +24,12 @@ import {
   ViroOrbitCamera
 } from 'react-viro'
 
-import HintButton from '../../HintButton'
+// import HintButton from '../../HintButton';
 
-var createReactClass = require('create-react-class')
+var createReactClass = require('create-react-class');
 export default class MainScene extends Component {
   constructor() {
-    super()
+    super();
 
     // initial state
     this.state = {
@@ -66,29 +66,47 @@ export default class MainScene extends Component {
               type="VRX"
             />
           </ViroPortal>
-          <Viro360Image
-            source={require('../dock.jpg')}
+          <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
+          {/* <Viro3DObject
+            source={require('../OBJ_CleaverKnife/CleaverKnife.obj')}
+            resources={[
+              require('../OBJ_CleaverKnife/CleaverKnife.mtl'),
+              require('../OBJ_CleaverKnife/CleaverKnife_AO.png'),
+              require('../OBJ_CleaverKnife/CleaverKnife_BaseColor.png'),
+              require('../OBJ_CleaverKnife/CleaverKnife_Metalness.png'),
+              require('../OBJ_CleaverKnife/CleaverKnife_Normal.png'),
+              require('../OBJ_CleaverKnife/CleaverKnife_Roughness.png'),
+            ]}
             type="OBJ"
-            scale={[0.01, 0.01, 0.01]}
-          />
+          /> */}
           <ViroText
-          text={this.state.text}
-          scale={[0.5, 0.5, 0.5]}
-          position={[0, 0, -1]}
-        />
+            text={this.state.text}
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
+          />
           <Viro3DObject
             source={require('../3dObjects/Key_B_02.obj')}
-            resources={[require('../3dObjects/Key_B_02.mtl'), require('../3dObjects/keyB_tx.bmp')]}
+            resources={[
+              require('../3dObjects/Key_B_02.mtl'),
+              require('../3dObjects/keyB_tx.bmp'),
+            ]}
             type="OBJ"
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
           />
-          <ViroBox position={[0, -0.5, -1]} scale={[0.3, 0.3, 0.1]} materials={['grid']} />
+          <ViroBox
+            position={[0, -0.5, -1]}
+            scale={[0.3, 0.3, 0.1]}
+            materials={['grid']}
+          />
         </ViroPortalScene>
-        {/* </ViroARPlane> */}
-        {/* <ViroAmbientLight color="#ffffff" intensity={200} />
-        <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
-          <ViroPortal position={[0, -3, -1]} scale={[1, 1, 1]}>
+
+        {/* <ViroPortalScene
+          passable={true}
+          dragType="FixedDistance"
+          onDrag={() => {}}
+        >
+          <ViroPortal position={[0, -1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -104,18 +122,18 @@ export default class MainScene extends Component {
         </ViroPortalScene> */}
 
       </ViroARScene>
-    )
+    );
   }
 
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text: 'Find the key!'
-      })
+        text: 'Find the key!',
+      });
     } else if (state == ViroConstants.TRACKING_NONE) {
       this.setState({
-        text: 'oopsie'
-      })
+        text: 'oopsie',
+      });
     }
   }
 
@@ -130,4 +148,4 @@ export default class MainScene extends Component {
   }
 }
 
-module.exports = MainScene
+module.exports = MainScene;
