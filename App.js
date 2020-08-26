@@ -7,7 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React from 'react'
+import React, {Component} from 'react'
 import Main from './Main'
 import store from './store'
 import {Provider} from 'react-redux'
