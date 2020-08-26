@@ -52,11 +52,11 @@ export default class MainScene extends Component {
           active={true}
         />
         <ViroPortalScene
-        // position={[-20, -90, -300]}
-        passable={true}
-        // dragType="FixedToPlane"
-        // onDrag={() => {}}
-        anchorDetectionTypes={'PlanesHorizontal'}
+          // position={[-20, -90, -300]}
+          passable={true}
+          dragType="FixedToPlane"
+          onDrag={() => {}}
+          anchorDetectionTypes={'PlanesHorizontal'}
         >
           <ViroPortal
             position={this.state.portalPosition}
@@ -65,29 +65,15 @@ export default class MainScene extends Component {
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-<<<<<<< HEAD:js/MainScene.js
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
-=======
                 require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
                 require('./portal_res/door/portal_archway/portal_archway_normal.png'),
                 require('./portal_res/door/portal_archway/portal_archway_specular.png'),
                 require('./portal_res/door/portal_archway/portal_entry.png'),
->>>>>>> 7d49d48775ccb814ac845101665e8f9b04219e43:js/res/ARPortals/MainScene.js
               ]}
               type="VRX"
             />
           </ViroPortal>
-<<<<<<< HEAD:js/MainScene.js
-          <Viro3DObject
-            source={require('./res/FBXtoVRX/model.vrx')}
-            type="VRX"
-          />
-=======
           <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
->>>>>>> 7d49d48775ccb814ac845101665e8f9b04219e43:js/res/ARPortals/MainScene.js
           {/* <Viro3DObject
             source={require('../OBJ_CleaverKnife/CleaverKnife.obj')}
             resources={[
@@ -106,17 +92,10 @@ export default class MainScene extends Component {
             position={[0, 0, -1]}
           />
           <Viro3DObject
-<<<<<<< HEAD:js/MainScene.js
-            source={require('./res/3dObjects/Key_B_02.obj')}
-            resources={[
-              require('./res/3dObjects/Key_B_02.mtl'),
-              require('./res/3dObjects/keyB_tx.bmp'),
-=======
             source={require('../3dObjects/Key_B_02.obj')}
             resources={[
               require('../3dObjects/Key_B_02.mtl'),
               require('../3dObjects/keyB_tx.bmp'),
->>>>>>> 7d49d48775ccb814ac845101665e8f9b04219e43:js/res/ARPortals/MainScene.js
             ]}
             type="OBJ"
             scale={[0.1, 0.1, 0.1]}
@@ -148,7 +127,6 @@ export default class MainScene extends Component {
           </ViroPortal>
           <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
         </ViroPortalScene> */}
-
       </ViroARScene>
     );
   }
