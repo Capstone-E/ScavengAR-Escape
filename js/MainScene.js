@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native'
 
 import {
   ViroSceneNavigator,
@@ -24,12 +24,11 @@ import {
   ViroOrbitCamera
 } from 'react-viro'
 
-// import HintButton from '../../HintButton';
+// import HintButton from './HintButton'
 
-var createReactClass = require('create-react-class');
 export default class MainScene extends Component {
   constructor() {
-    super();
+    super()
 
     // initial state
     this.state = {
@@ -48,25 +47,25 @@ export default class MainScene extends Component {
         {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
         <ViroOrbitCamera position={[-1, -1, -1]} focalPoint={[0, 0, -1]} active={true} />
         <ViroPortalScene
-        // position={[-20, -90, -300]}
-        passable={true}
-        // dragType="FixedToPlane"
-        // onDrag={() => {}}
-        anchorDetectionTypes={'PlanesHorizontal'}
+          // position={[-20, -90, -300]}
+          passable={true}
+          // dragType="FixedToPlane"
+          // onDrag={() => {}}
+          anchorDetectionTypes={'PlanesHorizontal'}
         >
           <ViroPortal position={this.state.portalPosition} scale={[75, 150, 10]}>
             <Viro3DObject
-              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
+              source={require('./res/ARPorals/portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
-                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
-                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
-                require('./portal_res/door/portal_archway/portal_entry.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png')
               ]}
               type="VRX"
             />
           </ViroPortal>
-          <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
+          <Viro3DObject source={require('./res/FBXtoVRX/model.vrx')} type="VRX" />
           {/* <Viro3DObject
             source={require('../OBJ_CleaverKnife/CleaverKnife.obj')}
             resources={[
@@ -79,26 +78,15 @@ export default class MainScene extends Component {
             ]}
             type="OBJ"
           /> */}
-          <ViroText
-            text={this.state.text}
-            scale={[0.5, 0.5, 0.5]}
-            position={[0, 0, -1]}
-          />
+          <ViroText text={this.state.text} scale={[0.5, 0.5, 0.5]} position={[0, 0, -1]} />
           <Viro3DObject
-            source={require('../3dObjects/Key_B_02.obj')}
-            resources={[
-              require('../3dObjects/Key_B_02.mtl'),
-              require('../3dObjects/keyB_tx.bmp'),
-            ]}
+            source={require('./res/3dObjects/Key_B_02.obj')}
+            resources={[require('./res/3dObjects/Key_B_02.mtl'), require('./res/3dObjects/keyB_tx.bmp')]}
             type="OBJ"
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
           />
-          <ViroBox
-            position={[0, -0.5, -1]}
-            scale={[0.3, 0.3, 0.1]}
-            materials={['grid']}
-          />
+          <ViroBox position={[0, -0.5, -1]} scale={[0.3, 0.3, 0.1]} materials={['grid']} />
         </ViroPortalScene>
 
         {/* <ViroPortalScene
@@ -120,20 +108,19 @@ export default class MainScene extends Component {
           </ViroPortal>
           <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
         </ViroPortalScene> */}
-
       </ViroARScene>
-    );
+    )
   }
 
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text: 'Find the key!',
-      });
+        text: 'Find the key!'
+      })
     } else if (state == ViroConstants.TRACKING_NONE) {
       this.setState({
-        text: 'oopsie',
-      });
+        text: 'oopsie'
+      })
     }
   }
 
@@ -148,4 +135,4 @@ export default class MainScene extends Component {
   }
 }
 
-module.exports = MainScene;
+module.exports = MainScene
