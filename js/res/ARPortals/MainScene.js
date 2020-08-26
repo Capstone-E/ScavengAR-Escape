@@ -59,8 +59,8 @@ export default class MainScene extends Component {
               type="VRX"
             />
           </ViroPortal>
-          <Viro360Image source={require('../snowscape.jpg')} />
-          <Viro3DObject
+          <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
+          {/* <Viro3DObject
             source={require('../OBJ_CleaverKnife/CleaverKnife.obj')}
             resources={[
               require('../OBJ_CleaverKnife/CleaverKnife.mtl'),
@@ -71,7 +71,7 @@ export default class MainScene extends Component {
               require('../OBJ_CleaverKnife/CleaverKnife_Roughness.png'),
             ]}
             type="OBJ"
-          />
+          /> */}
           <ViroText
             text={this.state.text}
             scale={[0.5, 0.5, 0.5]}
