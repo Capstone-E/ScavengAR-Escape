@@ -1,5 +1,4 @@
 'use strict';
-
 import React, { Component } from 'react';
 
 import { StyleSheet } from 'react-native';
@@ -24,9 +23,6 @@ import {
   ViroOrbitCamera,
 } from 'react-viro';
 
-// import HintButton from '../../HintButton';
-
-var createReactClass = require('create-react-class');
 export default class MainScene extends Component {
   constructor() {
     super();
@@ -34,7 +30,7 @@ export default class MainScene extends Component {
     // initial state
     this.state = {
       text: 'find the key',
-      portalPosition: [-20, -90, -300],
+      // portalPosition: [0, -9, -30]
     };
     this._onInitialized = this._onInitialized.bind(this);
     this._onClick = this._onClick.bind(this);
@@ -43,25 +39,14 @@ export default class MainScene extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        {/* <HintButton /> */}
         <ViroAmbientLight color="#ffffff" intensity={200} />
-        {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
-        <ViroOrbitCamera
-          position={[-1, -1, -1]}
-          focalPoint={[0, 0, -1]}
-          active={true}
-        />
+
         <ViroPortalScene
-          // position={[-20, -90, -300]}
           passable={true}
-          dragType="FixedToPlane"
+          dragType="FixedDistance"
           onDrag={() => {}}
-          anchorDetectionTypes={'PlanesHorizontal'}
         >
-          <ViroPortal
-            position={this.state.portalPosition}
-            scale={[75, 150, 10]}
-          >
+          <ViroPortal position={[0, 1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -98,6 +83,7 @@ export default class MainScene extends Component {
               require('../3dObjects/keyB_tx.bmp'),
             ]}
             type="OBJ"
+            position={[1, 1, 1]}
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
           />
@@ -108,7 +94,7 @@ export default class MainScene extends Component {
           />
         </ViroPortalScene>
 
-        {/* <ViroPortalScene
+        <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
@@ -125,8 +111,12 @@ export default class MainScene extends Component {
               type="VRX"
             />
           </ViroPortal>
-          <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
-        </ViroPortalScene> */}
+          <Viro360Image
+            source={require('../outside.jpg')}
+            type="OBJ"
+            scale={[0.01, 0.01, 0.01]}
+          />
+        </ViroPortalScene>
       </ViroARScene>
     );
   }
