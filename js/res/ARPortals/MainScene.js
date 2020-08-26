@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 
 import { StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { foundObjectThunk } from '../../../store/objectState'
 
 import {
   ViroSceneNavigator,
@@ -144,8 +146,16 @@ export default class MainScene extends Component {
       text: 'You found the key'
     })
     //change inventory state
+    this.props.sendObjectsStatus(true);
     //check box off todo list for hints
   }
 }
 
-module.exports = MainScene;
+
+const mapDispatch = dispatch => {
+  return {
+    sendObjectsStatus: (status) => dispatch(foundObjectThunk(status))
+  }
+}
+
+module.exports = connect(null, mapDispatch)(MainScene);

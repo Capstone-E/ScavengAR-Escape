@@ -7,7 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
@@ -25,6 +25,9 @@ function Main() {
   const toggleYesBtn = (gameState) => {
     dispatch(setGameState(!gameState))
   }
+  // const [ objects, setObjects ] = useState([])
+  // const foundObjects = (status) => setObjects([...objects, status]);
+
   const newGameScreen = () => {
     return (
       <View style={localStyles.outer}>
@@ -49,9 +52,10 @@ function Main() {
     return (
       <View style={{flex: 1}}>
         <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
-        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}}  />
+        {/* /*foundObjects={foundObjects}*/ }
         <HintButton />
-        <Inventory />
+        <Inventory /*foundObjectsState={objects}*/ />
       </View>
     )
   }

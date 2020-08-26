@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import {
   View,
@@ -11,31 +12,37 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-const Inventory = () => {
-  return (
-    <View style={style.outerContainer}>
-      <FlatList
-        horizontal={true}
-        contentContainerStyle={style.listViewContainer}
-        data={[
-          { key: 'empty' },
-          { key: 'empty2' },
-          { key: 'empty3' },
-          { key: 'empty4' },
-          { key: 'empty5' },
-        ]}
-        renderItem={({ item }) => (
-          <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
-            <Text style={style.textStyle}>{item.key}</Text>
-          </TouchableHighlight>
-        )}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        directionalLockEnabled={true}
-        removeClippedSubviews={false}
-      />
-    </View>
-  );
+class Inventory extends Component {
+  // const { foundObjectsState } = props;
+
+  render(){
+
+    return (
+
+      <View style={style.outerContainer}>
+        <FlatList
+          horizontal={true}
+          contentContainerStyle={style.listViewContainer}
+          data={[
+            { key: this.props.objectsStatus[0] ? 'key' : 'empty' },
+            { key: 'empty2' },
+            { key: 'empty3' },
+            { key: 'empty4' },
+            { key: 'empty5' },
+          ]}
+          renderItem={({ item }) => (
+            <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
+              <Text style={style.textStyle}>{item.key}</Text>
+            </TouchableHighlight>
+          )}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          directionalLockEnabled={true}
+          removeClippedSubviews={false}
+        />
+      </View>
+    );
+  }
 };
 
 const style = StyleSheet.create({
@@ -67,4 +74,8 @@ const style = StyleSheet.create({
   },
 });
 
-export default Inventory;
+const mapState = state => {
+  return { objectsStatus: state.objectsStatus }
+}
+
+export default connect(mapState)(Inventory);

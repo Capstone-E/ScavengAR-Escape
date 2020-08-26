@@ -4,9 +4,12 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 
 import game from './gameState'
+import objectsStatus from './objectState'
 
 const reducer = combineReducers({
-  game
+  game,
+  objectsStatus
+
 })
 const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})))
 const store = createStore(reducer, middleware)
