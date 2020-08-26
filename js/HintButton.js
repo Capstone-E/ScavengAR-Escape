@@ -1,53 +1,111 @@
-// import React, { Component } from 'react';
-// import { ViroButton, View, Text, ViroARCamera } from 'react-viro';
+import React, {useState} from 'react'
+import {Alert, Modal, StyleSheet, Text, TouchableHighlight, View} from 'react-native'
 
-// export default class HintButton extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       hints: {
-//         count: 0,
-//         1: 'blah',
-//         2: 'blahh',
-//         3: 'blahhh',
-//       },
-//       buttonStateTag: null,
-//     };
-//   }
-//   render() {
-//     return (
-//       <ViroARCamera>
-//         <ViroButton
-//           source={require('./res/info.png')}
-//           tapSource={require('./res/info-tap.png')}
-//           position={[1.5, 3.25, -6]}
-//           height={1}
-//           width={1}
-//           onTap={this.onTap}
-//         />
-//       </ViroARCamera>
-//     );
-//   }
+const HintButton = () => {
+  const hintsArr = [
+    `First Hint: a long riddle that will blow your mind`,
+    `Second Hint: you can't believe the answer was so simple`,
+    `Final Hint: truly the hardest, most difficult puzzle you've ever encountered`
+  ]
+  const [modalVisible, setModalVisible] = useState(false)
+  const [count, setCount] = useState(0)
 
-//   onTap() {
-//     this.setState({
-//       buttonStateTag: 'onTap',
-//     });
-//     this.hints.count += 1;
-//   }
+  const hintView = () => {
+    const currentHints = hintsArr.slice(0, count)
+    return (
+      <View>
+        {currentHints.map((hint, i) => (
+          <Text style={styles.center} key={i}>
+            {hint}
+          </Text>
+        ))}
+      </View>
+    )
+  }
 
-//   displayHint() {
-//     const hints = this.state.hints;
-//     const count = this.state.hints.count;
-//     const buttonStateTag = this.state.buttonStateTag;
-//     return (
-//       <View>
-//         {buttonStateTag === null ? (
-//           ''
-//         ) : (
-//           <Text>{hints.count <= 3 ? hints[count] : 'No hints left'}</Text>
-//         )}
-//       </View>
-//     );
-//   }
-// }
+  return (
+    <View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        style={{backgroundColor: 'transparent'}}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hints</Text>
+            {hintView()}
+            <TouchableHighlight
+              style={{...styles.hideButton, backgroundColor: '#800000'}}
+              onPress={() => {
+                setModalVisible(!modalVisible)
+              }}
+            >
+              <Text style={styles.textStyle}>Hide Hints</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+
+      <TouchableHighlight
+        style={styles.openButton}
+        onPress={() => {
+          if (count <= 3) {
+            setCount(count + 1)
+          }
+          setModalVisible(true)
+        }}
+      >
+        <Text style={styles.textStyle}>?</Text>
+      </TouchableHighlight>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22
+  },
+  center: {
+    textAlign: 'center'
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 50,
+    padding: 35,
+    alignItems: 'center',
+    elevation: 5
+  },
+  openButton: {
+    backgroundColor: '#800000',
+    borderRadius: 50,
+    padding: 20,
+    elevation: 2,
+    width: 20,
+    height: 10
+  },
+  hideButton: {
+    backgroundColor: '#800000',
+    borderRadius: 50,
+    padding: 10,
+    elevation: 2
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center'
+  }
+})
+
+export default HintButton
