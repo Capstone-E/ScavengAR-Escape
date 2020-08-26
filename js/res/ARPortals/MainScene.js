@@ -20,7 +20,9 @@ import {
   ViroARPlaneSelector,
   ViroARPlane,
   ViroBox,
-} from 'react-viro';
+  ViroConstants,
+  ViroOrbitCamera
+} from 'react-viro'
 
 // import HintButton from '../../HintButton';
 
@@ -31,30 +33,35 @@ export default class MainScene extends Component {
 
     // initial state
     this.state = {
-      text: '',
-    };
-    this._onInitialized = this._onInitialized.bind(this);
-    this._onClick = this._onClick.bind(this);
+      text: 'find the key',
+      portalPosition: [-20, -90, -300]
+    }
+    this._onInitialized = this._onInitialized.bind(this)
+    this._onClick = this._onClick.bind(this)
   }
 
   render() {
     return (
-      <ViroARScene>
-        {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
+      <ViroARScene onTrackingUpdated={this._onInitialized}>
         {/* <HintButton /> */}
         <ViroAmbientLight color="#ffffff" intensity={200} />
+        {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
+        <ViroOrbitCamera position={[-1, -1, -1]} focalPoint={[0, 0, -1]} active={true} />
         <ViroPortalScene
-          passable={true}
-          dragType="FixedDistance"
-          onDrag={() => {}}
+        // position={[-20, -90, -300]}
+        passable={true}
+        // dragType="FixedToPlane"
+        // onDrag={() => {}}
+        anchorDetectionTypes={'PlanesHorizontal'}
         >
-          <ViroPortal position={[0, 0, 5]} scale={[0.1, 0.1, 0.1]}>
+          <ViroPortal position={this.state.portalPosition} scale={[75, 150, 10]}>
             <Viro3DObject
-              source={require('./portal_res/portal_ship/portal_ship.vrx')}
+              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/portal_ship/portal_ship_diffuse.png'),
-                require('./portal_res/portal_ship/portal_ship_normal.png'),
-                require('./portal_res/portal_ship/portal_ship_specular.png'),
+                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
             />
@@ -94,28 +101,26 @@ export default class MainScene extends Component {
           />
         </ViroPortalScene>
 
-        <ViroPortalScene
+        {/* <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
         >
           <ViroPortal position={[0, -1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
-              source={require('./portal_res/portal_ship/portal_ship.vrx')}
+              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/portal_ship/portal_ship_diffuse.png'),
-                require('./portal_res/portal_ship/portal_ship_normal.png'),
-                require('./portal_res/portal_ship/portal_ship_specular.png'),
+                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
             />
           </ViroPortal>
-          <Viro360Image
-            source={require('../outside.jpg')}
-            type="OBJ"
-            scale={[0.01, 0.01, 0.01]}
-          />
-        </ViroPortalScene>
+          <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
+        </ViroPortalScene> */}
+
       </ViroARScene>
     );
   }
@@ -133,9 +138,13 @@ export default class MainScene extends Component {
   }
 
   _onClick() {
+    //remove key from view (unrender)
     this.setState({
-      text: 'You found the key',
-    });
+      keyfound: true,
+      text: 'You found the key'
+    })
+    //change inventory state
+    //check box off todo list for hints
   }
 }
 
