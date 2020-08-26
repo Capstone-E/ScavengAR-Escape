@@ -42,14 +42,14 @@ export default class MainScene extends Component {
       <ViroARScene
       onTrackingUpdated={this._onInitialized}
       >
-        <ViroAmbientLight color="#ffffff" intensity={200} />
+        <ViroAmbientLight color="#ffffff" intensity={500} />
 
         <ViroPortalScene
         passable={true}
         dragType="FixedDistance"
         onDrag={() => {}}
         >
-          <ViroPortal position={[0, 1, -1]} scale={[0.1, 0.1, 0.1]}>
+          <ViroPortal position={[0, -1, -2.5]} scale={[1, 2.5, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
