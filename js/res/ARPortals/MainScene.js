@@ -19,7 +19,9 @@ import {
   ViroImage,
   ViroARPlaneSelector,
   ViroARPlane,
-  ViroBox
+  ViroBox,
+  ViroConstants,
+  ViroOrbitCamera
 } from 'react-viro'
 
 import HintButton from '../../HintButton'
@@ -31,7 +33,8 @@ export default class MainScene extends Component {
 
     // initial state
     this.state = {
-      text: 'find the key'
+      text: 'find the key',
+      portalPosition: [-20, -90, -300]
     }
     this._onInitialized = this._onInitialized.bind(this)
     this._onClick = this._onClick.bind(this)
@@ -39,24 +42,32 @@ export default class MainScene extends Component {
 
   render() {
     return (
-      <ViroARScene>
+      <ViroARScene onTrackingUpdated={this._onInitialized}>
         {/* <HintButton /> */}
         <ViroAmbientLight color="#ffffff" intensity={200} />
         {/* <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}> */}
-        {/* <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
-          <ViroPortal position={[0, -3, -3]} scale={[0.015, 0.015, 0.015]}>
+        <ViroOrbitCamera position={[-1, -1, -1]} focalPoint={[0, 0, -1]} active={true} />
+        <ViroPortalScene
+        // position={[-20, -90, -300]}
+        passable={true}
+        // dragType="FixedToPlane"
+        // onDrag={() => {}}
+        anchorDetectionTypes={'PlanesHorizontal'}
+        >
+          <ViroPortal position={this.state.portalPosition} scale={[75, 150, 10]}>
             <Viro3DObject
-              source={require('./portal_res/door/Props.obj')}
+              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/door/Props.mtl'),
+                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
-              type="OBJ"
+              type="VRX"
             />
           </ViroPortal>
           <Viro360Image
             source={require('../dock.jpg')}
-            // source={require('../NoteOne/tinker.obj')}
-            // resources={[require('../NoteOne/obj.mtl')]}
             type="OBJ"
             scale={[0.01, 0.01, 0.01]}
           />
@@ -73,11 +84,11 @@ export default class MainScene extends Component {
             onClick={this._onClick}
           />
           <ViroBox position={[0, -0.5, -1]} scale={[0.3, 0.3, 0.1]} materials={['grid']} />
-        </ViroPortalScene> */}
+        </ViroPortalScene>
         {/* </ViroARPlane> */}
-        <ViroAmbientLight color="#ffffff" intensity={200} />
+        {/* <ViroAmbientLight color="#ffffff" intensity={200} />
         <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={() => {}}>
-          <ViroPortal position={[0, -3, -1]} scale={[0.01, 0.01, 0.01]}>
+          <ViroPortal position={[0, -3, -1]} scale={[1, 1, 1]}>
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -90,7 +101,7 @@ export default class MainScene extends Component {
             />
           </ViroPortal>
           <Viro360Image source={require('../outside.jpg')} type="OBJ" scale={[0.01, 0.01, 0.01]} />
-        </ViroPortalScene>
+        </ViroPortalScene> */}
 
       </ViroARScene>
     )
