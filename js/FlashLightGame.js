@@ -5,7 +5,6 @@ export default class FlashLightGame extends Component {
     return (
       <ViroARScene>
         <ViroAmbientLight color="#ffffff" intensity={200} />
-
         <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
