@@ -66,7 +66,7 @@ const HintButton = () => {
           setModalVisible(true);
         }}
       >
-        <Text style={styles.textStyle}>?</Text>
+        <Text style={styles.textStyle}>Open For Hint</Text>
       </TouchableHighlight>
     </View>
   );
@@ -92,11 +92,10 @@ const styles = StyleSheet.create({
   },
   openButton: {
     backgroundColor: '#800000',
-    borderRadius: 50,
-    padding: 20,
+    borderRadius: 20,
+    padding: 12,
     elevation: 2,
-    width: 20,
-    height: 10,
+    height: 5,
   },
   hideButton: {
     backgroundColor: '#800000',
@@ -106,8 +105,9 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: 'white',
-    fontWeight: 'bold',
     textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   modalText: {
     marginBottom: 15,
