@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import keyImage from './res/keyImage.png'
+import empty from './res/blank.png'
 class Inventory extends Component {
 
   render(){
@@ -24,16 +25,16 @@ class Inventory extends Component {
           horizontal={true}
           contentContainerStyle={style.listViewContainer}
           data={[
-            { key: this.props.objectsStatus[0] && keyImage },
+            { key: this.props.objectsStatus[0] ? keyImage : empty},
             // { key: '' },
             // { key: '' },
             // { key: '' },
-            // { key: '' },
+            // { key: questionMark },
           ]}
           renderItem={({ item }) => (
             <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
               <View style={{height: 50, width: 60}}>
-                <Image style={{height:50, width:50}} source={item.key} />
+                <Image style={{height: 50, width: 50}} source={item.key} />
               </View>
             </TouchableHighlight>
           )}
