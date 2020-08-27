@@ -25,6 +25,7 @@ function Main() {
   const toggleYesBtn = (gameState) => {
     dispatch(setGameState(!gameState))
   }
+
   const newGameScreen = () => {
     return (
       <View style={localStyles.outer}>
@@ -47,9 +48,9 @@ function Main() {
     return newGameScreen()
   } else {
     return (
-      <View style={{flex: 1}}>
+      <View style={{poisiton: 'absolute', flex: 1}}>
         <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
-        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}}  />
         <HintButton />
         <Inventory />
       </View>
