@@ -87,11 +87,11 @@ export default class MainScene extends Component {
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
           />
-          <ViroBox
+          {/* <ViroBox
             position={[0, -0.5, -1]}
             scale={[0.3, 0.3, 0.1]}
             materials={['grid']}
-          />
+          /> */}
         </ViroPortalScene>
 
         <ViroPortalScene
