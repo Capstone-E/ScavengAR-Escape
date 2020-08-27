@@ -21,7 +21,7 @@ import {
   ViroARPlane,
   ViroBox,
   ViroConstants,
-  ViroOrbitCamera
+  ViroSpotLight
 } from 'react-viro'
 
 export default class MainScene extends Component {
@@ -31,19 +31,38 @@ export default class MainScene extends Component {
     // initial state
     this.state = {
       text: 'find the key',
+      points: [[0, 0, 0]]
       // portalPosition: [0, -9, -30]
     }
     this._onInitialized = this._onInitialized.bind(this)
     this._onClick = this._onClick.bind(this)
+    this._onCameraARHitTest = this._onCameraARHitTest.bind(this)
   }
 
   render() {
+    console.log('state', this.state)
     return (
       <ViroARScene
       onTrackingUpdated={this._onInitialized}
+      // onCameraARHitTest={this._onCameraARHitTest}
       >
         <ViroAmbientLight color="#ffffff" intensity={500} />
-
+        <ViroSpotLight
+            innerAngle={5}
+            outerAngle={20}
+            direction={[0,-1,-.2]}
+            position={[0, 5, 1]}
+            color="#ffffff"
+            castsShadow={true}
+            // influenceBitMask={this.props.bitMask}
+            shadowNearZ={.1}
+            shadowFarZ={5}
+            shadowOpacity={.9} />
+            {/* <ViroText
+            text={this.state.points}
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
+          /> */}
         <ViroPortalScene
         passable={true}
         dragType="FixedDistance"
@@ -136,6 +155,10 @@ export default class MainScene extends Component {
       });
     }
   }
+
+  // _onCameraARHitTest(results) {
+  //   console.log(results)
+  // }
 
   _onClick() {
     //remove key from view (unrender)
