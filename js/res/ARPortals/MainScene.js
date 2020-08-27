@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { foundObjectThunk } from '../../../store/objectState';
-
 import {
   ViroSceneNavigator,
   ViroText,
@@ -23,13 +22,8 @@ import {
   ViroARPlane,
   ViroBox,
   ViroConstants,
-<<<<<<< HEAD
-  ViroOrbitCamera,
+  ViroSpotLight,
 } from 'react-viro';
-=======
-  ViroSpotLight
-} from 'react-viro'
->>>>>>> 0651357bba23aae4f8d40b617af941e95382216d
 
 export default class MainScene extends Component {
   constructor() {
@@ -38,44 +32,35 @@ export default class MainScene extends Component {
     // initial state
     this.state = {
       text: 'find the key',
-      points: [[0, 0, 0]]
+      points: [[0, 0, 0]],
       // portalPosition: [0, -9, -30]
-<<<<<<< HEAD
     };
     this._onInitialized = this._onInitialized.bind(this);
     this._onClick = this._onClick.bind(this);
-=======
-    }
-    this._onInitialized = this._onInitialized.bind(this)
-    this._onClick = this._onClick.bind(this)
-    this._onCameraARHitTest = this._onCameraARHitTest.bind(this)
->>>>>>> 0651357bba23aae4f8d40b617af941e95382216d
+    // this._onCameraARHitTest = this._onCameraARHitTest.bind(this);
   }
 
   render() {
-    console.log('state', this.state)
+    console.log('state', this.state);
     return (
-<<<<<<< HEAD
-      <ViroARScene onTrackingUpdated={this._onInitialized}>
-=======
       <ViroARScene
-      onTrackingUpdated={this._onInitialized}
-      // onCameraARHitTest={this._onCameraARHitTest}
+        onTrackingUpdated={this._onInitialized}
+        // onCameraARHitTest={this._onCameraARHitTest}
       >
->>>>>>> 0651357bba23aae4f8d40b617af941e95382216d
         <ViroAmbientLight color="#ffffff" intensity={500} />
         <ViroSpotLight
-            innerAngle={5}
-            outerAngle={20}
-            direction={[0,-1,-.2]}
-            position={[0, 5, 1]}
-            color="#ffffff"
-            castsShadow={true}
-            // influenceBitMask={this.props.bitMask}
-            shadowNearZ={.1}
-            shadowFarZ={5}
-            shadowOpacity={.9} />
-            {/* <ViroText
+          innerAngle={5}
+          outerAngle={20}
+          direction={[0, -1, -0.2]}
+          position={[0, 5, 1]}
+          color="#ffffff"
+          castsShadow={true}
+          // influenceBitMask={this.props.bitMask}
+          shadowNearZ={0.1}
+          shadowFarZ={5}
+          shadowOpacity={0.9}
+        />
+        {/* <ViroText
             text={this.state.points}
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
@@ -98,18 +83,7 @@ export default class MainScene extends Component {
             />
           </ViroPortal>
           <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
-          {/* <Viro3DObject
-            source={require('../OBJ_CleaverKnife/CleaverKnife.obj')}
-            resources={[
-              require('../OBJ_CleaverKnife/CleaverKnife.mtl'),
-              require('../OBJ_CleaverKnife/CleaverKnife_AO.png'),
-              require('../OBJ_CleaverKnife/CleaverKnife_BaseColor.png'),
-              require('../OBJ_CleaverKnife/CleaverKnife_Metalness.png'),
-              require('../OBJ_CleaverKnife/CleaverKnife_Normal.png'),
-              require('../OBJ_CleaverKnife/CleaverKnife_Roughness.png'),
-            ]}
-            type="OBJ"
-          /> */}
+
           <ViroText
             text={this.state.text}
             scale={[0.5, 0.5, 0.5]}
@@ -129,11 +103,11 @@ export default class MainScene extends Component {
             onClick={this._onClick}
           />
           {/* </ViroNode> */}
-          <ViroBox
+          {/* <ViroBox
             position={[0, -0.5, -1]}
             scale={[0.3, 0.3, 0.1]}
             materials={['grid']}
-          />
+          /> */}
         </ViroPortalScene>
 
         <ViroPortalScene
