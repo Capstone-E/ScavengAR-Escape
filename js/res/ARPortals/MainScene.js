@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 
 import { StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { foundObjectThunk } from '../../../store/objectState';
 
 import {
   ViroSceneNavigator,
@@ -15,6 +17,7 @@ import {
   ViroPortal,
   ViroPortalScene,
   Viro3DObject,
+  ViroNode,
   ViroImage,
   ViroARPlaneSelector,
   ViroARPlane,
@@ -76,6 +79,8 @@ export default class MainScene extends Component {
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
           />
+          {/* <ViroNode
+            position={[-1, -1.2, -2]} > This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
           <Viro3DObject
             source={require('../3dObjects/Key_B_02.obj')}
             resources={[
@@ -87,11 +92,12 @@ export default class MainScene extends Component {
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
           />
-          {/* <ViroBox
+          {/* </ViroNode> */}
+          <ViroBox
             position={[0, -0.5, -1]}
             scale={[0.3, 0.3, 0.1]}
             materials={['grid']}
-          /> */}
+          />
         </ViroPortalScene>
 
         <ViroPortalScene
@@ -140,8 +146,16 @@ export default class MainScene extends Component {
       text: 'You found the key',
     });
     //change inventory state
+    this.props.sendObjectsStatus(true);
+
     //check box off todo list for hints
   }
 }
 
-module.exports = MainScene;
+const mapDispatch = (dispatch) => {
+  return {
+    sendObjectsStatus: (status) => dispatch(foundObjectThunk(status)),
+  };
+};
+
+module.exports = connect(null, mapDispatch)(MainScene);
