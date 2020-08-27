@@ -34,20 +34,25 @@ export default class MainScene extends Component {
     // initial state
     this.state = {
       text: 'find the key',
-      points: [[0, 0, 0]]
+      insidePortal: false
+      // points: [[0, 0, 0]]
       // portalPosition: [0, -9, -30]
     }
     this._onInitialized = this._onInitialized.bind(this)
     this._onClick = this._onClick.bind(this)
     this._onCameraARHitTest = this._onCameraARHitTest.bind(this)
+    this._onPortalEnter = this._onPortalEnter.bind(this)
+    this._onPortalExit = this._onPortalExit.bind(this)
   }
 
   render() {
-    console.log('state', this.state)
+    // console.log('state', this.state)
     return (
       <ViroARScene
       onTrackingUpdated={this._onInitialized}
-      // onCameraARHitTest={this._onCameraARHitTest}
+      onCameraARHitTest={this._onCameraARHitTest}
+      onPortalEnter={this._onPortalEnter}
+      onPortalExit={this._onPortalExit}
       >
         <ViroAmbientLight color="#ffffff" intensity={500} />
         <ViroSpotLight
@@ -71,7 +76,7 @@ export default class MainScene extends Component {
         dragType="FixedDistance"
         onDrag={() => {}}
         >
-          <ViroPortal position={[0, -1, -2.5]} scale={[1, 2.5, 0.1]}>
+          <ViroPortal position={[0, -1.5, -2]} scale={[1, 1.5, 0.1]}>
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -81,6 +86,7 @@ export default class MainScene extends Component {
                 require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
+              visible={!this.insidePortal}
             />
 
           </ViroPortal>
@@ -106,7 +112,7 @@ export default class MainScene extends Component {
             position={[0, 0, -1]}
           />
           {/* <ViroNode
-            position={[-1, -1.2, -2]} > This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/} 
+            position={[-1, -1.2, -2]} > This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
             <Viro3DObject
               source={require('../3dObjects/Key_B_02.obj')}
               resources={[
@@ -114,9 +120,10 @@ export default class MainScene extends Component {
                 require('../3dObjects/keyB_tx.bmp'),
               ]}
               type="OBJ"
-              position={[1, 1, 1]}
+              position={[-1, 1, -1]}
               scale={[0.1, 0.1, 0.1]}
               onClick={this._onClick}
+              visible={this.insidePortal}
             />
           {/* </ViroNode> */}
           <ViroBox
@@ -162,9 +169,20 @@ export default class MainScene extends Component {
     }
   }
 
-  // _onCameraARHitTest(results) {
-  //   console.log(results)
-  // }
+  _onCameraARHitTest(results) {
+  }
+
+  _onPortalEnter() {
+    this.setState({
+      insidePortal:true,
+    });
+  }
+
+  _onPortalExit() {
+    this.setState({
+      insidePortal:false,
+    });
+  }
 
   _onClick() {
     //remove key from view (unrender)
