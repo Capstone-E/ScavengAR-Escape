@@ -23,8 +23,13 @@ import {
   ViroARPlane,
   ViroBox,
   ViroConstants,
+<<<<<<< HEAD
   ViroOrbitCamera,
 } from 'react-viro';
+=======
+  ViroSpotLight
+} from 'react-viro'
+>>>>>>> 0651357bba23aae4f8d40b617af941e95382216d
 
 export default class MainScene extends Component {
   constructor() {
@@ -33,17 +38,48 @@ export default class MainScene extends Component {
     // initial state
     this.state = {
       text: 'find the key',
+      points: [[0, 0, 0]]
       // portalPosition: [0, -9, -30]
+<<<<<<< HEAD
     };
     this._onInitialized = this._onInitialized.bind(this);
     this._onClick = this._onClick.bind(this);
+=======
+    }
+    this._onInitialized = this._onInitialized.bind(this)
+    this._onClick = this._onClick.bind(this)
+    this._onCameraARHitTest = this._onCameraARHitTest.bind(this)
+>>>>>>> 0651357bba23aae4f8d40b617af941e95382216d
   }
 
   render() {
+    console.log('state', this.state)
     return (
+<<<<<<< HEAD
       <ViroARScene onTrackingUpdated={this._onInitialized}>
+=======
+      <ViroARScene
+      onTrackingUpdated={this._onInitialized}
+      // onCameraARHitTest={this._onCameraARHitTest}
+      >
+>>>>>>> 0651357bba23aae4f8d40b617af941e95382216d
         <ViroAmbientLight color="#ffffff" intensity={500} />
-
+        <ViroSpotLight
+            innerAngle={5}
+            outerAngle={20}
+            direction={[0,-1,-.2]}
+            position={[0, 5, 1]}
+            color="#ffffff"
+            castsShadow={true}
+            // influenceBitMask={this.props.bitMask}
+            shadowNearZ={.1}
+            shadowFarZ={5}
+            shadowOpacity={.9} />
+            {/* <ViroText
+            text={this.state.points}
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
+          /> */}
         <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
@@ -138,6 +174,10 @@ export default class MainScene extends Component {
       });
     }
   }
+
+  // _onCameraARHitTest(results) {
+  //   console.log(results)
+  // }
 
   _onClick() {
     //remove key from view (unrender)
