@@ -7,10 +7,10 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React, {Component} from 'react'
-import Main from './Main'
-import store from './store'
-import {Provider} from 'react-redux'
+import React from 'react';
+import Main from './Main';
+import store from './store';
+import { Provider } from 'react-redux';
 
 // console.disableYellowBox = true;
 
@@ -19,7 +19,7 @@ const ScavengARescape = () => {
     <Provider store={store}>
       <Main />
     </Provider>
-  )
-}
+  );
+};
 
-module.exports = ScavengARescape
+module.exports = ScavengARescape;
