@@ -9,11 +9,11 @@ import {
   StyleSheet,
   FlatList,
   TouchableHighlight,
-  TouchableWithoutFeedback,
+  Image,
 } from 'react-native';
 
+import keyImage from './res/keyImage.png'
 class Inventory extends Component {
-  // const { foundObjectsState } = props;
 
   render(){
 
@@ -24,15 +24,17 @@ class Inventory extends Component {
           horizontal={true}
           contentContainerStyle={style.listViewContainer}
           data={[
-            { key: this.props.objectsStatus[0] ? 'key' : 'empty' },
-            { key: 'empty2' },
-            { key: 'empty3' },
-            { key: 'empty4' },
-            { key: 'empty5' },
+            { key: this.props.objectsStatus[0] && keyImage },
+            // { key: '' },
+            // { key: '' },
+            // { key: '' },
+            // { key: '' },
           ]}
           renderItem={({ item }) => (
             <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
-              <Text style={style.textStyle}>{item.key}</Text>
+              <View style={{height: 50, width: 60}}>
+                <Image style={{height:50, width:50}} source={item.key} />
+              </View>
             </TouchableHighlight>
           )}
           showsVerticalScrollIndicator={false}
@@ -57,16 +59,17 @@ const style = StyleSheet.create({
   buttons: {
     height: 60,
     width: 70,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 5,
     marginRight: 5,
     marginLeft: 5,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: '#800000',
+    backgroundColor: '#fff',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#800000',
   },
   textStyle: {
     color: 'white',

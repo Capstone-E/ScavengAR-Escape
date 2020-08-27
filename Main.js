@@ -50,7 +50,7 @@ function Main() {
     return newGameScreen()
   } else {
     return (
-      <View style={{flex: 1}}>
+      <View style={{poisiton: 'absolute', flex: 1}}>
         <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
         <ViroARSceneNavigator initialScene={{scene: MainScene}}  />
         {/* /*foundObjects={foundObjects}*/ }
