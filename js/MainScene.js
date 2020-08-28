@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {foundObjectThunk} from '../store/objectState'
 import {
   ViroSceneNavigator,
+  ViroMaterials,
   ViroText,
   ViroScene,
   ViroARScene,
@@ -78,22 +79,20 @@ export default class MainScene extends Component {
           onPortalEnter={this._onPortalOneEnter}
           onPortalExit={this._onPortalOneExit}
         >
-        <ViroAmbientLight color="#ffffff" intensity={500} />
-          <ViroPortal
-          position={this.state.portalOnePosition}
-          scale={this.state.portalOneSize}>
+          <ViroAmbientLight color="#ffffff" intensity={500} />
+          <ViroPortal position={this.state.portalOnePosition} scale={this.state.portalOneSize}>
             <Viro3DObject
-              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
+              source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
-                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
-                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
-                require('./portal_res/door/portal_archway/portal_entry.png')
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png')
               ]}
               type="VRX"
             />
           </ViroPortal>
-          <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
+          <Viro3DObject source={require('./res/FBXtoVRX/model.vrx')} type="VRX" />
 
           <ViroText text={this.state.text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
             <Viro3DObject
@@ -124,7 +123,7 @@ export default class MainScene extends Component {
           position={this.state.portalTwoPosition}
           scale={this.state.portalTwoSize}>
             <Viro3DObject
-              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
+              source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
                 require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
                 require('./portal_res/door/portal_archway/portal_archway_normal.png'),
@@ -172,7 +171,7 @@ export default class MainScene extends Component {
     this.setState({
       insidePortalOne: true,
       portalOneSize: [0, 0, 0]
-    });
+    })
   }
 
   _onPortalTwoEnter() {
@@ -184,9 +183,9 @@ export default class MainScene extends Component {
 
   _onPortalOneExit() {
     this.setState({
-      insidePortalOne:false,
+      insidePortalOne: false,
       portalOneSize: [0, 0, 0]
-    });
+    })
   }
 
   _onPortalTwoExit() {
@@ -201,8 +200,8 @@ export default class MainScene extends Component {
       keyOneFound: true,
       text: 'You found the key, you can escape!',
       portalOneSize: [0.75, 1.5, 0.1]
-    });
-    this.props.sendObjectsStatus(true);
+    })
+    this.props.sendObjectsStatus(true)
   }
 
   _onClickPortalTwo() {
