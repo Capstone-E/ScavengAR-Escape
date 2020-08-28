@@ -34,7 +34,7 @@ class Inventory extends Component {
           renderItem={({ item }) => (
             <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
               <View style={{height: 50, width: 60}}>
-                {('Empty'.includes(item.key)) ?
+                {(item.key[0] !== 'S') ?
                   <Image style={{height: 50, width: 50}} source={item.key} />
                   :
                   <Text style={style.textStyle}>{item.key}</Text>
@@ -61,7 +61,7 @@ const style = StyleSheet.create({
     backgroundColor: 'grey',
   },
   listViewContainer: {
-    height: 65,
+    height: 72,
     paddingStart: 5,
   },
   buttons: {
