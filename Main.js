@@ -8,11 +8,9 @@
  */
 
 import React, {useState} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
-import {setGameState, setHowToPlay} from './store/gameState'
 import HintButton from './js/HintButton'
 
 const MainScene = require('./js/res/ARPortals/MainScene')
@@ -22,9 +20,8 @@ const UNSET = 'UNSET'
 
 function Main() {
   const [navigator, setNavigator] = useState(UNSET)
-  const dispatch = useDispatch()
 
-  const getExperience = () => {
+  const newGameScreen = () => {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
@@ -41,14 +38,6 @@ function Main() {
     )
   }
 
-  const toggleYesBtn = (gameState) => {
-    dispatch(setGameState(!gameState))
-  }
-
-  const toggleHowToPlayBtn = (howToPlay) => {
-    dispatch(setHowToPlay(!howToPlay))
-  }
-
   const howToPlayScreen = () => {
     return (
       <View style={localStyles.outer}>
@@ -59,7 +48,7 @@ function Main() {
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={() => {
-              setHowToPlay(game.howToPlay)
+              setNavigator(UNSET)
             }}
           >
             <Text style={localStyles.buttonText}>Back</Text>
@@ -70,14 +59,18 @@ function Main() {
   }
 
   if (navigator === UNSET) {
-    return getExperience()
+    return newGameScreen()
   } else if (navigator === AR_NAVIGATOR) {
     return (
-      <View>
-        <Text>NULL</Text>
-        {console.log('navigator', navigator)}
+      <View style={{poisiton: 'absolute', flex: 1}}>
+        <StatusBar hidden={false} />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
+        <HintButton />
+        <Inventory />
       </View>
     )
+  } else if (navigator === HOW_TO_PLAY) {
+    return howToPlayScreen()
   }
 }
 
