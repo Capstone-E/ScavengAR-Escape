@@ -33,15 +33,16 @@ export default class MainScene extends Component {
     // initial state
     this.state = {
       text: 'find the key',
-      insidePortal: false,
-      portalPosition: [0, -1, -2],
-      portalSize: [0.75, 1.5, 0.1]
+      insidePortalOne: false,
+      portalOnePosition: [0, -1, -2],
+      portalOneSize: [0.75, 1.5, 0.1],
+      keyOneFound: false
     }
     this._onInitialized = this._onInitialized.bind(this)
-    this._onClick = this._onClick.bind(this)
+    this._onClickPortalOne = this._onClickPortalOne.bind(this)
     this._onCameraARHitTest = this._onCameraARHitTest.bind(this)
-    this._onPortalEnter = this._onPortalEnter.bind(this)
-    this._onPortalExit = this._onPortalExit.bind(this)
+    this._onPortalOneEnter = this._onPortalOneEnter.bind(this)
+    this._onPortalOneExit = this._onPortalOneExit.bind(this)
   }
 
   render() {
@@ -56,25 +57,19 @@ export default class MainScene extends Component {
           position={[0, 5, 1]}
           color="#ffffff"
           castsShadow={true}
-          // influenceBitMask={this.props.bitMask}
           shadowNearZ={0.1}
           shadowFarZ={5}
           shadowOpacity={0.9}
         />
-        {/* <ViroText
-            text={this.state.points}
-            scale={[0.5, 0.5, 0.5]}
-            position={[0, 0, -1]}
-          /> */}
         <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
-          onPortalEnter={this._onPortalEnter}
-          onPortalExit={this._onPortalExit}
+          onPortalEnter={this._onPortalOneEnter}
+          onPortalExit={this._onPortalOneExit}
         >
           <ViroAmbientLight color="#ffffff" intensity={500} />
-          <ViroPortal position={this.state.portalPosition} scale={this.state.portalSize}>
+          <ViroPortal position={this.state.portalOnePosition} scale={this.state.portalOneSize}>
             <Viro3DObject
               source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -93,20 +88,14 @@ export default class MainScene extends Component {
             position={[-1, -1.2, -2]} >  */}
           {/*This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
           <Viro3DObject
-            source={require('./res/3dObjects/Key_B_02.obj')}
-            resources={[require('./res/3dObjects/Key_B_02.mtl'), require('./res/3dObjects/keyB_tx.bmp')]}
+            source={require('../3dObjects/Key_B_02.obj')}
+            resources={[require('../3dObjects/Key_B_02.mtl'), require('../3dObjects/keyB_tx.bmp')]}
             type="OBJ"
             position={[-1.5, -0.5, 2]}
             scale={[0.055, 0.055, 0.055]}
-            onClick={this._onClick}
-            visible={!this.state.keyfound}
+            onClick={this._onClickPortalOne}
+            visible={!this.state.keyOneFound}
           />
-          {/* </ViroNode> */}
-          {/* <ViroBox
-            position={[0, -0.5, -1]}
-            scale={[0.3, 0.3, 0.1]}
-            materials={['grid']}
-          /> */}
         </ViroPortalScene>
 
         {/* <ViroPortalScene
@@ -150,25 +139,25 @@ export default class MainScene extends Component {
 
   _onCameraARHitTest(results) {}
 
-  _onPortalEnter() {
+  _onPortalOneEnter() {
     this.setState({
-      insidePortal: true,
-      portalSize: [0, 0, 0]
+      insidePortalOne: true,
+      portalOneSize: [0, 0, 0]
     })
   }
 
-  _onPortalExit() {
+  _onPortalOneExit() {
     this.setState({
-      insidePortal: false,
-      portalPosition: [0, 0, -2]
+      insidePortalOne: false,
+      portalOneSize: [0, 0, 0]
     })
   }
 
-  _onClick() {
+  _onClickPortalOne() {
     this.setState({
-      keyfound: true,
+      keyOneFound: true,
       text: 'You found the key, you can escape!',
-      portalSize: [0.75, 1.5, 0.1]
+      portalOneSize: [0.75, 1.5, 0.1]
     })
     this.props.sendObjectsStatus(true)
   }
