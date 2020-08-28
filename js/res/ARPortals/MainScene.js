@@ -49,7 +49,6 @@ export default class MainScene extends Component {
       <ViroARScene
       onTrackingUpdated={this._onInitialized}
       onCameraARHitTest={this._onCameraARHitTest}
-
       >
         <ViroAmbientLight color="#ffffff" intensity={500} />
         <ViroSpotLight
@@ -76,7 +75,10 @@ export default class MainScene extends Component {
           onPortalEnter={this._onPortalEnter}
           onPortalExit={this._onPortalExit}
         >
-          <ViroPortal position={this.state.portalPosition} scale={this.state.portalSize}>
+        <ViroAmbientLight color="#ffffff" intensity={500} />
+          <ViroPortal
+          position={this.state.portalPosition}
+          scale={this.state.portalSize}>
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -86,10 +88,12 @@ export default class MainScene extends Component {
                 require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
-              // visible={!this.insidePortal}
+              visible={!this.insidePortal}
             />
           </ViroPortal>
-          <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
+          <Viro3DObject
+          source={require('../FBXtoVRX/model.vrx')}
+          type="VRX" />
 
           <ViroText
             text={this.state.text}
@@ -109,7 +113,7 @@ export default class MainScene extends Component {
               position={[-1, 1, -1]}
               scale={[0.1, 0.1, 0.1]}
               onClick={this._onClick}
-              visible={this.insidePortal}
+              // visible={this.insidePortal}
             />
           {/* </ViroNode> */}
           {/* <ViroBox
@@ -164,7 +168,6 @@ export default class MainScene extends Component {
   _onPortalEnter() {
     this.setState({
       insidePortal: true,
-      // portalPosition: [0, -1, 2],
       portalSize: [0.15, 0.15, 0.15]
     });
   }
@@ -177,15 +180,12 @@ export default class MainScene extends Component {
   }
 
   _onClick() {
-    //remove key from view (unrender)
     this.setState({
       keyfound: true,
       text: 'You found the key',
+      portalSize: [0.75, 1.5, 0.1]
     });
-    //change inventory state
     this.props.sendObjectsStatus(true);
-
-    //check box off todo list for hints
   }
 }
 
