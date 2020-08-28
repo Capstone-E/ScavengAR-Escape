@@ -13,7 +13,7 @@ import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
 import HintButton from './js/HintButton'
 
-const MainScene = require('./js/res/ARPortals/MainScene')
+const MainScene = require('./js/MainScene')
 const AR_NAVIGATOR = 'AR_NAVIGATOR'
 const HOW_TO_PLAY = 'HOW_TO_PLAY'
 const UNSET = 'UNSET'
@@ -58,13 +58,15 @@ function Main() {
     )
   }
 
+  const exitGame = () => setNavigator(UNSET)
+
   if (navigator === UNSET) {
     return newGameScreen()
   } else if (navigator === AR_NAVIGATOR) {
     return (
       <View style={{poisiton: 'absolute', flex: 1}}>
         <StatusBar hidden={false} />
-        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}} viroAppProps={exitGame} />
         <HintButton />
         <Inventory />
       </View>
