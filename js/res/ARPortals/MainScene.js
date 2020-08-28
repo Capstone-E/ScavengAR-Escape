@@ -32,9 +32,9 @@ export default class MainScene extends Component {
     // initial state
     this.state = {
       text: 'find the key',
-      insidePortal: false
-      // points: [[0, 0, 0]]
-      // portalPosition: [0, -9, -30]
+      insidePortal: false,
+      portalPosition: [0, -1, -2],
+      portalSize: [0.75, 1.5, 0.1]
     }
     this._onInitialized = this._onInitialized.bind(this)
     this._onClick = this._onClick.bind(this)
@@ -49,8 +49,7 @@ export default class MainScene extends Component {
       <ViroARScene
       onTrackingUpdated={this._onInitialized}
       onCameraARHitTest={this._onCameraARHitTest}
-      onPortalEnter={this._onPortalEnter}
-      onPortalExit={this._onPortalExit}
+
       >
         <ViroAmbientLight color="#ffffff" intensity={500} />
         <ViroSpotLight
@@ -74,8 +73,10 @@ export default class MainScene extends Component {
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
+          onPortalEnter={this._onPortalEnter}
+          onPortalExit={this._onPortalExit}
         >
-          <ViroPortal position={[0, -1.5, -2]} scale={[1, 1.5, 0.1]}>
+          <ViroPortal position={this.state.portalPosition} scale={this.state.portalSize}>
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -85,7 +86,7 @@ export default class MainScene extends Component {
                 require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
-              visible={!this.insidePortal}
+              // visible={!this.insidePortal}
             />
           </ViroPortal>
           <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
@@ -117,7 +118,7 @@ export default class MainScene extends Component {
           /> */}
         </ViroPortalScene>
 
-        <ViroPortalScene
+        {/* <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
@@ -139,7 +140,7 @@ export default class MainScene extends Component {
             type="OBJ"
             scale={[0.01, 0.01, 0.01]}
           />
-        </ViroPortalScene>
+        </ViroPortalScene> */}
       </ViroARScene>
     );
   }
@@ -161,13 +162,16 @@ export default class MainScene extends Component {
 
   _onPortalEnter() {
     this.setState({
-      insidePortal:true,
+      insidePortal: true,
+      // portalPosition: [0, -1, 2],
+      portalSize: [0.15, 0.15, 0.15]
     });
   }
 
   _onPortalExit() {
     this.setState({
       insidePortal:false,
+      portalPosition: [0, 0, -2]
     });
   }
 
