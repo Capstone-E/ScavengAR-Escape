@@ -5,7 +5,10 @@ import {
   ViroNode,
   ViroFlexView,
   ViroAmbientLight,
+  ViroText,
+  Viro3DObject,
 } from 'react-viro';
+import { Box } from './Board';
 
 // const Board = (props) => {
 //   return <ViroButton onClick={props.onClick}>{props.value}</ViroButton>;
@@ -31,37 +34,48 @@ export default class Game extends Component {
     if (winner(boxes) || boxes[i]) {
       return;
     }
+    if (boxesClicked(boxes) === true) {
+      return;
+    }
+    //x, o marks
     boxes[i] = this.state.isNext ? 'X' : 'O';
+    //add it to the history
     history.push(this.state.isNext ? 'X' : 'O');
+    //updates the state
     this.setState({
       boxes: boxes,
       history: history,
       isNext: !this.state.isNext,
     });
   }
-
+  tryAgain = () => {
+    this.setState({
+      boxes: Array(9).fill(null),
+      history: [],
+      isNext: true,
+      gameKey: false,
+    });
+  };
   render() {
+    //if there's a winner
     const winners = winner(this.state.boxes);
+    //if all the boxes are clicked
     const isFilled = boxesClicked(this.state.boxes);
+    //text to send
     let status;
     // if (winner) {
     //   this.setState({ gameKey: true });
     // }
+    if (winner) {
+      status = 'you won :/, now get that key and get outta here!';
+    } else {
+      status = "you'd better try again... or you may never leave.";
+    }
     return (
       <ViroNode>
         <ViroAmbientLight color="#ffffff" intensity={500} />
-        <ViroFlexView
-          position={[0, -1, -3.5]}
-          style={{
-            flexDirection: 'column',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-          }}
-          backgroundColor="black"
-          rotation={[0, 0, 0]}
-          height={1.5}
-          width={1.5}
-        ></ViroFlexView>
+
+        <Box value={this.state.boxes[0]} onClick={() => this.boxesClicked(0)} />
       </ViroNode>
     );
   }
