@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {foundObjectThunk} from '../store/objectState'
 import {
   ViroSceneNavigator,
+  ViroMaterials,
   ViroText,
   ViroScene,
   ViroARScene,
@@ -75,25 +76,25 @@ export default class MainScene extends Component {
           <ViroAmbientLight color="#ffffff" intensity={500} />
           <ViroPortal position={this.state.portalPosition} scale={this.state.portalSize}>
             <Viro3DObject
-              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
+              source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
-                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
-                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
-                require('./portal_res/door/portal_archway/portal_entry.png')
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png')
               ]}
               type="VRX"
             />
           </ViroPortal>
-          <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
+          <Viro3DObject source={require('./res/FBXtoVRX/model.vrx')} type="VRX" />
 
           <ViroText text={this.state.text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
           {/* <ViroNode
             position={[-1, -1.2, -2]} >  */}
           {/*This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
           <Viro3DObject
-            source={require('../3dObjects/Key_B_02.obj')}
-            resources={[require('../3dObjects/Key_B_02.mtl'), require('../3dObjects/keyB_tx.bmp')]}
+            source={require('./res/3dObjects/Key_B_02.obj')}
+            resources={[require('./res/3dObjects/Key_B_02.mtl'), require('./res/3dObjects/keyB_tx.bmp')]}
             type="OBJ"
             position={[-1.5, -0.5, 2]}
             scale={[0.055, 0.055, 0.055]}
@@ -115,18 +116,18 @@ export default class MainScene extends Component {
         >
           <ViroPortal position={[0, -1, -1]} scale={[0.1, 0.1, 0.1]}>
             <Viro3DObject
-              source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
+              source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
-                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
-                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
-                require('./portal_res/door/portal_archway/portal_entry.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
             />
           </ViroPortal>
           <Viro360Image
-            source={require('../outside.jpg')}
+            source={require('./res/outside.jpg')}
             type="OBJ"
             scale={[0.01, 0.01, 0.01]}
           />
