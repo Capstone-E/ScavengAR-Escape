@@ -7,7 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React from 'react'
+import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
@@ -16,10 +16,30 @@ import {setGameState, setHowToPlay} from './store/gameState'
 import HintButton from './js/HintButton'
 
 const MainScene = require('./js/res/ARPortals/MainScene')
+const AR_NAVIGATOR = 'AR_NAVIGATOR'
+const HOW_TO_PLAY = 'HOW_TO_PLAY'
+const UNSET = 'UNSET'
 
 function Main() {
-  const game = useSelector((state) => state.game)
+  const [navigator, setNavigator] = useState(UNSET)
   const dispatch = useDispatch()
+
+  const getExperience = () => {
+    return (
+      <View style={localStyles.outer}>
+        <View style={localStyles.inner}>
+          <Text style={localStyles.titleText}>Can you escape?</Text>
+          <TouchableHighlight style={localStyles.buttons} onPress={() => setNavigator(AR_NAVIGATOR)}>
+            <Text style={localStyles.buttonText}>Yes</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight style={localStyles.buttons} onPress={() => setNavigator(HOW_TO_PLAY)}>
+            <Text style={localStyles.buttonText}>How To Play</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
 
   const toggleYesBtn = (gameState) => {
     dispatch(setGameState(!gameState))
@@ -33,57 +53,29 @@ function Main() {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Can you escape?</Text>
+          <Text style={localStyles.titleText}>1. Move Device Slowly To Find Portal</Text>
+          <Text style={localStyles.titleText}>2. Enter Portals To Complete Puzzles</Text>
+          <Text style={localStyles.titleText}>3. Escape</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={() => {
-              setHowToPlay(game.gameState)
+              setHowToPlay(game.howToPlay)
             }}
           >
-            <Text style={localStyles.buttonText}>Yes</Text>
+            <Text style={localStyles.buttonText}>Back</Text>
           </TouchableHighlight>
         </View>
       </View>
     )
   }
 
-  const newGameScreen = () => {
+  if (navigator === UNSET) {
+    return getExperience()
+  } else if (navigator === AR_NAVIGATOR) {
     return (
-      <View style={localStyles.outer}>
-        <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Can you escape?</Text>
-          <TouchableHighlight
-            style={localStyles.buttons}
-            onPress={() => {
-              toggleYesBtn(game.gameState)
-            }}
-          >
-            <Text style={localStyles.buttonText}>Yes</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={localStyles.buttons}
-            onPress={() => {
-              // toggleHowToPlayBtn(game.howToPlay)
-            }}
-          >
-            <Text style={localStyles.buttonText}>How To Play</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
-    )
-  }
-
-  if (game.gameState === false) {
-    return newGameScreen()
-  } else if (game.howToPlay === true) {
-    return howToPlayScreen()
-  } else {
-    return (
-      <View style={{poisiton: 'absolute', flex: 1}}>
-        <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
-        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
-        <HintButton />
-        <Inventory />
+      <View>
+        <Text>NULL</Text>
+        {console.log('navigator', navigator)}
       </View>
     )
   }
