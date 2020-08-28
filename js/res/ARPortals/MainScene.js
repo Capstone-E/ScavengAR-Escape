@@ -32,20 +32,24 @@ export default class MainScene extends Component {
     // initial state
     this.state = {
       text: 'find the key',
-      points: [[0, 0, 0]],
-      // portalPosition: [0, -9, -30]
-    };
-    this._onInitialized = this._onInitialized.bind(this);
-    this._onClick = this._onClick.bind(this);
-    // this._onCameraARHitTest = this._onCameraARHitTest.bind(this);
+      insidePortal: false,
+      portalPosition: [0, -1, -2],
+      portalSize: [0.75, 1.5, 0.1]
+    }
+    this._onInitialized = this._onInitialized.bind(this)
+    this._onClick = this._onClick.bind(this)
+    this._onCameraARHitTest = this._onCameraARHitTest.bind(this)
+    this._onPortalEnter = this._onPortalEnter.bind(this)
+    this._onPortalExit = this._onPortalExit.bind(this)
   }
 
   render() {
-    console.log('state', this.state);
+    // console.log('state', this.state)
     return (
       <ViroARScene
-        onTrackingUpdated={this._onInitialized}
-        // onCameraARHitTest={this._onCameraARHitTest}
+      onTrackingUpdated={this._onInitialized}
+      onCameraARHitTest={this._onCameraARHitTest}
+
       >
         <ViroAmbientLight color="#ffffff" intensity={500} />
         <ViroSpotLight
@@ -69,8 +73,10 @@ export default class MainScene extends Component {
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
+          onPortalEnter={this._onPortalEnter}
+          onPortalExit={this._onPortalExit}
         >
-          <ViroPortal position={[0, -1, -2.5]} scale={[1, 2.5, 0.1]}>
+          <ViroPortal position={this.state.portalPosition} scale={this.state.portalSize}>
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -80,6 +86,7 @@ export default class MainScene extends Component {
                 require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
+              // visible={!this.insidePortal}
             />
           </ViroPortal>
           <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
@@ -91,17 +98,18 @@ export default class MainScene extends Component {
           />
           {/* <ViroNode
             position={[-1, -1.2, -2]} > This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
-          <Viro3DObject
-            source={require('../3dObjects/Key_B_02.obj')}
-            resources={[
-              require('../3dObjects/Key_B_02.mtl'),
-              require('../3dObjects/keyB_tx.bmp'),
-            ]}
-            type="OBJ"
-            position={[1, 1, 1]}
-            scale={[0.1, 0.1, 0.1]}
-            onClick={this._onClick}
-          />
+            <Viro3DObject
+              source={require('../3dObjects/Key_B_02.obj')}
+              resources={[
+                require('../3dObjects/Key_B_02.mtl'),
+                require('../3dObjects/keyB_tx.bmp'),
+              ]}
+              type="OBJ"
+              position={[-1, 1, -1]}
+              scale={[0.1, 0.1, 0.1]}
+              onClick={this._onClick}
+              visible={this.insidePortal}
+            />
           {/* </ViroNode> */}
           {/* <ViroBox
             position={[0, -0.5, -1]}
@@ -110,7 +118,7 @@ export default class MainScene extends Component {
           /> */}
         </ViroPortalScene>
 
-        <ViroPortalScene
+        {/* <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
@@ -132,7 +140,7 @@ export default class MainScene extends Component {
             type="OBJ"
             scale={[0.01, 0.01, 0.01]}
           />
-        </ViroPortalScene>
+        </ViroPortalScene> */}
       </ViroARScene>
     );
   }
@@ -149,9 +157,23 @@ export default class MainScene extends Component {
     }
   }
 
-  // _onCameraARHitTest(results) {
-  //   console.log(results)
-  // }
+  _onCameraARHitTest(results) {
+  }
+
+  _onPortalEnter() {
+    this.setState({
+      insidePortal: true,
+      // portalPosition: [0, -1, 2],
+      portalSize: [0.15, 0.15, 0.15]
+    });
+  }
+
+  _onPortalExit() {
+    this.setState({
+      insidePortal:false,
+      portalPosition: [0, 0, -2]
+    });
+  }
 
   _onClick() {
     //remove key from view (unrender)
