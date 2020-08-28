@@ -76,6 +76,7 @@ export default class MainScene extends Component {
           onPortalEnter={this._onPortalEnter}
           onPortalExit={this._onPortalExit}
         >
+          <ViroAmbientLight color="#ffffff" intensity={500} />
           <ViroPortal
             position={this.state.portalPosition}
             scale={this.state.portalSize}
@@ -89,7 +90,7 @@ export default class MainScene extends Component {
                 require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
-              // visible={!this.insidePortal}
+              visible={!this.insidePortal}
             />
           </ViroPortal>
           <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
@@ -100,7 +101,8 @@ export default class MainScene extends Component {
             position={[0, 0, -1]}
           />
           {/* <ViroNode
-            position={[-1, -1.2, -2]} > This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
+            position={[-1, -1.2, -2]} >  */}
+          {/*This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
           <Viro3DObject
             source={require('../3dObjects/Key_B_02.obj')}
             resources={[
@@ -111,7 +113,7 @@ export default class MainScene extends Component {
             position={[-1, 1, -1]}
             scale={[0.1, 0.1, 0.1]}
             onClick={this._onClick}
-            visible={this.insidePortal}
+            // visible={this.insidePortal}
           />
           <ViroNode>
             <Game />
@@ -163,7 +165,6 @@ export default class MainScene extends Component {
   _onPortalEnter() {
     this.setState({
       insidePortal: true,
-      // portalPosition: [0, -1, 2],
       portalSize: [0.15, 0.15, 0.15],
     });
   }
@@ -176,15 +177,12 @@ export default class MainScene extends Component {
   }
 
   _onClick() {
-    //remove key from view (unrender)
     this.setState({
       keyfound: true,
       text: 'You found the key',
+      portalSize: [0.75, 1.5, 0.1],
     });
-    //change inventory state
     this.props.sendObjectsStatus(true);
-
-    //check box off todo list for hints
   }
 }
 
