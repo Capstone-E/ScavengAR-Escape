@@ -56,7 +56,7 @@ const Game = () => {
 
 export default Game;
 
-//This is the file to ReactDom render, react-dom is not installed in this application yet
+//THis is the file to ReactDom render, react-dom is not
 /* import React from "react";
 import ReactDom from "react-dom";
 import "./index.css";

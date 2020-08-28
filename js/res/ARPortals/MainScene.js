@@ -24,6 +24,7 @@ import {
   ViroConstants,
   ViroSpotLight,
 } from 'react-viro';
+import Game from '../../TICTACTOE/TICTACTOE';
 
 export default class MainScene extends Component {
   constructor() {
@@ -103,11 +104,6 @@ export default class MainScene extends Component {
             onClick={this._onClick}
           />
           {/* </ViroNode> */}
-          {/* <ViroBox
-            position={[0, -0.5, -1]}
-            scale={[0.3, 0.3, 0.1]}
-            materials={['grid']}
-          /> */}
         </ViroPortalScene>
 
         <ViroPortalScene
