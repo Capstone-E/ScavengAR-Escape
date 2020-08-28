@@ -1,64 +1,95 @@
-// taken from https://github.com/codeSTACKr/react-tic-tac-toe-hooks
+import React, { useState, Component } from 'react';
+import { winner, boxesClicked } from './helperz';
+import {
+  ViroButton,
+  ViroNode,
+  ViroFlexView,
+  ViroAmbientLight,
+} from 'react-viro';
 
-import React, { useState } from 'react';
-import { winner } from './helperz';
-import Board from './Board';
+// const Board = (props) => {
+//   return <ViroButton onClick={props.onClick}>{props.value}</ViroButton>;
+// };
 
-const Game = () => {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [stepNumber, setStepNumber] = useState(0);
-  const [xIsNext, setXisNext] = useState(true);
-  const winners = winner(history[stepNumber]);
-  const xO = xIsNext ? 'X' : 'O';
-
-  const handleClick = (i) => {
-    const historyPoint = history.slice(0, stepNumber + 1);
-    const current = historyPoint[stepNumber];
-    const squares = [...current];
-    // return if won or occupied
-    if (winner || squares[i]) return;
-    // select square
-    squares[i] = xO;
-    setHistory([...historyPoint, squares]);
-    setStepNumber(historyPoint.length);
-    setXisNext(!xIsNext);
-  };
-
-  const jumpTo = (step) => {
-    setStepNumber(step);
-    setXisNext(step % 2 === 0);
-  };
-
-  const renderMoves = () =>
-    history.map((_step, move) => {
-      const destination = move ? `Go to move #${move}` : 'Go to Start';
-      return (
-        <li key={move}>
-          <button onClick={() => jumpTo(move)}>{destination}</button>
-        </li>
-      );
+export default class Game extends Component {
+  constructor() {
+    super();
+    this.state = {
+      //makes the ticboard
+      boxes: Array(9).fill(null),
+      history: [],
+      isNext: [],
+      gameKey: false,
+    };
+  }
+  handleClick(i) {
+    //sees wassup with the box states
+    const boxes = this.state.boxes.slice();
+    //get current state of gameplay
+    let history = this.state.history;
+    //stops if theres a winner
+    if (winner(boxes) || boxes[i]) {
+      return;
+    }
+    boxes[i] = this.state.isNext ? 'X' : 'O';
+    history.push(this.state.isNext ? 'X' : 'O');
+    this.setState({
+      boxes: boxes,
+      history: history,
+      isNext: !this.state.isNext,
     });
+  }
 
+  render() {
+    const winners = winner(this.state.boxes);
+    const isFilled = boxesClicked(this.state.boxes);
+    let status;
+    // if (winner) {
+    //   this.setState({ gameKey: true });
+    // }
+    return (
+      <ViroNode>
+        <ViroAmbientLight color="#ffffff" intensity={500} />
+        <ViroFlexView
+          position={[0, -1, -3.5]}
+          style={{
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+          }}
+          backgroundColor="black"
+          rotation={[0, 0, 0]}
+          height={1.5}
+          width={1.5}
+        ></ViroFlexView>
+      </ViroNode>
+    );
+  }
+}
+
+/* BOARD.JS OLD CODE
+import React from 'react';
+import Unit from './Unit';
+const Board = ({ squares, onClick }) => (
+  <div>
+    {squares.map((square, i) => (
+      <Unit key={i} value={square} onClick={() => onClick(i)} />
+    ))}
+  </div>
+);
+export default Board;
+*/
+/* UNIT.JS OLD CODE
+import React from 'react';
+
+const Unit = ({ value, onClick }) => {
+  const style = value ? `unit ${value}` : `unit`;
   return (
-    <>
-      <h1>React Tic Tac Toe - With Hooks</h1>
-      <Board squares={history[stepNumber]} onClick={handleClick} />
-      <div className="info-wrapper">
-        <div>
-          <h3>History</h3>
-          {renderMoves()}
-        </div>
-        <h3>{winner ? 'Winner: ' + winner : 'Next Player: ' + xO}</h3>
-      </div>
-    </>
+    <button className={style} onClick={onClick}>
+      {value}
+    </button>
   );
 };
 
-export default Game;
-
-//THis is the file to ReactDom render, react-dom is not
-/* import React from "react";
-import ReactDom from "react-dom";
-import "./index.css";
-import Game from "./components/Game";
-ReactDom.render(<Game />, document.getElementById("root")); */
+export default Unit;
+*/

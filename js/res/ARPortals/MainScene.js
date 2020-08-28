@@ -35,22 +35,21 @@ export default class MainScene extends Component {
       text: 'find the key',
       insidePortal: false,
       portalPosition: [0, -1, -2],
-      portalSize: [0.75, 1.5, 0.1]
-    }
-    this._onInitialized = this._onInitialized.bind(this)
-    this._onClick = this._onClick.bind(this)
-    this._onCameraARHitTest = this._onCameraARHitTest.bind(this)
-    this._onPortalEnter = this._onPortalEnter.bind(this)
-    this._onPortalExit = this._onPortalExit.bind(this)
+      portalSize: [0.75, 1.5, 0.1],
+    };
+    this._onInitialized = this._onInitialized.bind(this);
+    this._onClick = this._onClick.bind(this);
+    this._onCameraARHitTest = this._onCameraARHitTest.bind(this);
+    this._onPortalEnter = this._onPortalEnter.bind(this);
+    this._onPortalExit = this._onPortalExit.bind(this);
   }
 
   render() {
     // console.log('state', this.state)
     return (
       <ViroARScene
-      onTrackingUpdated={this._onInitialized}
-      onCameraARHitTest={this._onCameraARHitTest}
-
+        onTrackingUpdated={this._onInitialized}
+        onCameraARHitTest={this._onCameraARHitTest}
       >
         <ViroAmbientLight color="#ffffff" intensity={500} />
         <ViroSpotLight
@@ -77,7 +76,10 @@ export default class MainScene extends Component {
           onPortalEnter={this._onPortalEnter}
           onPortalExit={this._onPortalExit}
         >
-          <ViroPortal position={this.state.portalPosition} scale={this.state.portalSize}>
+          <ViroPortal
+            position={this.state.portalPosition}
+            scale={this.state.portalSize}
+          >
             <Viro3DObject
               source={require('./portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -99,18 +101,21 @@ export default class MainScene extends Component {
           />
           {/* <ViroNode
             position={[-1, -1.2, -2]} > This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
-            <Viro3DObject
-              source={require('../3dObjects/Key_B_02.obj')}
-              resources={[
-                require('../3dObjects/Key_B_02.mtl'),
-                require('../3dObjects/keyB_tx.bmp'),
-              ]}
-              type="OBJ"
-              position={[-1, 1, -1]}
-              scale={[0.1, 0.1, 0.1]}
-              onClick={this._onClick}
-              visible={this.insidePortal}
-            />
+          <Viro3DObject
+            source={require('../3dObjects/Key_B_02.obj')}
+            resources={[
+              require('../3dObjects/Key_B_02.mtl'),
+              require('../3dObjects/keyB_tx.bmp'),
+            ]}
+            type="OBJ"
+            position={[-1, 1, -1]}
+            scale={[0.1, 0.1, 0.1]}
+            onClick={this._onClick}
+            visible={this.insidePortal}
+          />
+          <ViroNode>
+            <Game />
+          </ViroNode>
           {/* </ViroNode> */}
         </ViroPortalScene>
 
@@ -153,21 +158,20 @@ export default class MainScene extends Component {
     }
   }
 
-  _onCameraARHitTest(results) {
-  }
+  _onCameraARHitTest(results) {}
 
   _onPortalEnter() {
     this.setState({
       insidePortal: true,
       // portalPosition: [0, -1, 2],
-      portalSize: [0.15, 0.15, 0.15]
+      portalSize: [0.15, 0.15, 0.15],
     });
   }
 
   _onPortalExit() {
     this.setState({
-      insidePortal:false,
-      portalPosition: [0, 0, -2]
+      insidePortal: false,
+      portalPosition: [0, 0, -2],
     });
   }
 
