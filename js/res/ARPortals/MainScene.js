@@ -87,7 +87,8 @@ export default class MainScene extends Component {
             position={[0, 0, -1]}
           />
           {/* <ViroNode
-            position={[-1, -1.2, -2]} > This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/} 
+            position={[-1, -1.2, -2]} >  */}
+            {/*This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/} 
             <Viro3DObject
               source={require('../3dObjects/Key_B_02.obj')}
               resources={[
