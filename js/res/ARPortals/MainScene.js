@@ -110,8 +110,8 @@ export default class MainScene extends Component {
               require('../3dObjects/keyB_tx.bmp'),
             ]}
             type="OBJ"
-            position={[-1, 1, -1]}
-            scale={[0.1, 0.1, 0.1]}
+            position={[-2, -0.5, 2]}
+            scale={[0.055, 0.055, 0.055]}
             onClick={this._onClick}
             // visible={this.insidePortal}
           />
@@ -165,7 +165,7 @@ export default class MainScene extends Component {
   _onPortalEnter() {
     this.setState({
       insidePortal: true,
-      portalSize: [0.15, 0.15, 0.15],
+      portalSize: [0, 0, 0],
     });
   }
 
