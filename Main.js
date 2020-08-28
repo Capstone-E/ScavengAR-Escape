@@ -7,29 +7,45 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableHighlight,
-  StatusBar,
-} from 'react-native';
-import { ViroARSceneNavigator } from 'react-viro';
-import Inventory from './js/Inventory';
-import { setGameState } from './store/gameState';
-import HintButton from './js/HintButton';
+import React from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
+import {ViroARSceneNavigator} from 'react-viro'
+import Inventory from './js/Inventory'
+import {setGameState, setHowToPlay} from './store/gameState'
+import HintButton from './js/HintButton'
 
-const MainScene = require('./js/res/ARPortals/MainScene');
+const MainScene = require('./js/res/ARPortals/MainScene')
 
 function Main() {
-  const game = useSelector((state) => state.game);
-  const dispatch = useDispatch();
+  const game = useSelector((state) => state.game)
+  const dispatch = useDispatch()
 
   const toggleYesBtn = (gameState) => {
-    dispatch(setGameState(!gameState));
-  };
+    dispatch(setGameState(!gameState))
+  }
+
+  const toggleHowToPlayBtn = (howToPlay) => {
+    dispatch(setHowToPlay(!howToPlay))
+  }
+
+  const howToPlayScreen = () => {
+    return (
+      <View style={localStyles.outer}>
+        <View style={localStyles.inner}>
+          <Text style={localStyles.titleText}>Can you escape?</Text>
+          <TouchableHighlight
+            style={localStyles.buttons}
+            onPress={() => {
+              setHowToPlay(game.gameState)
+            }}
+          >
+            <Text style={localStyles.buttonText}>Yes</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
 
   const newGameScreen = () => {
     return (
@@ -39,60 +55,70 @@ function Main() {
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={() => {
-              toggleYesBtn();
+              toggleYesBtn(game.gameState)
             }}
           >
             <Text style={localStyles.buttonText}>Yes</Text>
           </TouchableHighlight>
+          <TouchableHighlight
+            style={localStyles.buttons}
+            onPress={() => {
+              // toggleHowToPlayBtn(game.howToPlay)
+            }}
+          >
+            <Text style={localStyles.buttonText}>How To Play</Text>
+          </TouchableHighlight>
         </View>
       </View>
-    );
-  };
+    )
+  }
 
   if (game.gameState === false) {
-    return newGameScreen();
+    return newGameScreen()
+  } else if (game.howToPlay === true) {
+    return howToPlayScreen()
   } else {
     return (
-      <View style={{ poisiton: 'absolute', flex: 1 }}>
+      <View style={{poisiton: 'absolute', flex: 1}}>
         <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
-        <ViroARSceneNavigator initialScene={{ scene: MainScene }} />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
         <HintButton />
         <Inventory />
       </View>
-    );
+    )
   }
 }
 
-export default Main;
+export default Main
 
 const localStyles = StyleSheet.create({
   viroContainer: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   outer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   inner: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   titleText: {
     paddingTop: 30,
     paddingBottom: 20,
     color: '#fff',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 25
   },
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 20
   },
   buttons: {
     height: 80,
@@ -104,7 +130,7 @@ const localStyles = StyleSheet.create({
     backgroundColor: '#800000',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
   exitButton: {
     height: 50,
@@ -116,6 +142,6 @@ const localStyles = StyleSheet.create({
     backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
-  },
-});
+    borderColor: '#fff'
+  }
+})
