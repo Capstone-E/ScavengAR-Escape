@@ -25,7 +25,7 @@ class Inventory extends Component {
           horizontal={true}
           contentContainerStyle={style.listViewContainer}
           data={[
-            { key: this.props.objectsStatus[0] ? keyImage : 'empty'},
+            { key: this.props.objectsStatus[0] ? keyImage : 'Slot One Empty'},
             // { key: '' },
             // { key: '' },
             // { key: '' },
@@ -34,7 +34,7 @@ class Inventory extends Component {
           renderItem={({ item }) => (
             <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
               <View style={{height: 50, width: 60}}>
-                {(item.key !== 'empty') ?
+                {('Empty'.includes(item.key)) ?
                   <Image style={{height: 50, width: 50}} source={item.key} />
                   :
                   <Text style={style.textStyle}>{item.key}</Text>
@@ -43,7 +43,7 @@ class Inventory extends Component {
               </View>
             </TouchableHighlight>
           )}
-          keyExtractor={item => String(item)}
+          keyExtractor={item => item.toString()} // for warning about key and string 
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           directionalLockEnabled={true}
@@ -57,11 +57,11 @@ class Inventory extends Component {
 
 const style = StyleSheet.create({
   outerContainer: {
-    height: 80,
+    height: 75,
     backgroundColor: 'grey',
   },
   listViewContainer: {
-    height: 72,
+    height: 65,
     paddingStart: 5,
   },
   buttons: {
@@ -80,7 +80,8 @@ const style = StyleSheet.create({
     borderColor: '#800000',
   },
   textStyle: {
-    marginTop: 15,
+    marginTop: 6,
+    textAlign: 'center',
     fontWeight: 'bold',
     color: 'black',
     alignSelf: 'center',
