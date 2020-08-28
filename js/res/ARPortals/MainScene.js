@@ -88,7 +88,6 @@ export default class MainScene extends Component {
                 require('./portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
-              visible={!this.insidePortal}
             />
           </ViroPortal>
           <Viro3DObject
@@ -98,7 +97,7 @@ export default class MainScene extends Component {
           <ViroText
             text={this.state.text}
             scale={[0.5, 0.5, 0.5]}
-            position={[0, 0, -1]}
+            position={[0, 1, -2]}
           />
           {/* <ViroNode
             position={[-1, -1.2, -2]} >  */}
@@ -110,10 +109,10 @@ export default class MainScene extends Component {
                 require('../3dObjects/keyB_tx.bmp'),
               ]}
               type="OBJ"
-              position={[-2, -0.5, 2]}
+              position={[-1.5, -0.5, 2]}
               scale={[0.055, 0.055, 0.055]}
               onClick={this._onClick}
-              // visible={this.insidePortal}
+              visible={!this.state.keyfound}
             />
           {/* </ViroNode> */}
           {/* <ViroBox
@@ -182,7 +181,7 @@ export default class MainScene extends Component {
   _onClick() {
     this.setState({
       keyfound: true,
-      text: 'You found the key',
+      text: 'You found the key, you can escape!',
       portalSize: [0.75, 1.5, 0.1]
     });
     this.props.sendObjectsStatus(true);
