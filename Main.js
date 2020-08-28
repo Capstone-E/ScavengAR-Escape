@@ -13,6 +13,7 @@ import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-nativ
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
 import HintButton from './js/HintButton'
+import ExitButton from './js/ExitButton'
 import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
 
 const MainScene = require('./js/MainScene')
@@ -58,6 +59,10 @@ function Main() {
     )
   }
 
+  const exit = () => {
+    return dispatch(setNavigator(UNSET))
+  }
+
   if (navigator === UNSET) {
     return newGameScreen()
   } else if (navigator === AR_NAVIGATOR) {
@@ -66,6 +71,7 @@ function Main() {
         <StatusBar hidden={false} />
         <ViroARSceneNavigator initialScene={{scene: MainScene}} />
         <HintButton />
+        <ExitButton />
         <Inventory />
       </View>
     )
