@@ -88,8 +88,8 @@ export default class MainScene extends Component {
             position={[-1, -1.2, -2]} >  */}
           {/*This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
           <Viro3DObject
-            source={require('../3dObjects/Key_B_02.obj')}
-            resources={[require('../3dObjects/Key_B_02.mtl'), require('../3dObjects/keyB_tx.bmp')]}
+            source={require('./res/3dObjects/Key_B_02.obj')}
+            resources={[require('./res/3dObjects/Key_B_02.mtl'), require('./res/3dObjects/keyB_tx.bmp')]}
             type="OBJ"
             position={[-1.5, -0.5, 2]}
             scale={[0.055, 0.055, 0.055]}
