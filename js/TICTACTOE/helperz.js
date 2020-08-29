@@ -35,3 +35,16 @@ export const winner = (units) => {
   }
   return null;
 };
+export const boxesClicked = (boxes) => {
+  let count = 0;
+  boxes.forEach(function (item) {
+    if (item !== null) {
+      count++;
+    }
+  });
+  if (count === 9) {
+    return true;
+  } else {
+    return false;
+  }
+};

@@ -1,10 +1,10 @@
 import React from 'react';
-import Unit from './Unit';
-const Board = ({ squares, onClick }) => (
-  <div>
-    {squares.map((square, i) => (
-      <Square key={i} value={square} onClick={() => onClick(i)} />
-    ))}
-  </div>
-);
-export default Board;
+import { ViroButton } from 'react-viro';
+import { Button } from 'react-native';
+export const Box = (props) => {
+  return (
+    <Button title="button" onPress={props.onCPress}>
+      {props.value}
+    </Button>
+  );
+};
