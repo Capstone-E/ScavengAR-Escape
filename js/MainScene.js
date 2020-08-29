@@ -44,20 +44,23 @@ export default class MainScene extends Component {
       portalTwoSize: zeroPortalSize,
       keyTwoFound: false,
     }
+    //these are for all portals
     this._onInitialized = this._onInitialized.bind(this)
-    this._onClickPortalOne = this._onClickPortalOne.bind(this)
-    this._onClickPortalTwo = this._onClickPortalTwo.bind(this)
     this._onCameraARHitTest = this._onCameraARHitTest.bind(this)
+          //    these are needed for each portal
+
+    //// PORTAL ONE
+    this._onClickPortalOne = this._onClickPortalOne.bind(this)
     this._onPortalOneEnter = this._onPortalOneEnter.bind(this)
     this._onPortalOneExit = this._onPortalOneExit.bind(this)
+    //// PORTAL TWO
+    this._onClickPortalTwo = this._onClickPortalTwo.bind(this)
     this._onPortalTwoEnter = this._onPortalTwoEnter.bind(this)
     this._onPortalTwoExit = this._onPortalTwoExit.bind(this)
+
   }
 
-
-
   render() {
-    // console.log('state', this.state)
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} onCameraARHitTest={this._onCameraARHitTest}>
         <ViroAmbientLight color="#ffffff" intensity={500} />
@@ -170,34 +173,7 @@ export default class MainScene extends Component {
 
   _onCameraARHitTest(results) {}
 
-  _onPortalOneEnter() {
-    this.setState({
-      insidePortalOne: true,
-      portalOneSize: [0, 0, 0]
-    })
-  }
-
-  _onPortalTwoEnter() {
-    this.setState({
-      insidePortalTwo: true,
-      portalTwoSize: [0, 0, 0]
-    });
-  }
-
-  _onPortalOneExit() {
-    this.setState({
-      insidePortalOne: false,
-      portalOneSize: [0, 0, 0],
-      portalTwoSize: [0.75, 1.5, 0.1]
-    })
-  }
-
-  _onPortalTwoExit() {
-    this.setState({
-      insidePortalTwo:false,
-      portalTwoSize: [0, 0, 0]
-    });
-  }
+  // ~~~~~~ PORTAL ONE ~~~~~~~~
 
   _onClickPortalOne() {
     this.setState({
@@ -208,6 +184,23 @@ export default class MainScene extends Component {
     this.props.sendObjectsStatus(true)
   }
 
+  _onPortalOneEnter() {
+    this.setState({
+      insidePortalOne: true,
+      portalOneSize: [0, 0, 0]
+    })
+  }
+
+  _onPortalOneExit() {
+    this.setState({
+      insidePortalOne: false,
+      portalOneSize: [0, 0, 0],
+      portalTwoSize: [0.75, 1.5, 0.1]
+    })
+  }
+
+  // ~~~~~~ PORTAL TWO ~~~~~~~~
+
   _onClickPortalTwo() {
     this.setState({
       keyTwoFound: true,
@@ -215,6 +208,20 @@ export default class MainScene extends Component {
       portalTwoSize: [0.75, 1.5, 0.1]
     });
     this.props.sendObjectsStatus(true);
+  }
+
+  _onPortalTwoEnter() {
+    this.setState({
+      insidePortalTwo: true,
+      portalTwoSize: [0, 0, 0]
+    });
+  }
+
+  _onPortalTwoExit() {
+    this.setState({
+      insidePortalTwo:false,
+      portalTwoSize: [0, 0, 0]
+    });
   }
 
 }
