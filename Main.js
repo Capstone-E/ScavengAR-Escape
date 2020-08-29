@@ -8,29 +8,30 @@
  */
 
 import React, {useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
 import HintButton from './js/HintButton'
+import ExitButton from './js/ExitButton'
+import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
 
 const MainScene = require('./js/MainScene')
-const AR_NAVIGATOR = 'AR_NAVIGATOR'
-const HOW_TO_PLAY = 'HOW_TO_PLAY'
-const UNSET = 'UNSET'
 
 function Main() {
-  const [navigator, setNavigator] = useState(UNSET)
+  const navigator = useSelector((state) => state.navigator)
+  const dispatch = useDispatch()
 
   const newGameScreen = () => {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
           <Text style={localStyles.titleText}>Can you escape?</Text>
-          <TouchableHighlight style={localStyles.buttons} onPress={() => setNavigator(AR_NAVIGATOR)}>
+          <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(AR_NAVIGATOR))}>
             <Text style={localStyles.buttonText}>Yes</Text>
           </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons} onPress={() => setNavigator(HOW_TO_PLAY)}>
+          <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(HOW_TO_PLAY))}>
             <Text style={localStyles.buttonText}>How To Play</Text>
           </TouchableHighlight>
         </View>
@@ -48,7 +49,7 @@ function Main() {
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={() => {
-              setNavigator(UNSET)
+              dispatch(setNavigator(UNSET))
             }}
           >
             <Text style={localStyles.buttonText}>Back</Text>
@@ -58,7 +59,9 @@ function Main() {
     )
   }
 
-  const exitGame = () => setNavigator(UNSET)
+  const exit = () => {
+    return dispatch(setNavigator(UNSET))
+  }
 
   if (navigator === UNSET) {
     return newGameScreen()
@@ -66,8 +69,9 @@ function Main() {
     return (
       <View style={{poisiton: 'absolute', flex: 1}}>
         <StatusBar hidden={false} />
-        <ViroARSceneNavigator initialScene={{scene: MainScene}} viroAppProps={exitGame} />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
         <HintButton />
+        <ExitButton />
         <Inventory />
       </View>
     )
