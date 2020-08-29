@@ -29,18 +29,19 @@ import {
 export default class MainScene extends Component {
   constructor() {
     super()
-
+    const standardPortalSize = [0.75, 1.5, 0.1]
+    const zeroPortalSize = [0, 0, 0]
     // initial state
     this.state = {
       text: 'find the key',
       insidePortalOne: false,
       portalOnePosition: [0, -1, -2],
-      portalOneSize: [0.75, 1.5, 0.1],
+      portalOneSize: standardPortalSize,
       keyOneFound: false,
 
       insidePortalTwo: false,
       portalTwoPosition: [2, -1, -2],
-      portalTwoSize: [0, 0, 0],
+      portalTwoSize: zeroPortalSize,
       keyTwoFound: false,
     }
     this._onInitialized = this._onInitialized.bind(this)
@@ -52,6 +53,8 @@ export default class MainScene extends Component {
     this._onPortalTwoEnter = this._onPortalTwoEnter.bind(this)
     this._onPortalTwoExit = this._onPortalTwoExit.bind(this)
   }
+
+
 
   render() {
     // console.log('state', this.state)
@@ -96,10 +99,10 @@ export default class MainScene extends Component {
 
           <ViroText text={this.state.text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
             <Viro3DObject
-              source={require('../3dObjects/Key_B_02.obj')}
+              source={require('./res/3dObjects/Key_B_02.obj')}
               resources={[
-                require('../3dObjects/Key_B_02.mtl'),
-                require('../3dObjects/keyB_tx.bmp'),
+                require('./res/3dObjects/Key_B_02.mtl'),
+                require('./res/3dObjects/keyB_tx.bmp'),
               ]}
               type="OBJ"
               position={[-1.5, -0.5, 2]}
@@ -125,25 +128,25 @@ export default class MainScene extends Component {
             <Viro3DObject
               source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
-                require('./portal_res/door/portal_archway/portal_archway_diffuse.png'),
-                require('./portal_res/door/portal_archway/portal_archway_normal.png'),
-                require('./portal_res/door/portal_archway/portal_archway_specular.png'),
-                require('./portal_res/door/portal_archway/portal_entry.png')
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png')
               ]}
               type="VRX"
             />
           </ViroPortal>
-          <Viro3DObject source={require('../FBXtoVRX/model.vrx')} type="VRX" />
+          <Viro3DObject source={require('./res/FBXtoVRX/model.vrx')} type="VRX" />
 
           <ViroText text={this.state.text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
             <Viro3DObject
-              source={require('../3dObjects/Key_B_02.obj')}
+              source={require('./res/3dObjects/Key_B_02.obj')}
               resources={[
-                require('../3dObjects/Key_B_02.mtl'),
-                require('../3dObjects/keyB_tx.bmp'),
+                require('./res/3dObjects/Key_B_02.mtl'),
+                require('./res/3dObjects/keyB_tx.bmp'),
               ]}
               type="OBJ"
-              position={[-1.5, -0.5, 2]}
+              position={[-1, -1, -2]}
               scale={[0.055, 0.055, 0.055]}
               onClick={this._onClickPortalTwo}
               visible={!this.state.keyTwoFound}
@@ -160,7 +163,7 @@ export default class MainScene extends Component {
       })
     } else if (state == ViroConstants.TRACKING_NONE) {
       this.setState({
-        text: 'oopsie'
+        text: 'Oopsie! Something is wrong with your AR. Restart and try again'
       })
     }
   }
@@ -184,7 +187,8 @@ export default class MainScene extends Component {
   _onPortalOneExit() {
     this.setState({
       insidePortalOne: false,
-      portalOneSize: [0, 0, 0]
+      portalOneSize: [0, 0, 0],
+      portalTwoSize: [0.75, 1.5, 0.1]
     })
   }
 
@@ -198,7 +202,7 @@ export default class MainScene extends Component {
   _onClickPortalOne() {
     this.setState({
       keyOneFound: true,
-      text: 'You found the key, you can escape!',
+      text: 'You found the key! Exit to find the next portal!',
       portalOneSize: [0.75, 1.5, 0.1]
     })
     this.props.sendObjectsStatus(true)
