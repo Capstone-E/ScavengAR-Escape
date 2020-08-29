@@ -30,24 +30,37 @@ import Game from './TICTACTOE/TICTACTOE';
 export default class MainScene extends Component {
   constructor() {
     super();
-
+    const standardPortalSize = [0.75, 1.5, 0.1];
+    const zeroPortalSize = [0, 0, 0];
     // initial state
     this.state = {
       text: 'find the key',
       insidePortalOne: false,
       portalOnePosition: [0, -1, -2],
-      portalOneSize: [0.75, 1.5, 0.1],
+      portalOneSize: standardPortalSize,
       keyOneFound: false,
+
+      insidePortalTwo: false,
+      portalTwoPosition: [2, -1, -2],
+      portalTwoSize: zeroPortalSize,
+      keyTwoFound: false,
     };
+    //these are for all portals
     this._onInitialized = this._onInitialized.bind(this);
-    this._onClickPortalOne = this._onClickPortalOne.bind(this);
     this._onCameraARHitTest = this._onCameraARHitTest.bind(this);
+    //    these are needed for each portal
+
+    //// PORTAL ONE
+    this._onClickPortalOne = this._onClickPortalOne.bind(this);
     this._onPortalOneEnter = this._onPortalOneEnter.bind(this);
     this._onPortalOneExit = this._onPortalOneExit.bind(this);
+    //// PORTAL TWO
+    this._onClickPortalTwo = this._onClickPortalTwo.bind(this);
+    this._onPortalTwoEnter = this._onPortalTwoEnter.bind(this);
+    this._onPortalTwoExit = this._onPortalTwoExit.bind(this);
   }
 
   render() {
-    // console.log('state', this.state)
     return (
       <ViroARScene
         onTrackingUpdated={this._onInitialized}
@@ -65,6 +78,9 @@ export default class MainScene extends Component {
           shadowFarZ={5}
           shadowOpacity={0.9}
         />
+
+        {/*/~~~~~/ PORTAL SCENE ONE /~~~~~/*/}
+
         <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
@@ -100,9 +116,6 @@ export default class MainScene extends Component {
             scale={[0.5, 0.5, 0.5]}
             position={[0, 1, -2]}
           />
-          {/* <ViroNode
-            position={[-1, -1.2, -2]} >  */}
-          {/*This is for making the key appear at the portal for easier clickabliltiy/drag for testing inv.*/}
           <Viro3DObject
             source={require('./res/3dObjects/Key_B_02.obj')}
             resources={[
@@ -120,12 +133,20 @@ export default class MainScene extends Component {
           </ViroNode> */}
         </ViroPortalScene>
 
-        {/* <ViroPortalScene
+        {/*/~~~~~/ PORTAL SCENE TWO /~~~~~~/*/}
+
+        <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
           onDrag={() => {}}
+          onPortalEnter={this._onPortalTwoEnter}
+          onPortalExit={this._onPortalTwoExit}
         >
-          <ViroPortal position={[0, -1, -1]} scale={[0.1, 0.1, 0.1]}>
+          <ViroAmbientLight color="#ffffff" intensity={500} />
+          <ViroPortal
+            position={this.state.portalTwoPosition}
+            scale={this.state.portalTwoSize}
+          >
             <Viro3DObject
               source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
               resources={[
@@ -137,12 +158,29 @@ export default class MainScene extends Component {
               type="VRX"
             />
           </ViroPortal>
-          <Viro360Image
-            source={require('./res/outside.jpg')}
-            type="OBJ"
-            scale={[0.01, 0.01, 0.01]}
+          <Viro3DObject
+            source={require('./res/FBXtoVRX/model.vrx')}
+            type="VRX"
           />
-        </ViroPortalScene> */}
+
+          <ViroText
+            text={this.state.text}
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 1, -2]}
+          />
+          <Viro3DObject
+            source={require('./res/3dObjects/Key_B_02.obj')}
+            resources={[
+              require('./res/3dObjects/Key_B_02.mtl'),
+              require('./res/3dObjects/keyB_tx.bmp'),
+            ]}
+            type="OBJ"
+            position={[-1, -1, -2]}
+            scale={[0.055, 0.055, 0.055]}
+            onClick={this._onClickPortalTwo}
+            visible={!this.state.keyTwoFound}
+          />
+        </ViroPortalScene>
       </ViroARScene>
     );
   }
@@ -154,12 +192,23 @@ export default class MainScene extends Component {
       });
     } else if (state == ViroConstants.TRACKING_NONE) {
       this.setState({
-        text: 'oopsie',
+        text: 'Oopsie! Something is wrong with your AR. Restart and try again',
       });
     }
   }
 
   _onCameraARHitTest(results) {}
+
+  // ~~~~~~ PORTAL ONE ~~~~~~~~
+
+  _onClickPortalOne() {
+    this.setState({
+      keyOneFound: true,
+      text: 'You found the key! Exit to find the next portal!',
+      portalOneSize: [0.75, 1.5, 0.1],
+    });
+    this.props.sendObjectsStatus(true);
+  }
 
   _onPortalOneEnter() {
     this.setState({
@@ -172,16 +221,33 @@ export default class MainScene extends Component {
     this.setState({
       insidePortalOne: false,
       portalOneSize: [0, 0, 0],
+      portalTwoSize: [0.75, 1.5, 0.1],
     });
   }
 
-  _onClickPortalOne() {
+  // ~~~~~~ PORTAL TWO ~~~~~~~~
+
+  _onClickPortalTwo() {
     this.setState({
-      keyOneFound: true,
+      keyTwoFound: true,
       text: 'You found the key, you can escape!',
-      portalOneSize: [0.75, 1.5, 0.1],
+      portalTwoSize: [0.75, 1.5, 0.1],
     });
     this.props.sendObjectsStatus(true);
+  }
+
+  _onPortalTwoEnter() {
+    this.setState({
+      insidePortalTwo: true,
+      portalTwoSize: [0, 0, 0],
+    });
+  }
+
+  _onPortalTwoExit() {
+    this.setState({
+      insidePortalTwo: false,
+      portalTwoSize: [0, 0, 0],
+    });
   }
 }
 
