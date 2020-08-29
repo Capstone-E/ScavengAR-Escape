@@ -26,6 +26,7 @@ import {
   ViroSpotLight,
 } from 'react-viro';
 import Game from './TICTACTOE/TICTACTOE';
+
 export default class MainScene extends Component {
   constructor() {
     super();
@@ -87,8 +88,10 @@ export default class MainScene extends Component {
               type="VRX"
             />
           </ViroPortal>
+          {/* object for the room */}
           <Viro3DObject
-            source={require('./res/FBXtoVRX/model.vrx')}
+            source={require('./res/FBXtoVRX/camping.vrx')}
+            // position={[0, -1, -50]}
             type="VRX"
           />
 
@@ -112,9 +115,9 @@ export default class MainScene extends Component {
             onClick={this._onClickPortalOne}
             visible={!this.state.keyOneFound}
           />
-          <ViroNode>
+          {/* <ViroNode>
             <Game />
-          </ViroNode>
+          </ViroNode> */}
         </ViroPortalScene>
 
         {/* <ViroPortalScene
