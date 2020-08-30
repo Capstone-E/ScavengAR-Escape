@@ -23,8 +23,10 @@ class Inventory extends Component {
           contentContainerStyle={style.listViewContainer}
           data={[
             { key: this.props.objectsStatus[0] ? keyImage : 'Slot One Empty' },
-            // { key: '' },
-            // { key: '' },
+            { key: this.props.objectsStatus[1] ? keyImage : 'Slot Two Empty' },
+            // { key: this.props.objectsStatus[2] ? keyImage : 'Slot Three Empty' },
+            // { key: this.props.objectsStatus[3] ? keyImage : 'Slot Four Empty' },
+            // { key: this.props.objectsStatus[4] ? keyImage : 'Slot Five Empty' },
             // { key: '' },
             // { key: questionMark },
           ]}
