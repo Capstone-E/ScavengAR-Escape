@@ -35,7 +35,7 @@ class Inventory extends Component {
                   <Image style={{height: 50, width: 50}} source={item.key} />
                   :
                   <Text style={style.textStyle}>{item.key}</Text>
-                )}
+                }
               </View>
             </TouchableHighlight>
           )}
