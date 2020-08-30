@@ -7,7 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Text,
@@ -18,18 +18,20 @@ import {
 } from 'react-native';
 import { ViroARSceneNavigator } from 'react-viro';
 import Inventory from './js/Inventory';
-import { setGameState } from './store/gameState';
 import HintButton from './js/HintButton';
+import ExitButton from './js/ExitButton';
+import {
+  AR_NAVIGATOR,
+  UNSET,
+  HOW_TO_PLAY,
+  setNavigator,
+} from './store/navigator';
 
-const MainScene = require('./js/res/ARPortals/MainScene');
+const MainScene = require('./js/MainScene');
 
 function Main() {
-  const game = useSelector((state) => state.game);
+  const navigator = useSelector((state) => state.navigator);
   const dispatch = useDispatch();
-
-  const toggleYesBtn = (gameState) => {
-    dispatch(setGameState(!gameState));
-  };
 
   const newGameScreen = () => {
     return (
@@ -38,28 +40,64 @@ function Main() {
           <Text style={localStyles.titleText}>Can you escape?</Text>
           <TouchableHighlight
             style={localStyles.buttons}
-            onPress={() => {
-              toggleYesBtn();
-            }}
+            onPress={() => dispatch(setNavigator(AR_NAVIGATOR))}
           >
             <Text style={localStyles.buttonText}>Yes</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={localStyles.buttons}
+            onPress={() => dispatch(setNavigator(HOW_TO_PLAY))}
+          >
+            <Text style={localStyles.buttonText}>How To Play</Text>
           </TouchableHighlight>
         </View>
       </View>
     );
   };
 
-  if (game.gameState === false) {
+  const howToPlayScreen = () => {
+    return (
+      <View style={localStyles.outer}>
+        <View style={localStyles.inner}>
+          <Text style={localStyles.titleText}>
+            1. Move Device Slowly To Find Portal
+          </Text>
+          <Text style={localStyles.titleText}>
+            2. Enter Portals To Complete Puzzles
+          </Text>
+          <Text style={localStyles.titleText}>3. Escape</Text>
+          <TouchableHighlight
+            style={localStyles.buttons}
+            onPress={() => {
+              dispatch(setNavigator(UNSET));
+            }}
+          >
+            <Text style={localStyles.buttonText}>Back</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    );
+  };
+
+  const exit = () => {
+    return dispatch(setNavigator(UNSET));
+  };
+
+  if (navigator === UNSET) {
     return newGameScreen();
-  } else {
+  } else if (navigator === AR_NAVIGATOR) {
     return (
       <View style={{ poisiton: 'absolute', flex: 1 }}>
-        <StatusBar hidden={false} /**Shows top bar for time, signal, etc */ />
+        <StatusBar hidden={false} />
         <ViroARSceneNavigator initialScene={{ scene: MainScene }} />
         <HintButton />
+        <ExitButton />
         <Inventory />
       </View>
     );
+  } else if (navigator === HOW_TO_PLAY) {
+    return howToPlayScreen();
   }
 }
 

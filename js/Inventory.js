@@ -12,20 +12,17 @@ import {
   Image,
 } from 'react-native';
 
-import keyImage from './res/keyImage.png'
+import keyImage from './res/keyImage.png';
 
 class Inventory extends Component {
-
-  render(){
-
+  render() {
     return (
-
       <View style={style.outerContainer}>
         <FlatList
           horizontal={true}
           contentContainerStyle={style.listViewContainer}
           data={[
-            { key: this.props.objectsStatus[0] ? keyImage : 'Slot One Empty'},
+            { key: this.props.objectsStatus[0] ? keyImage : 'Slot One Empty' },
             // { key: '' },
             // { key: '' },
             // { key: '' },
@@ -38,22 +35,20 @@ class Inventory extends Component {
                   <Image style={{height: 50, width: 50}} source={item.key} />
                   :
                   <Text style={style.textStyle}>{item.key}</Text>
-                }
-                
+                )}
               </View>
             </TouchableHighlight>
           )}
-          keyExtractor={item => item.toString()} // for warning about key and string 
+          keyExtractor={(item) => item.toString()} // for warning about key and string
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           directionalLockEnabled={true}
           removeClippedSubviews={false}
-
         />
       </View>
     );
   }
-};
+}
 
 const style = StyleSheet.create({
   outerContainer: {
@@ -88,8 +83,8 @@ const style = StyleSheet.create({
   },
 });
 
-const mapState = state => {
-  return { objectsStatus: state.objectsStatus }
-}
+const mapState = (state) => {
+  return { objectsStatus: state.objectsStatus };
+};
 
 export default connect(mapState)(Inventory);
