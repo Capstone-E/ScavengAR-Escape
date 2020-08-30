@@ -27,8 +27,6 @@ class Inventory extends Component {
             // { key: this.props.objectsStatus[2] ? keyImage : 'Slot Three Empty' },
             // { key: this.props.objectsStatus[3] ? keyImage : 'Slot Four Empty' },
             // { key: this.props.objectsStatus[4] ? keyImage : 'Slot Five Empty' },
-            // { key: '' },
-            // { key: questionMark },
           ]}
           renderItem={({ item }) => (
             <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
@@ -55,7 +53,9 @@ class Inventory extends Component {
 const style = StyleSheet.create({
   outerContainer: {
     height: 75,
-    backgroundColor: 'grey',
+    borderTopWidth: 2,
+    borderColor: '#800000',
+    backgroundColor: 'rgba(72,72,72, .85)',
   },
   listViewContainer: {
     height: 72,
@@ -69,16 +69,17 @@ const style = StyleSheet.create({
     paddingLeft: 5,
     marginRight: 5,
     marginLeft: 5,
-    marginTop: 5,
+    marginTop: 3,
     marginBottom: 5,
     backgroundColor: '#fff',
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: .5,
     borderColor: '#800000',
   },
   textStyle: {
-    marginTop: 6,
+    marginTop: 11,
     textAlign: 'center',
+    fontSize: 10,
     fontWeight: 'bold',
     color: 'black',
     alignSelf: 'center',
