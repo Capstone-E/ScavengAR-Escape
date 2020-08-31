@@ -89,7 +89,7 @@ export const PortalOne = () => {
           <ViroText
             text={text}
             scale={[0.5, 0.5, 0.5]}
-            position={[0, 0, -2]}
+            position={[0, 0, -1.5]}
           />
           <Viro3DObject
             source={require('./res/3dObjects/Key_B_02.obj')}
@@ -98,7 +98,7 @@ export const PortalOne = () => {
               require('./res/3dObjects/keyB_tx.bmp'),
             ]}
             type="OBJ"
-            position={[-1.5, -0.5, 2]}
+            position={[0.5, -0.8, 0.5]}
             scale={[0.055, 0.055, 0.055]}
             onClick={_onClick}
             visible={!keyFound}
