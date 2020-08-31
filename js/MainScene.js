@@ -5,62 +5,37 @@ import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { foundObjectThunk } from '../store/objectState';
 import {
-  ViroSceneNavigator,
+  ViroARSceneNavigator,
   ViroMaterials,
-  ViroText,
-  ViroScene,
   ViroARScene,
   ViroAmbientLight,
-  Viro360Video,
-  Viro360Image,
-  ViroUtils,
-  ViroPortal,
-  ViroPortalScene,
-  Viro3DObject,
-  ViroNode,
-  ViroImage,
-  ViroARPlaneSelector,
-  ViroARPlane,
-  ViroBox,
   ViroConstants,
   ViroSpotLight,
 } from 'react-viro';
+
+import PortalOne from './PortalOne'
+import PortalTwo from './PortalTwo'
 import Game from './TICTACTOE/TICTACTOE';
 
 export default class MainScene extends Component {
-  constructor() {
-    super();
-    const standardPortalSize = [0.75, 1.5, 0.1];
-    const zeroPortalSize = [0, 0, 0];
-    // initial state
-    this.state = {
-      text: 'find the key',
-      insidePortalOne: false,
-      portalOnePosition: [0, -1, -2],
-      portalOneSize: standardPortalSize,
-      keyOneFound: false,
+  constructor(props) {
+    super(props);
 
-      insidePortalTwo: false,
-      portalTwoPosition: [2, -1, -2],
-      portalTwoSize: zeroPortalSize,
-      keyTwoFound: false,
+    // initial state
+
+    this.state = {
+      text: '',
+      visible: false,
+      activePortalScene: PortalOne
     };
-    //these are for all portals
+
     this._onInitialized = this._onInitialized.bind(this);
     this._onCameraARHitTest = this._onCameraARHitTest.bind(this);
-    //    these are needed for each portal
 
-    //// PORTAL ONE
-    this._onClickPortalOne = this._onClickPortalOne.bind(this);
-    this._onPortalOneEnter = this._onPortalOneEnter.bind(this);
-    this._onPortalOneExit = this._onPortalOneExit.bind(this);
-    //// PORTAL TWO
-    this._onClickPortalTwo = this._onClickPortalTwo.bind(this);
-    this._onPortalTwoEnter = this._onPortalTwoEnter.bind(this);
-    this._onPortalTwoExit = this._onPortalTwoExit.bind(this);
   }
 
   render() {
+    console.log('this.state.props', this.state.props)
     return (
       <ViroARScene
         onTrackingUpdated={this._onInitialized}
@@ -78,109 +53,12 @@ export default class MainScene extends Component {
           shadowFarZ={5}
           shadowOpacity={0.9}
         />
+        {/* <ViroARSceneNavigator initialScene={this.state.activePortalScene} /> */}
+        {/* _activePortal(activePortalScene) */}
 
-        {/*/~~~~~/ PORTAL SCENE ONE /~~~~~/*/}
+        <PortalOne />
+        {/* <PortalTwo /> */}
 
-        <ViroPortalScene
-          passable={true}
-          dragType="FixedDistance"
-          onDrag={() => {}}
-          onPortalEnter={this._onPortalOneEnter}
-          onPortalExit={this._onPortalOneExit}
-        >
-          <ViroAmbientLight color="#ffffff" intensity={500} />
-          <ViroPortal
-            position={this.state.portalOnePosition}
-            scale={this.state.portalOneSize}
-          >
-            <Viro3DObject
-              source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
-              resources={[
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
-              ]}
-              type="VRX"
-            />
-          </ViroPortal>
-          {/* object for the room */}
-          <Viro3DObject
-            source={require('./res/FBXtoVRX/camping.vrx')}
-            // position={[0, -1, -50]}
-            type="VRX"
-          />
-
-          <ViroText
-            text={this.state.text}
-            scale={[0.5, 0.5, 0.5]}
-            position={[0, 1, -2]}
-          />
-          <Viro3DObject
-            source={require('./res/3dObjects/Key_B_02.obj')}
-            resources={[
-              require('./res/3dObjects/Key_B_02.mtl'),
-              require('./res/3dObjects/keyB_tx.bmp'),
-            ]}
-            type="OBJ"
-            position={[-1.5, -0.5, 2]}
-            scale={[0.055, 0.055, 0.055]}
-            onClick={this._onClickPortalOne}
-            visible={!this.state.keyOneFound}
-          />
-          {/* <ViroNode>
-            <Game />
-          </ViroNode> */}
-        </ViroPortalScene>
-
-        {/*/~~~~~/ PORTAL SCENE TWO /~~~~~~/*/}
-
-        <ViroPortalScene
-          passable={true}
-          dragType="FixedDistance"
-          onDrag={() => {}}
-          onPortalEnter={this._onPortalTwoEnter}
-          onPortalExit={this._onPortalTwoExit}
-        >
-          <ViroAmbientLight color="#ffffff" intensity={500} />
-          <ViroPortal
-            position={this.state.portalTwoPosition}
-            scale={this.state.portalTwoSize}
-          >
-            <Viro3DObject
-              source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
-              resources={[
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
-                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
-              ]}
-              type="VRX"
-            />
-          </ViroPortal>
-          <Viro3DObject
-            source={require('./res/FBXtoVRX/model.vrx')}
-            type="VRX"
-          />
-
-          <ViroText
-            text={this.state.text}
-            scale={[0.5, 0.5, 0.5]}
-            position={[0, 1, -2]}
-          />
-          <Viro3DObject
-            source={require('./res/3dObjects/Key_B_02.obj')}
-            resources={[
-              require('./res/3dObjects/Key_B_02.mtl'),
-              require('./res/3dObjects/keyB_tx.bmp'),
-            ]}
-            type="OBJ"
-            position={[-1, -1, -2]}
-            scale={[0.055, 0.055, 0.055]}
-            onClick={this._onClickPortalTwo}
-            visible={!this.state.keyTwoFound}
-          />
-        </ViroPortalScene>
       </ViroARScene>
     );
   }
@@ -199,56 +77,10 @@ export default class MainScene extends Component {
 
   _onCameraARHitTest(results) {}
 
-  // ~~~~~~ PORTAL ONE ~~~~~~~~
-
-  _onClickPortalOne() {
-    this.setState({
-      keyOneFound: true,
-      text: 'You found the key! Exit to find the next portal!',
-      portalOneSize: [0.75, 1.5, 0.1],
-    });
-    this.props.sendObjectsStatus(true);
+  _activePortal(portal) {
+    <ViroARSceneNavigator initialScene={portal} />
   }
 
-  _onPortalOneEnter() {
-    this.setState({
-      insidePortalOne: true,
-      portalOneSize: [0, 0, 0],
-    });
-  }
-
-  _onPortalOneExit() {
-    this.setState({
-      insidePortalOne: false,
-      portalOneSize: [0, 0, 0],
-      portalTwoSize: [0.75, 1.5, 0.1],
-    });
-  }
-
-  // ~~~~~~ PORTAL TWO ~~~~~~~~
-
-  _onClickPortalTwo() {
-    this.setState({
-      keyTwoFound: true,
-      text: 'You found the key, you can escape!',
-      portalTwoSize: [0.75, 1.5, 0.1],
-    });
-    this.props.sendObjectsStatus(true);
-  }
-
-  _onPortalTwoEnter() {
-    this.setState({
-      insidePortalTwo: true,
-      portalTwoSize: [0, 0, 0],
-    });
-  }
-
-  _onPortalTwoExit() {
-    this.setState({
-      insidePortalTwo: false,
-      portalTwoSize: [0, 0, 0],
-    });
-  }
 }
 
 const mapDispatch = (dispatch) => {
