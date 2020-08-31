@@ -98,8 +98,8 @@ export const PortalOne = () => {
               require('./res/3dObjects/keyB_tx.bmp'),
             ]}
             type="OBJ"
-            position={[0.5, -0.8, 0.5]}
-            scale={[0.055, 0.055, 0.055]}
+            position={[-2.1, 0.3, 0.8]}
+            scale={[0.015, 0.015, 0.015]}
             onClick={_onClick}
             visible={!keyFound}
           />
