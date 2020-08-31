@@ -1,6 +1,6 @@
 'use strict';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { foundObjectThunk } from '../store/objectState';
 import {
   ViroText,
@@ -24,6 +24,9 @@ export const PortalOne = () => {
   const [ portalVisible, setPortalVisible ] = useState(true)
   const [ keyFound, setKeyFound ] = useState(false)
 
+  const objectFoundStatus = useSelector((state) => state.objectsStatus);
+  const dispatch = useDispatch();
+
   const _onClick = () => {
     setKeyFound(true)
     setText('You found the key! Exit to find the next portal!')
@@ -31,6 +34,7 @@ export const PortalOne = () => {
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
     // mona's thunk goes here?
+    dispatch(foundObjectThunk(true))
   }
 
   const _onPortalEnter = () => {
@@ -79,7 +83,7 @@ export const PortalOne = () => {
           <Viro3DObject
             source={require('./res/FBXtoVRX/camping.vrx')}
             position={[0.3, -1.05, -1]}
-            scale={[0.015, 0.015, 0.015]}
+            scale={[0.1, 0.1, 0.1]}
             type="VRX"
             visible={portalVisible}
             // onLoadStart={}
@@ -114,10 +118,5 @@ export const PortalOne = () => {
 
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    sendObjectsStatus: (status) => dispatch(foundObjectThunk(status)),
-  };
-};
 
-module.exports = connect(null, mapDispatch)(PortalOne);
+module.exports = PortalOne;
