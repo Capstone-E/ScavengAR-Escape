@@ -1,6 +1,6 @@
 'use strict';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { foundObjectThunk } from '../store/objectState';
 import {
   ViroText,
@@ -23,13 +23,16 @@ export const PortalTwo = () => {
   const [portalVisible, setPortalVisible] = useState(true);
   const [keyFound, setKeyFound] = useState(false);
 
+  const objectFoundStatus = useSelector((state) => state.objectsStatus);
+  const dispatch = useDispatch();
+
   const _onClick = () => {
     setKeyFound(true);
     setText('You found the key! Exit to find the next portal!');
     setPortalPosition([-1, -1, -2]);
     setPortalSize(standardPortalSize);
     setPortalVisible(true);
-    // mona's thunk goes here?
+    dispatch(foundObjectThunk(true)); // for inv.
   };
 
   const _onPortalEnter = () => {
@@ -104,10 +107,4 @@ export const PortalTwo = () => {
   );
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    sendObjectsStatus: (status) => dispatch(foundObjectThunk(status)),
-  };
-};
-
-module.exports = connect(null, mapDispatch)(PortalTwo);
+module.exports = PortalTwo;
