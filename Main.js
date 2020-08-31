@@ -67,7 +67,7 @@ function Main() {
         <StatusBar hidden={false} />
         <ViroARSceneNavigator initialScene={{scene: MainScene}} />
         <HintButton />
-        <ExitButton />
+        {/* <ExitButton /> */}
         <Inventory />
       </View>
     )
