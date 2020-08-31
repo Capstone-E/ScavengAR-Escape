@@ -11,15 +11,14 @@ import {
   ViroNode
 } from 'react-viro';
 import Game from './TICTACTOE/TICTACTOE';
-import PortalTwo from './PortalTwo';
 
-export const PortalOne = () => {
+export const PortalTwo = () => {
   const standardPortalSize = [0.75, 1.5, 0.1]
   const zeroPortalSize = [0, 0, 0]
 
   const [ text, setText ] = useState('Solve the puzzle and find the key')
   const [ insidePortal, setInsidePortal ] = useState(false)
-  const [ portalPosition, setPortalPosition ] = useState([0, -1, -2])
+  const [ portalPosition, setPortalPosition ] = useState([1, -1, -2])
   const [ portalSize, setPortalSize] = useState(standardPortalSize)
   const [ portalVisible, setPortalVisible ] = useState(true)
   const [ keyFound, setKeyFound ] = useState(false)
@@ -27,14 +26,14 @@ export const PortalOne = () => {
   const _onClick = () => {
     setKeyFound(true)
     setText('You found the key! Exit to find the next portal!')
-    setPortalVisible(true)
+    setPortalPosition([-1, -1, -2])
     setPortalSize(standardPortalSize)
+    setPortalVisible(true)
     // mona's thunk goes here?
   }
 
   const _onPortalEnter = () => {
     setInsidePortal(true)
-    setPortalVisible(false)
     setPortalSize(zeroPortalSize)
   }
 
@@ -76,7 +75,7 @@ export const PortalOne = () => {
     </ViroPortal>
     {/* object for the room */}
     <Viro3DObject
-      source={require('./res/FBXtoVRX/camping.vrx')}
+      source={require('./res/FBXtoVRX/beach.vrx')}
       position={[0.3, 0, -1]}
       scale={[0.03, 0.03, 0.03]}
       type="VRX"

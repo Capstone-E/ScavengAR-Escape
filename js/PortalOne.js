@@ -27,14 +27,14 @@ export const PortalOne = () => {
   const _onClick = () => {
     setKeyFound(true)
     setText('You found the key! Exit to find the next portal!')
-    setPortalVisible(true)
+    setPortalPosition([-1, -1, -2])
     setPortalSize(standardPortalSize)
+    setPortalVisible(true)
     // mona's thunk goes here?
   }
 
   const _onPortalEnter = () => {
     setInsidePortal(true)
-    setPortalVisible(false)
     setPortalSize(zeroPortalSize)
   }
 
@@ -48,7 +48,6 @@ export const PortalOne = () => {
 
   return (
     <ViroNode>
-      {levelComplete ? (
     <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
@@ -79,8 +78,8 @@ export const PortalOne = () => {
           {/* object for the room */}
           <Viro3DObject
             source={require('./res/FBXtoVRX/camping.vrx')}
-            position={[0.3, 0, -1]}
-            scale={[0.03, 0.03, 0.03]}
+            position={[0.3, -1.05, -1]}
+            scale={[0.015, 0.015, 0.015]}
             type="VRX"
             visible={portalVisible}
             // onLoadStart={}
@@ -90,7 +89,7 @@ export const PortalOne = () => {
           <ViroText
             text={text}
             scale={[0.5, 0.5, 0.5]}
-            position={[0, 1, -2]}
+            position={[0, 0, -2]}
           />
           <Viro3DObject
             source={require('./res/3dObjects/Key_B_02.obj')}
@@ -107,11 +106,9 @@ export const PortalOne = () => {
           {/* <ViroNode
             <Game />
           </ViroNode> */}
-
         </ViroPortalScene>
-        ) : (
-          <PortalTwo />
-        )}
+
+        {levelComplete && <PortalTwo />}
     </ViroNode>
   )
 
