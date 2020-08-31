@@ -48,7 +48,7 @@ const HintButton = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hints</Text>
+            <Text style={styles.modalText}>Hints {count}/3</Text>
             {hintView()}
             <TouchableHighlight
               style={{...styles.hideButton, backgroundColor: '#800000'}}
@@ -83,7 +83,7 @@ const HintButton = () => {
           }}
           underlayColor="#00000000"
         >
-          <Text style={styles.textStyle}>?</Text>
+          <Text style={styles.textStyle}> ?</Text>
         </TouchableHighlight>
       </View>
     </View>
