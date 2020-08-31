@@ -1,27 +1,17 @@
 'use strict';
 import React, { Component } from 'react';
 
-import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { foundObjectThunk } from '../store/objectState';
 import {
-  ViroSceneNavigator,
   ViroMaterials,
   ViroText,
-  ViroScene,
   ViroARScene,
   ViroAmbientLight,
-  Viro360Video,
-  Viro360Image,
-  ViroUtils,
   ViroPortal,
   ViroPortalScene,
   Viro3DObject,
-  ViroNode,
-  ViroImage,
-  ViroARPlaneSelector,
-  ViroARPlane,
-  ViroBox,
+  Viro360Image,
   ViroConstants,
   ViroSpotLight,
 } from 'react-viro';
@@ -104,11 +94,12 @@ export default class MainScene extends Component {
               type="VRX"
             />
           </ViroPortal>
-          {/* object for the room */}
-          <Viro3DObject
-            source={require('./res/FBXtoVRX/camping.vrx')}
-            // position={[0, -1, -50]}
-            type="VRX"
+          {/* image for the room */}
+
+          <Viro360Image
+            source={require('./res/dock.jpg')}
+            type="OBJ"
+            scale={[0.01, 0.01, 0.01]}
           />
 
           <ViroText
@@ -158,9 +149,10 @@ export default class MainScene extends Component {
               type="VRX"
             />
           </ViroPortal>
-          <Viro3DObject
-            source={require('./res/FBXtoVRX/model.vrx')}
-            type="VRX"
+          <Viro360Image
+            source={require('./res/outside.jpg')}
+            type="OBJ"
+            scale={[0.01, 0.01, 0.01]}
           />
 
           <ViroText
