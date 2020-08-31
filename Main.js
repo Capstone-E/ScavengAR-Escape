@@ -67,7 +67,7 @@ function Main() {
     return newGameScreen()
   } else if (navigator === AR_NAVIGATOR) {
     return (
-      <View style={{position: 'absolute', flex: 1}}>
+      <View style={{flex: 1}}>
         <StatusBar hidden={false} />
         <ViroARSceneNavigator initialScene={{scene: MainScene}} />
         <HintButton />
