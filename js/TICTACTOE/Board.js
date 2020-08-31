@@ -1,5 +1,6 @@
 import React from 'react';
-import { ViroButton } from 'react-viro';
+import { ViroFlexView } from 'react-viro';
+
 import { Button } from 'react-native';
 export const Box = (props) => {
   return (
@@ -8,3 +9,17 @@ export const Box = (props) => {
     </Button>
   );
 };
+
+// const Square = ({ value, onCLick }) => {
+//   const style = value ? `squares ${value}` : `squares`;
+//   return (
+//     <ViroFlexView backgroundColor="black" border="solid" font-size="5rem">
+//       <button className={style} onClick={onClick}>
+//         {value}
+//       </button>
+//       ;
+//     </ViroFlexView>
+//   );
+// };
+
+// export default Square;

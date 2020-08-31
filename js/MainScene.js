@@ -26,6 +26,7 @@ import {
   ViroSpotLight,
 } from 'react-viro';
 import Game from './TICTACTOE/TICTACTOE';
+import Square from './TICTACTOE/Board';
 
 export default class MainScene extends Component {
   constructor() {
@@ -128,9 +129,9 @@ export default class MainScene extends Component {
             onClick={this._onClickPortalOne}
             visible={!this.state.keyOneFound}
           />
-          {/* <ViroNode>
+          <ViroNode shadowCastingBitMask={2}>
             <Game />
-          </ViroNode> */}
+          </ViroNode>
         </ViroPortalScene>
 
         {/*/~~~~~/ PORTAL SCENE TWO /~~~~~~/*/}

@@ -35,6 +35,7 @@ export const winner = (units) => {
   }
   return null;
 };
+
 export const boxesClicked = (boxes) => {
   let count = 0;
   boxes.forEach(function (item) {
