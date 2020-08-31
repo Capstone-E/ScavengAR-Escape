@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { foundObjectThunk } from '../store/objectState';
 import {
-  ViroARSceneNavigator,
   ViroText,
   ViroAmbientLight,
   ViroPortal,
   ViroPortalScene,
   Viro3DObject,
+  ViroNode
 } from 'react-viro';
 import Game from './TICTACTOE/TICTACTOE';
-import { PortalTwo } from './PortalTwo';
+import PortalTwo from './PortalTwo';
 
 export const PortalOne = () => {
   const standardPortalSize = [0.75, 1.5, 0.1]
@@ -42,11 +42,13 @@ export const PortalOne = () => {
     setInsidePortal(false)
     setPortalVisible(false)
     setPortalSize(zeroPortalSize)
-
-    // link to send state to open second portal goes here?
   }
-  console.log('state.props', state.props)
+
+  let levelComplete = keyFound && !insidePortal
+
   return (
+    <ViroNode>
+      {levelComplete ? (
     <ViroPortalScene
           passable={true}
           dragType="FixedDistance"
@@ -69,7 +71,6 @@ export const PortalOne = () => {
                 require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
               ]}
               type="VRX"
-              renderingOrder={-1}
               visible={portalVisible}
               // onLoadStart={}
               // onLoadEnd={}
@@ -77,11 +78,10 @@ export const PortalOne = () => {
           </ViroPortal>
           {/* object for the room */}
           <Viro3DObject
-            source={require('./res/FBXtoVRX/beach.vrx')}
+            source={require('./res/FBXtoVRX/camping.vrx')}
             position={[0.3, 0, -1]}
             scale={[0.03, 0.03, 0.03]}
             type="VRX"
-            renderingOrder={0}
             visible={portalVisible}
             // onLoadStart={}
             // onLoadEnd={}
@@ -103,13 +103,16 @@ export const PortalOne = () => {
             scale={[0.055, 0.055, 0.055]}
             onClick={_onClick}
             visible={!keyFound}
-            renderingOrder={1}
           />
           {/* <ViroNode
-          renderingOrder={2}>
             <Game />
           </ViroNode> */}
+
         </ViroPortalScene>
+        ) : (
+          <PortalTwo />
+        )}
+    </ViroNode>
   )
 
 }

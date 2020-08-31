@@ -19,7 +19,7 @@ import {
 import { ViroARSceneNavigator } from 'react-viro';
 import Inventory from './js/Inventory';
 import HintButton from './js/HintButton';
-import ExitButton from './js/ExitButton';
+// import ExitButton from './js/ExitButton';
 import {
   AR_NAVIGATOR,
   UNSET,
@@ -92,7 +92,7 @@ function Main() {
         <StatusBar hidden={false} />
         <ViroARSceneNavigator initialScene={{ scene: MainScene }} />
         <HintButton />
-        <ExitButton />
+        {/* <ExitButton /> */}
         <Inventory />
       </View>
     );

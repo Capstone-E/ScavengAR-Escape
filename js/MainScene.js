@@ -1,11 +1,9 @@
 'use strict';
 import React, { Component } from 'react';
 
-import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { foundObjectThunk } from '../store/objectState';
 import {
-  ViroARSceneNavigator,
   ViroMaterials,
   ViroARScene,
   ViroAmbientLight,
@@ -14,8 +12,6 @@ import {
 } from 'react-viro';
 
 import PortalOne from './PortalOne'
-import PortalTwo from './PortalTwo'
-import Game from './TICTACTOE/TICTACTOE';
 
 export default class MainScene extends Component {
   constructor(props) {
@@ -26,7 +22,6 @@ export default class MainScene extends Component {
     this.state = {
       text: '',
       visible: false,
-      activePortalScene: PortalOne
     };
 
     this._onInitialized = this._onInitialized.bind(this);
@@ -35,7 +30,7 @@ export default class MainScene extends Component {
   }
 
   render() {
-    console.log('this.state.props', this.state.props)
+
     return (
       <ViroARScene
         onTrackingUpdated={this._onInitialized}
@@ -53,12 +48,7 @@ export default class MainScene extends Component {
           shadowFarZ={5}
           shadowOpacity={0.9}
         />
-        {/* <ViroARSceneNavigator initialScene={this.state.activePortalScene} /> */}
-        {/* _activePortal(activePortalScene) */}
-
         <PortalOne />
-        {/* <PortalTwo /> */}
-
       </ViroARScene>
     );
   }
@@ -76,10 +66,6 @@ export default class MainScene extends Component {
   }
 
   _onCameraARHitTest(results) {}
-
-  _activePortal(portal) {
-    <ViroARSceneNavigator initialScene={portal} />
-  }
 
 }
 
