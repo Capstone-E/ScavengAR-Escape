@@ -7,130 +7,105 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableHighlight,
-  StatusBar,
-} from 'react-native';
-import { ViroARSceneNavigator } from 'react-viro';
-import Inventory from './js/Inventory';
-import HintButton from './js/HintButton';
-// import ExitButton from './js/ExitButton';
-import {
-  AR_NAVIGATOR,
-  UNSET,
-  HOW_TO_PLAY,
-  setNavigator,
-} from './store/navigator';
+import React, {useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
+import {ViroARSceneNavigator} from 'react-viro'
+import Inventory from './js/Inventory'
+import HintButton from './js/HintButton'
+import ExitButton from './js/ExitButton'
+import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
 
-const MainScene = require('./js/MainScene');
+const MainScene = require('./js/MainScene')
 
 function Main() {
-  const navigator = useSelector((state) => state.navigator);
-  const dispatch = useDispatch();
+  const navigator = useSelector((state) => state.navigator)
+  const dispatch = useDispatch()
 
   const newGameScreen = () => {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
           <Text style={localStyles.titleText}>Can you escape?</Text>
-          <TouchableHighlight
-            style={localStyles.buttons}
-            onPress={() => dispatch(setNavigator(AR_NAVIGATOR))}
-          >
+          <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(AR_NAVIGATOR))}>
             <Text style={localStyles.buttonText}>Yes</Text>
           </TouchableHighlight>
 
-          <TouchableHighlight
-            style={localStyles.buttons}
-            onPress={() => dispatch(setNavigator(HOW_TO_PLAY))}
-          >
+          <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(HOW_TO_PLAY))}>
             <Text style={localStyles.buttonText}>How To Play</Text>
           </TouchableHighlight>
         </View>
       </View>
-    );
-  };
+    )
+  }
 
   const howToPlayScreen = () => {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>
-            1. Move Device Slowly To Find Portal
-          </Text>
-          <Text style={localStyles.titleText}>
-            2. Enter Portals To Complete Puzzles
-          </Text>
+          <Text style={localStyles.titleText}>1. Move Device Slowly To Find Portal</Text>
+          <Text style={localStyles.titleText}>2. Enter Portals To Complete Puzzles</Text>
           <Text style={localStyles.titleText}>3. Escape</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={() => {
-              dispatch(setNavigator(UNSET));
+              dispatch(setNavigator(UNSET))
             }}
           >
             <Text style={localStyles.buttonText}>Back</Text>
           </TouchableHighlight>
         </View>
       </View>
-    );
-  };
-
-  const exit = () => {
-    return dispatch(setNavigator(UNSET));
-  };
+    )
+  }
 
   if (navigator === UNSET) {
-    return newGameScreen();
+    return newGameScreen()
   } else if (navigator === AR_NAVIGATOR) {
     return (
-      <View style={{ poisiton: 'absolute', flex: 1 }}>
+      <View style={{flex: 1}}>
         <StatusBar hidden={false} />
-        <ViroARSceneNavigator initialScene={{ scene: MainScene }} />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
         <HintButton />
         {/* <ExitButton /> */}
         <Inventory />
       </View>
-    );
+    )
   } else if (navigator === HOW_TO_PLAY) {
-    return howToPlayScreen();
+    return howToPlayScreen()
   }
 }
 
-export default Main;
+export default Main
 
 const localStyles = StyleSheet.create({
   viroContainer: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   outer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   inner: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   titleText: {
     paddingTop: 30,
     paddingBottom: 20,
     color: '#fff',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 25
   },
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 20
   },
   buttons: {
     height: 80,
@@ -142,7 +117,7 @@ const localStyles = StyleSheet.create({
     backgroundColor: '#800000',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
   exitButton: {
     height: 50,
@@ -154,6 +129,6 @@ const localStyles = StyleSheet.create({
     backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
-  },
-});
+    borderColor: '#fff'
+  }
+})
