@@ -22,17 +22,18 @@ class Inventory extends Component {
           horizontal={true}
           contentContainerStyle={style.listViewContainer}
           data={[
-            { key: this.props.objectsStatus[0] ? keyImage : 'Slot One Empty' },
-            { key: this.props.objectsStatus[1] ? keyImage : 'Slot Two Empty' },
-            // { key: this.props.objectsStatus[2] ? keyImage : 'Slot Three Empty' },
-            // { key: this.props.objectsStatus[3] ? keyImage : 'Slot Four Empty' },
-            // { key: this.props.objectsStatus[4] ? keyImage : 'Slot Five Empty' },
+            { key: this.props.objectsStatus[0] ? keyImage : 'Slot One Locked' },
+            { key: this.props.objectsStatus[1] ? keyImage : 'Slot Two Locked' },
+            // { key: this.props.objectsStatus[2] ? keyImage : 'Slot Three Locked' },
+            // { key: this.props.objectsStatus[3] ? keyImage : 'Slot Four Locked' },
+            // { key: this.props.objectsStatus[4] ? keyImage : 'Slot Five Locked' },
+
           ]}
           renderItem={({ item }) => (
             <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
               <View style={{height: 50, width: 60}}>
                 {(item.key[0] !== 'S') ?
-                  <Image style={{height: 50, width: 50}} source={item.key} />
+                  <Image style={{height: 50, width: 50, paddingLeft: 3, borderRadius: 5}} source={item.key} />
                   :
                   <Text style={style.textStyle}>{item.key}</Text>
                 }
@@ -52,10 +53,10 @@ class Inventory extends Component {
 
 const style = StyleSheet.create({
   outerContainer: {
-    height: 75,
-    borderTopWidth: 2,
+    height: 80,
+    borderTopWidth: .5,
     borderColor: '#800000',
-    backgroundColor: 'rgba(72,72,72, .85)',
+    backgroundColor: 'black',
   },
   listViewContainer: {
     height: 72,
@@ -69,15 +70,15 @@ const style = StyleSheet.create({
     paddingLeft: 5,
     marginRight: 5,
     marginLeft: 5,
-    marginTop: 3,
+    marginTop: 5,
     marginBottom: 5,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    borderWidth: .5,
+    backgroundColor: 'rgba(255, 255, 255, 1 )',
+    borderRadius: 20,
+    borderWidth: .1,
     borderColor: '#800000',
   },
   textStyle: {
-    marginTop: 11,
+    marginTop: 12,
     textAlign: 'center',
     fontSize: 10,
     fontWeight: 'bold',
