@@ -59,10 +59,6 @@ function Main() {
     )
   }
 
-  const exit = () => {
-    return dispatch(setNavigator(UNSET))
-  }
-
   if (navigator === UNSET) {
     return newGameScreen()
   } else if (navigator === AR_NAVIGATOR) {
