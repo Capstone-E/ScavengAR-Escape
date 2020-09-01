@@ -1,16 +1,9 @@
-'use strict';
+'use strict'
 
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableHighlight,
-  Image,
-} from 'react-native';
+import {View, Text, StyleSheet, FlatList, TouchableHighlight, Image} from 'react-native'
 
 import keyImage from './res/keyImage.png';
 import keyImageTwo from './res/keyImageTwo.png';
@@ -58,13 +51,13 @@ const Inventory = () => {
 const style = StyleSheet.create({
   outerContainer: {
     height: 80,
-    borderTopWidth: .5,
+    borderTopWidth: 0.5,
     borderColor: '#800000',
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   listViewContainer: {
     height: 72,
-    paddingStart: 5,
+    paddingStart: 5
   },
   buttons: {
     height: 60,
@@ -78,8 +71,8 @@ const style = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: 'rgba(255, 255, 255, 1 )',
     borderRadius: 20,
-    borderWidth: .1,
-    borderColor: '#800000',
+    borderWidth: 0.1,
+    borderColor: '#800000'
   },
   textStyle: {
     marginTop: 12,
@@ -87,8 +80,8 @@ const style = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
     color: 'black',
-    alignSelf: 'center',
-  },
-});
+    alignSelf: 'center'
+  }
+})
 
 export default Inventory;
