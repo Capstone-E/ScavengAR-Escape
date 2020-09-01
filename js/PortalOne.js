@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { foundObjectThunk } from '../store/objectState';
 import { useSelector, useDispatch } from 'react-redux';
+import unlockSound from './soundUtils';
 
 import {
   ViroText,
@@ -35,6 +36,7 @@ export const PortalOne = () => {
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
     dispatch(foundObjectThunk(true)) // for inv.
+    unlockSound();
   }
 
   const _onPortalEnter = () => {
@@ -83,7 +85,7 @@ export const PortalOne = () => {
           <Viro3DObject
             source={require('./res/FBXtoVRX/camping.vrx')}
             position={[0.3, -1.05, -1]}
-            scale={[0.015, 0.015, 0.015]}
+            scale={[0.15, 0.15, 0.15]} // changed size for testing 
             type="VRX"
             visible={portalVisible}
             // onLoadStart={}

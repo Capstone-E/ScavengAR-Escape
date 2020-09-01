@@ -1,3 +1,4 @@
+import React from 'react';
 import { ViroSound } from 'react-viro';
 
 const unlockSound = () => {
@@ -6,8 +7,6 @@ const unlockSound = () => {
     />
 }
 
-export default {
-    unlockSound
-}
+export default unlockSound
 
 
