@@ -7,13 +7,12 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React, {useState} from 'react'
+import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
 import HintButton from './js/HintButton'
-import ExitButton from './js/ExitButton'
 import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
 
 const MainScene = require('./js/MainScene')
@@ -67,7 +66,6 @@ function Main() {
         <StatusBar hidden={false} />
         <ViroARSceneNavigator initialScene={{scene: MainScene}} />
         <HintButton />
-        {/* <ExitButton /> */}
         <Inventory />
       </View>
     )
