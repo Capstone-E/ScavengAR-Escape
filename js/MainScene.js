@@ -10,7 +10,7 @@ import {
   ViroConstants,
   ViroSpotLight,
 } from 'react-viro';
-
+import Game from './TICTACTOE/TICTACTOE';
 import PortalOne from './PortalOne';
 
 export default class MainScene extends Component {
@@ -46,7 +46,8 @@ export default class MainScene extends Component {
           shadowFarZ={5}
           shadowOpacity={0.9}
         />
-        <PortalOne />
+        {/* <PortalOne /> */}
+        <Game />
       </ViroARScene>
     );
   }

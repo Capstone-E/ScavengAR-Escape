@@ -7,6 +7,7 @@ import {
   ViroNode,
   ViroText,
 } from 'react-viro';
+import { StyleSheet } from 'react-native';
 import { Box } from './Board';
 
 // const Board = (props) => {
@@ -107,76 +108,100 @@ const Unit = ({ value, onClick }) => {
 export default Unit;
 */
 
-export default class Game extends Component {
-  constructor() {
-    super();
+// export default class Game extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       gameBoard: this.makeBoard(3, 3),
+//     };
+//     // this.clickSquare = this.clickSquare.bind(this);
+//   }
+//   makeBoard = (height, width) => {
+//     let board = [];
+//     for (let i = 0; i < height; i++) {
+//       let row = [];
+//       for (let j = 0; j < width; j++) {
+//         let square = Math.round(Math.random());
+//         row.push(square);
+//       }
+//       board.push(row);
+//     }
+//     return board;
+//   };
+//   render() {
+//     return (
+//       <ViroNode>
+//         {/* <ViroFlexView> */}
+//         {this.state.gameBoard.map((row, rowIdx) => {
+//           return (
+//             <ViroFlexView
+//               key={`row${rowIdx}`}
+//               style={{ flexDirection: 'row' }}
+//               width={1.5}
+//               height={1.5}
+//             >
+//               {row.map((place, colIdx) => {
+//                 return (
+//                   <ViroQuad
+//                     style={{ flexDirection: 'column' }}
+//                     key={`place${colIdx}`}
+//                     width={1.2}
+//                     height={1.2}
+//                     materials={['theX']['theO']}
+//                   ></ViroQuad>
+//                 );
+//               })}
+//             </ViroFlexView>
+//           );
+//         })}
+//         {/* </ViroFlexView> */}
+//       </ViroNode>
+//     );
+//   }
+// }
+
+// ViroMaterials.createMaterials({
+//   theX: {
+//     diffuseTexture: require('../res/theticX.png'),
+//   },
+//   theO: {
+//     diffuseTexture: require('../res/theticO.png'),
+//   },
+//   grid: {
+//     diffuseTexture: require('../res/ticGrid.png'),
+//   },
+// });
+
+// const ticTacStyles = StyleSheet.create({
+//   box: {
+//     borderWidth: 2,
+//   },
+// });
+
+class Game extends Component {
+  constructor(props) {
+    super(props);
+    this.handlReset = this.handleReset.bind(this);
     this.state = {
-      gameBoard: this.makeBoard(3, 3),
+      playerOne: 'X',
+      computer: 'O',
+      playerTurn: true,
+      board: ['', '', '', '', '', '', '', '', ''],
     };
-    // this.clickSquare = this.clickSquare.bind(this);
   }
-  makeBoard = (height, width) => {
-    let board = [];
-    for (let i = 0; i < height; i++) {
-      let row = [];
-      for (let j = 0; j < width; j++) {
-        let square = Math.round(Math.random());
-        row.push(square);
-      }
-      board.push(row);
+  handleBoxClick(i, moreMoves) {
+    updateBoard[i] = this.state.playerOne;
+    this.setState({ board: updateBoard });
+    let computerMove = makeMove(updateBoard);
+    if (computerMove !== -4) {
+      updateBoard[computerMove] = this.state.computer;
+      this.setState({ board: updateBoard });
     }
-    return board;
-  };
-  render() {
-    return (
-      <ViroNode>
-        <ViroFlexView
-          position={[0, -1, -3.6]}
-          style={{
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          backgroundColor="white"
-          rotation={[0, 0, 0]}
-          height={1.5}
-          width={1.5}
-        >
-          {this.state.gameBoard.map((row, rowIdx) => {
-            return (
-              <ViroFlexView
-                key={`row${rowIdx}`}
-                style={{ flexDirection: 'row' }}
-                width={1.5}
-                height={1.5}
-              >
-                {row.map((place, colIdx) => {
-                  return (
-                    <ViroQuad
-                      style={{ flexDirection: 'column' }}
-                      key={`place${colIdx}`}
-                      width={1.2}
-                      height={1.2}
-                      materials={place ? ['theX'] : ['theO']}
-                    >
-                      {/* {Box} */}
-                    </ViroQuad>
-                  );
-                })}
-              </ViroFlexView>
-            );
-          })}
-        </ViroFlexView>
-      </ViroNode>
-    );
+  }
+  handlReset() {
+    this.setState({
+      board: ['', '', '', '', '', '', '', '', ''],
+      playerTurn: true,
+    });
   }
 }
-
-ViroMaterials.createMaterials({
-  theX: {
-    diffuseTexture: require('../res/theticX.png'),
-  },
-  theO: {
-    diffuseTexture: require('../res/theticO.png'),
-  },
-});
