@@ -8,7 +8,8 @@ import {
   ViroPortal,
   ViroPortalScene,
   Viro3DObject,
-  ViroNode
+  ViroNode,
+  ViroSound
 } from 'react-viro';
 import Game from './TICTACTOE/TICTACTOE';
 
@@ -104,6 +105,13 @@ export const PortalTwo = () => {
       onClick={_onClick}
       visible={!keyFound}
     />
+    {objectFoundStatus[1] && <ViroSound
+      source={require("./res/sound/unlock.wav")}
+      volume={1.0}
+      paused={false}
+      muted={false}
+      loop={false}
+    />}
     {/* <ViroNode
       <Game />
     </ViroNode> */}
