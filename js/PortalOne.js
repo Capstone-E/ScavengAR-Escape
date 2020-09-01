@@ -20,7 +20,7 @@ export const PortalOne = () => {
   const [ text, setText ] = useState('Solve the puzzle and find the key')
   const [ insidePortal, setInsidePortal ] = useState(false)
   const [ portalPosition, setPortalPosition ] = useState([0, -1, -2])
-  const [ portalSize, setPortalSize] = useState(standardPortalSize)
+  const [ portalSize, setPortalSize ] = useState(standardPortalSize)
   const [ portalVisible, setPortalVisible ] = useState(true)
   const [ keyFound, setKeyFound ] = useState(false)
 
@@ -98,7 +98,7 @@ export const PortalOne = () => {
               require('./res/3dObjects/keyB_tx.bmp'),
             ]}
             type="OBJ"
-            position={[-2.1, 0.3, 0.8]}
+            position={[-1.1, 0.1, 0.2]}
             scale={[0.015, 0.015, 0.015]}
             onClick={_onClick}
             visible={!keyFound}
