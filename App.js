@@ -12,7 +12,6 @@ import Main from './Main';
 import store from './store';
 import { Provider } from 'react-redux';
 
-console.disableYellowBox = true;
 
 const ScavengARescape = () => {
   return (
