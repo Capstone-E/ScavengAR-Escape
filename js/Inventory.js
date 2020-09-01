@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import keyImage from './res/keyImage.png';
+import keyImageTwo from './res/keyImageTwo.png';
 
 const Inventory = () => {
 
@@ -24,8 +25,8 @@ const Inventory = () => {
         horizontal={true}
         contentContainerStyle={style.listViewContainer}
         data={[
-          { key: objectFoundStatus[0] ? keyImage : 'Slot One Locked' },
-          { key: objectFoundStatus[1] ? keyImage : 'Slot Two Locked' },
+          { key: objectFoundStatus[0] ? keyImage  : 'Slot One Locked'},
+          { key: objectFoundStatus[1] ? keyImageTwo  : 'Slot Two Locked'},
           // { key: objectFoundStatus[2] ? keyImage : 'Slot Three Locked' },
           // { key: objectFoundStatus[3] ? keyImage : 'Slot Four Locked' },
           // { key: objectFoundStatus[4] ? keyImage : 'Slot Five Locked' },
@@ -34,15 +35,16 @@ const Inventory = () => {
         renderItem={({ item }) => (
           <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
             <View style={{height: 50, width: 60}}>
-              {(item.key[0] !== 'S') ?
+              {
+              (item.key[0] !== 'S') ?
                 <Image style={{height: 50, width: 50, paddingLeft: 3, borderRadius: 5}} source={item.key} />
                 :
                 <Text style={style.textStyle}>{item.key}</Text>
-              }
+              }       
             </View>
           </TouchableHighlight>
         )}
-        keyExtractor={(item) => item.toString()} // for warning about key and string
+        keyExtractor={(item) => item.key.toString()} // for warning about key and string
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         directionalLockEnabled={true}

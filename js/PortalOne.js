@@ -105,7 +105,7 @@ export const PortalOne = () => {
             ]}
             type="OBJ"
             position={[0.5, -0.8, 0.5]}
-            scale={[0.055, 0.055, 0.055]}
+            scale={[0.55, 0.55, 0.55]}
             onClick={_onClick}
             visible={!keyFound}
           />
