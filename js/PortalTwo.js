@@ -30,7 +30,7 @@ export const PortalTwo = () => {
   const _onClick = () => {
     setKeyFound(true)
     setText('You found the key! Exit to find the next portal!')
-    setPortalPosition([-1, -1, -2])
+    setPortalPosition([0, -1, -1.8])
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
     dispatch(foundObjectThunk(true)) // for inv.

@@ -31,7 +31,7 @@ export const PortalOne = () => {
   const _onClick = () => {
     setKeyFound(true)
     setText('You found the key! Exit to find the next portal!')
-    setPortalPosition([0.01, -1, -1.8])
+    setPortalPosition([0, -1, -1.8])
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
     dispatch(foundObjectThunk(true)) // for inv.
@@ -82,7 +82,7 @@ export const PortalOne = () => {
           {/* object for the room */}
           <Viro3DObject
             source={require('./res/FBXtoVRX/camping.vrx')}
-            position={[0.3, -1.05, -1]}
+            position={[0.3, -1.35, -1]}
             scale={[0.015, 0.015, 0.015]}
             type="VRX"
             visible={portalVisible}

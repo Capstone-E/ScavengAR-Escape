@@ -1,11 +1,11 @@
 'use strict';
 import React, { useState } from 'react';
 
-
 import {
   ViroNode,
   ViroARTrackingTargets,
   ViroARImageMarker,
+  ViroText
 } from 'react-viro';
 
 import TrainPortal from './TrainPortal'
@@ -25,6 +25,11 @@ export const FinalePortal = () => {
 
   return (
     <ViroNode>
+      <ViroText
+        text={text}
+        scale={[0.5, 0.5, 0.5]}
+        position={[0, 0, -1.5]}
+      />
       <ViroARImageMarker
         target={'targetMetrocard'}
         onAnchorFound={_onAnchorFound}
