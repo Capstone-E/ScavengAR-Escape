@@ -14,10 +14,10 @@ export const FinalePortal = () => {
 
   const [ text, setText ] = useState('Find a Metrocard in real life, scan it with your phone to escape')
 
-  const _onClick = () => {
-    setText('Find a Metrocard in real life, scan it with your phone to escape')
-    //something ends or resets the game here
-  }
+  // const _onClick = () => {
+  //   setText('Find a Metrocard in real life, scan it with your phone to escape')
+  //   //something ends or resets the game here
+  // }
 
   const _onAnchorFound = () => {
     // setPortalSize(standardPortalSize)
