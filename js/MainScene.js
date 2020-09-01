@@ -49,6 +49,7 @@ export default class MainScene extends Component {
           shadowOpacity={0.9}
         />
         <PortalOne />
+        
       </ViroARScene>
     );
   }
