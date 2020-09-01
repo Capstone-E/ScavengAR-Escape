@@ -7,7 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Text,
@@ -19,15 +19,14 @@ import {
 import { ViroARSceneNavigator } from 'react-viro';
 import Inventory from './js/Inventory';
 import HintButton from './js/HintButton';
-import ExitButton from './js/ExitButton';
 import {
   AR_NAVIGATOR,
   UNSET,
   HOW_TO_PLAY,
   setNavigator,
 } from './store/navigator';
-const TicTacToeTest = require('./js/TICTACTOE/TICTACTOE');
-const MainScene = require('./js/MainScene');
+
+import MainScene from './js/MainScene';
 
 function Main() {
   const navigator = useSelector((state) => state.navigator);
@@ -61,12 +60,21 @@ function Main() {
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
           <Text style={localStyles.titleText}>
-            1. Move Device Slowly To Find Portal
+            1. Start With Back Against A Wall Or With Plenty Room In Front Of
+            Camera
+          </Text>
+          <Text style={localStyles.titleText}>2. Pan Camera Slowly</Text>
+
+          <Text style={localStyles.titleText}>
+            3. Enter Portals To Complete Puzzles And Find Keys
           </Text>
           <Text style={localStyles.titleText}>
-            2. Enter Portals To Complete Puzzles
+            4. Click Keys To Exit Portal
           </Text>
-          <Text style={localStyles.titleText}>3. Escape</Text>
+          <Text style={localStyles.titleText}>
+            5. Find All Keys Or Complete All Puzzles To Win The Game
+          </Text>
+
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={() => {
@@ -88,7 +96,6 @@ function Main() {
         <StatusBar hidden={false} />
         <ViroARSceneNavigator initialScene={{ scene: MainScene }} />
         <HintButton />
-        {/* <ExitButton /> */}
         <Inventory />
       </View>
     );
