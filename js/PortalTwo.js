@@ -19,7 +19,7 @@ export const PortalTwo = () => {
   const [ text, setText ] = useState('Solve the puzzle and find the key')
   const [ insidePortal, setInsidePortal ] = useState(false)
   const [ portalPosition, setPortalPosition ] = useState([1, -1, -2])
-  const [ portalSize, setPortalSize] = useState(standardPortalSize)
+  const [ portalSize, setPortalSize ] = useState(standardPortalSize)
   const [ portalVisible, setPortalVisible ] = useState(true)
   const [ keyFound, setKeyFound ] = useState(false)
 
