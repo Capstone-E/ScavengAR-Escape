@@ -42,9 +42,15 @@ function Main() {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>1. Move Device Slowly To Find Portal</Text>
-          <Text style={localStyles.titleText}>2. Enter Portals To Complete Puzzles</Text>
-          <Text style={localStyles.titleText}>3. Escape</Text>
+          <Text style={localStyles.titleText}>
+            1. Start With Back Against A Wall Or With Plenty Room In Front Of Camera
+          </Text>
+          <Text style={localStyles.titleText}>2. Pan Camera Slowly</Text>
+
+          <Text style={localStyles.titleText}>3. Enter Portals To Complete Puzzles And Find Keys</Text>
+          <Text style={localStyles.titleText}>4. Click Keys To Exit Portal</Text>
+          <Text style={localStyles.titleText}>5. Find All Keys Or Complete All Puzzles To Win The Game</Text>
+
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={() => {
