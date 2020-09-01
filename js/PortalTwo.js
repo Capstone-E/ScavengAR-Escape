@@ -19,7 +19,7 @@ export const PortalTwo = () => {
   const [ text, setText ] = useState('Solve the puzzle and find the key')
   const [ insidePortal, setInsidePortal ] = useState(false)
   const [ portalPosition, setPortalPosition ] = useState([1, -1, -2])
-  const [ portalSize, setPortalSize] = useState(standardPortalSize)
+  const [ portalSize, setPortalSize ] = useState(standardPortalSize)
   const [ portalVisible, setPortalVisible ] = useState(true)
   const [ keyFound, setKeyFound ] = useState(false)
 
@@ -79,8 +79,8 @@ export const PortalTwo = () => {
     {/* object for the room */}
     <Viro3DObject
       source={require('./res/FBXtoVRX/beach.vrx')}
-      position={[0.3, 0, -1]}
-      scale={[0.03, 0.03, 0.03]}
+      position={[0.5, -1.8, -1]}
+      scale={[0.015, 0.015, 0.015]}
       type="VRX"
       visible={portalVisible}
       // onLoadStart={}
@@ -99,8 +99,8 @@ export const PortalTwo = () => {
         require('./res/3dObjects/keyB_tx.bmp'),
       ]}
       type="OBJ"
-      position={[-1.5, -0.5, 2]}
-      scale={[0.055, 0.055, 0.055]}
+      position={[-1.1, 0.1, 0.2]}
+      scale={[0.015, 0.015, 0.015]}
       onClick={_onClick}
       visible={!keyFound}
     />
