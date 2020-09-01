@@ -1,5 +1,12 @@
 import React, { useState, Component } from 'react';
-import { winner, boxesClicked } from './helperz';
+import {
+  winner,
+  makeTheBoard,
+  checkMovesLeft,
+  evaulate,
+  minMax,
+  bestMove,
+} from './helperz';
 import {
   ViroFlexView,
   ViroQuad,
@@ -7,8 +14,109 @@ import {
   ViroNode,
   ViroText,
 } from 'react-viro';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Box } from './Board';
+
+export default class Game extends Component {
+  constructor(props) {
+    super(props);
+    // this.handlReset = this.handleReset.bind(this);
+    this.state = {
+      playerOne: 'X',
+      computer: 'O',
+      playerTurn: true,
+      board: ['', '', '', '', '', '', '', '', ''],
+    };
+  }
+  handleBoxClick(i, moreMoves) {
+    updateBoard[i] = this.state.playerOne;
+    this.setState({ board: updateBoard });
+    let computerMove = makeMove(updateBoard);
+    if (computerMove !== -4) {
+      updateBoard[computerMove] = this.state.computer;
+      this.setState({ board: updateBoard });
+    }
+  }
+  handlReset() {
+    this.setState({
+      board: ['', '', '', '', '', '', '', '', ''],
+      playerTurn: true,
+    });
+  }
+  render() {
+    let decideWinner = winner(this.state.board);
+    let continuePlaying = decideWinner === null ? true : false;
+    // if (decideWinner !== null) alert(decideWinner + ' won!');
+    return (
+      <ViroNode shadowCastingBitMask={2}>
+        {/* <ViroFlexView position={[-3.8, -0.8, 0]} width={1.5} height={1.5}> */}
+        {this.state.board.map((cell, index) => {
+          return (
+            <ViroNode>
+              <ViroText>{cell}</ViroText>
+            </ViroNode>
+          );
+        })}
+        {/* </ViroFlexView> */}
+        {/* <div className="master">
+          <div className="game">
+            <div className="board">
+              {this.state.board.map((cell, index) => {
+                return (
+                  <div
+                    className="square"
+                    key={index}
+                    onClick={() => this.handleCellClick(index, keep_playing)}
+                  >
+                    {' '}
+                    {cell}{' '}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="side-bar">
+            <div className="reset-button" onClick={this.handleResetButton}>
+              {' '}
+              Reset{' '}
+            </div>
+            <div className="button-line">
+              <div
+                className={
+                  this.state.vsPC === null
+                    ? 'active-singleplayer-button'
+                    : 'deactived-singleplayer-button'
+                }
+                onClick={this.handleSinglePlayerButton}
+              >
+                {' '}
+                Single Player{' '}
+              </div>
+              <div
+                className={
+                  this.state.vsPC === null
+                    ? 'active-multiplayer-button'
+                    : 'deactived-multiplayer-button'
+                }
+                onClick={this.handleMultiPlayerButton}
+              >
+                {' '}
+                Multiplayer{' '}
+              </div>
+            </div>
+          </div>
+        </div> */}
+      </ViroNode>
+    );
+  }
+}
+
+const ticTacStyles = StyleSheet.create({
+  board: {
+    borderWidth: 10,
+    borderColor: 'black',
+  },
+});
 
 // const Board = (props) => {
 //   return <ViroButton onClick={props.onClick}>{props.value}</ViroButton>;
@@ -177,31 +285,3 @@ export default Unit;
 //     borderWidth: 2,
 //   },
 // });
-
-class Game extends Component {
-  constructor(props) {
-    super(props);
-    this.handlReset = this.handleReset.bind(this);
-    this.state = {
-      playerOne: 'X',
-      computer: 'O',
-      playerTurn: true,
-      board: ['', '', '', '', '', '', '', '', ''],
-    };
-  }
-  handleBoxClick(i, moreMoves) {
-    updateBoard[i] = this.state.playerOne;
-    this.setState({ board: updateBoard });
-    let computerMove = makeMove(updateBoard);
-    if (computerMove !== -4) {
-      updateBoard[computerMove] = this.state.computer;
-      this.setState({ board: updateBoard });
-    }
-  }
-  handlReset() {
-    this.setState({
-      board: ['', '', '', '', '', '', '', '', ''],
-      playerTurn: true,
-    });
-  }
-}

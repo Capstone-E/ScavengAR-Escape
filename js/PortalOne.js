@@ -31,7 +31,7 @@ export const PortalOne = () => {
   const _onClick = () => {
     setKeyFound(true);
     setText('You found the key! Exit to find the next portal!');
-    setPortalPosition([-1, -1, -2]);
+    setPortalPosition([0.01, -1, -1.8]);
     setPortalSize(standardPortalSize);
     setPortalVisible(true);
     dispatch(foundObjectThunk(true)); // for inv.
@@ -98,8 +98,8 @@ export const PortalOne = () => {
             require('./res/3dObjects/keyB_tx.bmp'),
           ]}
           type="OBJ"
-          position={[0.5, -0.8, 0.5]}
-          scale={[0.055, 0.055, 0.055]}
+          position={[-1.1, 0.1, 0.2]}
+          scale={[0.015, 0.015, 0.015]}
           onClick={_onClick}
           visible={!keyFound}
         />

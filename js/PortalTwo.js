@@ -87,6 +87,17 @@ export const PortalTwo = () => {
         // onLoadEnd={}
       />
 
+      {/* object for the room */}
+      <Viro3DObject
+        source={require('./res/FBXtoVRX/beach.vrx')}
+        position={[0.5, -1.8, -1]}
+        scale={[0.015, 0.015, 0.015]}
+        type="VRX"
+        visible={portalVisible}
+        // onLoadStart={}
+        // onLoadEnd={}
+      />
+
       <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
       <Viro3DObject
         source={require('./res/3dObjects/Key_B_02.obj')}
@@ -95,8 +106,8 @@ export const PortalTwo = () => {
           require('./res/3dObjects/keyB_tx.bmp'),
         ]}
         type="OBJ"
-        position={[-1.5, -0.5, 2]}
-        scale={[0.055, 0.055, 0.055]}
+        position={[-1.1, 0.1, 0.2]}
+        scale={[0.015, 0.015, 0.015]}
         onClick={_onClick}
         visible={!keyFound}
       />
