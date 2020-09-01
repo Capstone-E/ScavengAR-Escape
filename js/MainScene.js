@@ -1,7 +1,6 @@
 'use strict'
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {foundObjectThunk} from '../store/objectState'
 import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
 
 import PortalOne from './PortalOne'
@@ -20,7 +19,6 @@ function MainScene(props) {
   }
   const _onCameraARHitTest = (results) => {}
 
-  const sendObjectsStatus = (status) => dispatch(foundObjectThunk(status))
 
   return (
     <ViroARScene onTrackingUpdated={_onInitialized} onCameraARHitTest={_onCameraARHitTest}>
