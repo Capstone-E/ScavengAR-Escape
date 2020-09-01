@@ -3,9 +3,9 @@ import {Alert, Modal, StyleSheet, Text, TouchableHighlight, View} from 'react-na
 
 const HintButton = () => {
   const hintsArr = [
-    `First Hint: a long riddle that will blow your mind`,
-    `Second Hint: you can't believe the answer was so simple`,
-    `Final Hint: truly the hardest, most difficult puzzle you've ever encountered`
+    `First Hint: A key in a tent? Well that makes no sense.`,
+    `Second Hint: --- --- --- ---`,
+    `Final Hint: --- ---- ---- ---`
   ]
   const [modalVisible, setModalVisible] = useState(false)
   const [count, setCount] = useState(0)
@@ -48,7 +48,15 @@ const HintButton = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hints {count}/3</Text>
+            <Text style={styles.modalText}>HOW TO PLAY</Text>
+            <Text style={styles.howToPlayText}>
+              1. Start With Back Against A Wall Or With Plenty Room In Front Of Camera
+            </Text>
+            <Text style={styles.howToPlayText}>2. Pan Camera Slowly </Text>
+            <Text style={styles.howToPlayText}>3. Enter Portals To Complete Puzzles And Find Keys </Text>
+            <Text style={styles.howToPlayText}>4. Click Keys To Exit Portal </Text>
+            <Text style={styles.modalText}>5. Find All Keys Or Complete All Puzzles To Win The Game</Text>
+            <Text style={styles.modalText}>HINTS {count}/3</Text>
             {hintView()}
             <TouchableHighlight
               style={{...styles.hideButton, backgroundColor: '#800000'}}
@@ -76,7 +84,7 @@ const HintButton = () => {
         <TouchableHighlight
           style={{...styles.openButton}}
           onPress={() => {
-            if (count <= 3) {
+            if (count < 3) {
               setCount(count + 1)
             }
             setModalVisible(true)
@@ -129,6 +137,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  howToPlayText: {textAlign: 'center'},
   modalText: {
     marginBottom: 15,
     textAlign: 'center'
