@@ -10,7 +10,8 @@ import {
   Viro3DObject,
   ViroNode
 } from 'react-viro';
-import Game from './TICTACTOE/TICTACTOE';
+
+import FinalePortal from './FinalePortal';
 
 export const PortalTwo = () => {
   const standardPortalSize = [0.75, 1.5, 0.1]
@@ -49,7 +50,8 @@ export const PortalTwo = () => {
   let levelComplete = keyFound && !insidePortal
 
   return (
-    <ViroPortalScene
+    <ViroNode>
+      <ViroPortalScene
     passable={true}
     dragType="FixedDistance"
     onDrag={() => {}}
@@ -99,7 +101,7 @@ export const PortalTwo = () => {
         require('./res/3dObjects/keyB_tx.bmp'),
       ]}
       type="OBJ"
-      position={[-1.1, 0.1, 0.2]}
+      position={[0.8, 0.1, -0.2]}
       scale={[0.015, 0.015, 0.015]}
       onClick={_onClick}
       visible={!keyFound}
@@ -108,7 +110,10 @@ export const PortalTwo = () => {
       <Game />
     </ViroNode> */}
 
-  </ViroPortalScene>
+      </ViroPortalScene>
+
+      {levelComplete && <FinalePortal />}
+    </ViroNode>
   )
 
 }
