@@ -1,66 +1,55 @@
-'use strict';
+'use strict'
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import {useSelector} from 'react-redux'
+import {View, Text, StyleSheet, FlatList, TouchableHighlight, Image} from 'react-native'
+import keyImage from './res/keyImage.png'
 
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableHighlight,
-  Image,
-} from 'react-native';
-
-import keyImage from './res/keyImage.png';
-
-class Inventory extends Component {
-  render() {
-    return (
-      <View style={style.outerContainer}>
-        <FlatList
-          horizontal={true}
-          contentContainerStyle={style.listViewContainer}
-          data={[
-            { key: this.props.objectsStatus[0] ? keyImage : 'Slot One Locked' },
-            { key: this.props.objectsStatus[1] ? keyImage : 'Slot Two Locked' },
-            // { key: this.props.objectsStatus[2] ? keyImage : 'Slot Three Locked' },
-            // { key: this.props.objectsStatus[3] ? keyImage : 'Slot Four Locked' },
-            // { key: this.props.objectsStatus[4] ? keyImage : 'Slot Five Locked' },
-
-          ]}
-          renderItem={({ item }) => (
-            <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
-              <View style={{height: 50, width: 60}}>
-                {(item.key[0] !== 'S') ?
-                  <Image style={{height: 50, width: 50, paddingLeft: 3, borderRadius: 5}} source={item.key} />
-                  :
-                  <Text style={style.textStyle}>{item.key}</Text>
-                }
-              </View>
-            </TouchableHighlight>
-          )}
-          keyExtractor={(item) => item.toString()} // for warning about key and string
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          directionalLockEnabled={true}
-          removeClippedSubviews={false}
-        />
-      </View>
-    );
-  }
+function Inventory() {
+  const objectsStatus = useSelector((state) => state.objectsStatus)
+  return (
+    <View style={style.outerContainer}>
+      <FlatList
+        horizontal={true}
+        contentContainerStyle={style.listViewContainer}
+        data={[
+          {key: objectsStatus[0] ? keyImage : 'Slot One Locked'},
+          {key: objectsStatus[1] ? keyImage : 'Slot Two Locked'}
+          // { key: objectsStatus[2] ? keyImage : 'Slot Three Locked' },
+          // { key: objectsStatus[3] ? keyImage : 'Slot Four Locked' },
+          // { key: objectsStatus[4] ? keyImage : 'Slot Five Locked' },
+        ]}
+        renderItem={({item}) => (
+          <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
+            <View style={{height: 50, width: 60}}>
+              {item.key[0] !== 'S' ? (
+                <Image style={{height: 50, width: 50, paddingLeft: 3, borderRadius: 5}} source={item.key} />
+              ) : (
+                <Text style={style.textStyle}>{item.key}</Text>
+              )}
+            </View>
+          </TouchableHighlight>
+        )}
+        keyExtractor={(item) => item.toString()} // for warning about key and string
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        directionalLockEnabled={true}
+        removeClippedSubviews={false}
+      />
+    </View>
+  )
 }
 
 const style = StyleSheet.create({
   outerContainer: {
     height: 80,
-    borderTopWidth: .5,
+    borderTopWidth: 0.5,
     borderColor: '#800000',
-    backgroundColor: 'black',
+    backgroundColor: 'black'
   },
   listViewContainer: {
     height: 72,
-    paddingStart: 5,
+    paddingStart: 5
   },
   buttons: {
     height: 60,
@@ -74,8 +63,8 @@ const style = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: 'rgba(255, 255, 255, 1 )',
     borderRadius: 20,
-    borderWidth: .1,
-    borderColor: '#800000',
+    borderWidth: 0.1,
+    borderColor: '#800000'
   },
   textStyle: {
     marginTop: 12,
@@ -83,12 +72,8 @@ const style = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
     color: 'black',
-    alignSelf: 'center',
-  },
-});
+    alignSelf: 'center'
+  }
+})
 
-const mapState = (state) => {
-  return { objectsStatus: state.objectsStatus };
-};
-
-export default connect(mapState)(Inventory);
+export default Inventory
