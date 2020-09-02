@@ -60,7 +60,6 @@ export default class Game extends Component {
     );
   }
 }
-_onClick() {}
 ViroMaterials.createMaterials({
   board: {
     diffuseTexture: require('../res/ticGrid.png'),

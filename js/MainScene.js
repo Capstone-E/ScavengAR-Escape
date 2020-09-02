@@ -46,8 +46,8 @@ function MainScene(props) {
         shadowFarZ={5}
         shadowOpacity={0.9}
       />
-      <Game />
-      {/* <PortalOne /> */}
+      {/* <Game /> */}
+      <PortalOne />
     </ViroARScene>
   );
 }
