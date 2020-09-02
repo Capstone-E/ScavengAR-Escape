@@ -15,7 +15,7 @@ import Inventory from './js/Inventory'
 import HintButton from './js/HintButton'
 import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
 
-import MainScene from './js/MainScene'
+const MainScene = require('./js/MainScene')
 
 function Main() {
   const navigator = useSelector((state) => state.navigator)
