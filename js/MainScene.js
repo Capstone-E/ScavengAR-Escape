@@ -11,6 +11,7 @@ import {
 } from 'react-viro';
 
 import PortalOne from './PortalOne';
+import Game from './TICTACTOE/TICTACTOE';
 
 function MainScene(props) {
   const [text, setText] = useState('');
@@ -45,7 +46,8 @@ function MainScene(props) {
         shadowFarZ={5}
         shadowOpacity={0.9}
       />
-      <PortalOne />
+      <Game />
+      {/* <PortalOne /> */}
     </ViroARScene>
   );
 }

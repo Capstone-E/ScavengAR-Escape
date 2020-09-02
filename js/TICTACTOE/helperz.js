@@ -117,7 +117,7 @@ export const evaulate = (board, depth) => {
   return 0;
 };
 
-const minMax = (board, depth, max) => {
+export const minMax = (board, depth, max) => {
   if (checkMovesLeft(board) === false) {
     return evaulate(board, depth);
   }
@@ -150,7 +150,7 @@ const minMax = (board, depth, max) => {
   }
 };
 
-const bestMove = (boxes) => {
+export const bestMove = (boxes) => {
   let board = makeTheBoard(boxes);
   let value,
     row = -1,

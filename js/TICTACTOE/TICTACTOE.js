@@ -12,6 +12,7 @@ import {
   ViroQuad,
   ViroMaterials,
   ViroNode,
+  ViroBox,
   ViroText,
 } from 'react-viro';
 import { StyleSheet, View, Text } from 'react-native';
@@ -29,9 +30,10 @@ export default class Game extends Component {
     };
   }
   handleBoxClick(i, moreMoves) {
+    let updateBoard = this.state.board;
     updateBoard[i] = this.state.playerOne;
     this.setState({ board: updateBoard });
-    let computerMove = makeMove(updateBoard);
+    let computerMove = bestMove(updateBoard);
     if (computerMove !== -4) {
       updateBoard[computerMove] = this.state.computer;
       this.setState({ board: updateBoard });
@@ -45,76 +47,23 @@ export default class Game extends Component {
   }
   render() {
     let decideWinner = winner(this.state.board);
-    let continuePlaying = decideWinner === null ? true : false;
     // if (decideWinner !== null) alert(decideWinner + ' won!');
     return (
-      <ViroNode shadowCastingBitMask={2}>
-        {/* <ViroFlexView position={[-3.8, -0.8, 0]} width={1.5} height={1.5}> */}
-        {this.state.board.map((cell, index) => {
-          return (
-            <ViroNode>
-              <ViroText>{cell}</ViroText>
-            </ViroNode>
-          );
-        })}
-        {/* </ViroFlexView> */}
-        {/* <div className="master">
-          <div className="game">
-            <div className="board">
-              {this.state.board.map((cell, index) => {
-                return (
-                  <div
-                    className="square"
-                    key={index}
-                    onClick={() => this.handleCellClick(index, keep_playing)}
-                  >
-                    {' '}
-                    {cell}{' '}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="side-bar">
-            <div className="reset-button" onClick={this.handleResetButton}>
-              {' '}
-              Reset{' '}
-            </div>
-            <div className="button-line">
-              <div
-                className={
-                  this.state.vsPC === null
-                    ? 'active-singleplayer-button'
-                    : 'deactived-singleplayer-button'
-                }
-                onClick={this.handleSinglePlayerButton}
-              >
-                {' '}
-                Single Player{' '}
-              </div>
-              <div
-                className={
-                  this.state.vsPC === null
-                    ? 'active-multiplayer-button'
-                    : 'deactived-multiplayer-button'
-                }
-                onClick={this.handleMultiPlayerButton}
-              >
-                {' '}
-                Multiplayer{' '}
-              </div>
-            </div>
-          </div>
-        </div> */}
-      </ViroNode>
+      <ViroFlexView position={[0, 0, -3]}>
+        <ViroQuad
+          position={[0, 1, 0]}
+          height={1.5}
+          width={1.5}
+          materials={['board']}
+        />
+      </ViroFlexView>
     );
   }
 }
-
-const ticTacStyles = StyleSheet.create({
+_onClick() {}
+ViroMaterials.createMaterials({
   board: {
-    borderWidth: 10,
-    borderColor: 'black',
+    diffuseTexture: require('../res/ticGrid.png'),
   },
 });
 
