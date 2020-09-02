@@ -17,13 +17,14 @@ import PortalTwo from './PortalTwo';
 
 export const PortalOne = () => {
   const standardPortalSize = [0.75, 1.5, 0.1]
-  const zeroPortalSize = [0, 0, 0]
+  const zeroSize = [0, 0, 0]
 
   const [ text, setText ] = useState('Solve the puzzle and find the key')
   const [ insidePortal, setInsidePortal ] = useState(false)
   const [ portalPosition, setPortalPosition ] = useState([0, -1, -2])
   const [ portalSize, setPortalSize ] = useState(standardPortalSize)
   const [ portalVisible, setPortalVisible ] = useState(true)
+  const [ campSize, setCampSize ] = useState([0.015, 0.015, 0.015])
   const [ keyFound, setKeyFound ] = useState(false)
 
   const objectFoundStatus = useSelector((state) => state.objectsStatus);
@@ -41,13 +42,14 @@ export const PortalOne = () => {
 
   const _onPortalEnter = () => {
     setInsidePortal(true)
-    setPortalSize(zeroPortalSize)
+    setPortalSize(zeroSize)
   }
 
   const _onPortalExit = () => {
     setInsidePortal(false)
     setPortalVisible(false)
-    setPortalSize(zeroPortalSize)
+    setPortalSize(zeroSize)
+    setCampSize(zeroSize)
   }
 
   let levelComplete = keyFound && !insidePortal
@@ -85,7 +87,7 @@ export const PortalOne = () => {
           <Viro3DObject
             source={require('./res/FBXtoVRX/camping.vrx')}
             position={[0.3, -1.35, -1]}
-            scale={[0.015, 0.015, 0.015]}
+            scale={campSize}
             type="VRX"
             visible={portalVisible}
             // onLoadStart={}

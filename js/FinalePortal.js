@@ -25,16 +25,17 @@ export const FinalePortal = () => {
 
   return (
     <ViroNode>
-      <ViroText
-        text={text}
-        scale={[0.5, 0.5, 0.5]}
-        position={[0, 0, -1.5]}
-      />
+
       <ViroARImageMarker
         target={'targetMetrocard'}
         onAnchorFound={_onAnchorFound}
       >
-        <TrainPortal />
+      <ViroText
+        text={text}
+        scale={[0.5, 0.5, 0.5]}
+        position={[0, 1, -2]}
+      />
+        {/* <TrainPortal /> */}
       </ViroARImageMarker>
     </ViroNode>
   )
