@@ -31,13 +31,14 @@ export const PortalOne = () => {
   const dispatch = useDispatch();
 
   const _onClick = () => {
-    setKeyFound(true);
-    setText('You found the key! Exit to find the next portal!');
-    setPortalPosition([0, -1, -1.8]);
-    setPortalSize(standardPortalSize);
-    setPortalVisible(true);
-    dispatch(foundObjectThunk(true)); // for inv.
-  };
+    setKeyFound(true)
+    setText('You found the key! Exit to find the next portal!')
+    setPortalPosition([0.3, -1, -1.8])
+    setPortalSize(standardPortalSize)
+    setPortalVisible(true)
+    dispatch(foundObjectThunk(true)) // for inv.
+
+  }
 
   const _onPortalEnter = () => {
     setInsidePortal(true);
@@ -89,28 +90,39 @@ export const PortalOne = () => {
           // onLoadEnd={}
         />
 
-        <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 0, -1.5]} />
-        <Viro3DObject
-          source={require('./res/3dObjects/Key_B_02.obj')}
-          resources={[
-            require('./res/3dObjects/Key_B_02.mtl'),
-            require('./res/3dObjects/keyB_tx.bmp'),
-          ]}
-          type="OBJ"
-          position={[-1.1, 0.1, 0.2]}
-          scale={[0.015, 0.015, 0.015]}
-          onClick={_onClick}
-          visible={!keyFound}
-        />
-        {objectFoundStatus[0] && (
-          <ViroSound
-            source={require('./res/sound/unlock.wav')}
+          <ViroText
+            text={text}
+            scale={[0.1, 0.1, 0.1]}
+            position={[0.3, 0, -1.5]}
+          />
+          <Viro3DObject
+            source={require('./res/3dObjects/Key_B_02.obj')}
+            resources={[
+              require('./res/3dObjects/Key_B_02.mtl'),
+              require('./res/3dObjects/keyB_tx.bmp'),
+            ]}
+            type="OBJ"
+            position={[-1.1, 0.1, 0.2]}
+            scale={[0.015, 0.015, 0.015]}
+            onClick={_onClick}
+            visible={!keyFound}
+          />
+          {objectFoundStatus[0] && <ViroSound
+            source={require("./res/sound/unlock.wav")}
             volume={1.0}
             paused={false}
             muted={false}
             loop={false}
-          />
-        )}
+          />}
+          {/* <ViroNode
+            <Game />
+          </ViroNode> */}
+        </ViroPortalScene>
+
+        {levelComplete && <PortalTwo />}
+
+    </ViroNode>
+  )
 
         {/* <Game /> */}
       </ViroPortalScene>

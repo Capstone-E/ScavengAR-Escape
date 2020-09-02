@@ -17,8 +17,6 @@ import {
   ViroButton,
 } from 'react-viro';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { Box } from './Board';
 export default class Game extends Component {
   constructor(props) {
     super(props);

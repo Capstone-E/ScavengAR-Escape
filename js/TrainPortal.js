@@ -1,14 +1,11 @@
 'use strict';
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { foundObjectThunk } from '../store/objectState';
 import {
   ViroText,
   ViroAmbientLight,
   ViroPortal,
   ViroPortalScene,
   Viro3DObject,
-  ViroNode,
 } from 'react-viro';
 
 export const TrainPortal = () => {
@@ -20,19 +17,6 @@ export const TrainPortal = () => {
   const [portalPosition, setPortalPosition] = useState([1, -1, -2]);
   const [portalSize, setPortalSize] = useState(standardPortalSize);
   const [portalVisible, setPortalVisible] = useState(true);
-  const [keyFound, setKeyFound] = useState(false);
-
-  const objectFoundStatus = useSelector((state) => state.objectsStatus);
-  const dispatch = useDispatch();
-
-  const _onClick = () => {
-    setKeyFound(true);
-    setText('You found the key! Exit to find the next portal!');
-    setPortalPosition([-1, -1, -2]);
-    setPortalSize(standardPortalSize);
-    setPortalVisible(true);
-    dispatch(foundObjectThunk(true)); // for inv.
-  };
 
   const _onPortalEnter = () => {
     setInsidePortal(true);
@@ -44,8 +28,6 @@ export const TrainPortal = () => {
     setPortalVisible(false);
     setPortalSize(zeroPortalSize);
   };
-
-  let levelComplete = keyFound && !insidePortal;
 
   return (
     <ViroPortalScene
@@ -85,7 +67,6 @@ export const TrainPortal = () => {
         // onLoadStart={}
         // onLoadEnd={}
       />
-
       <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
     </ViroPortalScene>
   );

@@ -1,3 +1,4 @@
+'use strict';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -7,13 +8,13 @@ import {
   ViroConstants,
   ViroSpotLight,
 } from 'react-viro';
-
 import PortalOne from './PortalOne';
-import Game from './TICTACTOE/TICTACTOE';
+// import TrainPortal from './TrainPortal'
+
+const Smoke = require('./SmokeEffect');
 
 function MainScene(props) {
   const [text, setText] = useState('');
-  const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
 
   const _onInitialized = (state, reason) => {
@@ -42,8 +43,9 @@ function MainScene(props) {
         shadowFarZ={5}
         shadowOpacity={0.9}
       />
-      {/* <Game /> */}
+      <Smoke />
       <PortalOne />
+      {/* <TrainPortal /> */}
     </ViroARScene>
   );
 }
