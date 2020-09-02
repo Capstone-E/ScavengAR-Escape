@@ -4,10 +4,10 @@ import {useDispatch} from 'react-redux'
 import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
 
 import PortalOne from './PortalOne'
+// import TrainPortal from './TrainPortal'
 
 function MainScene(props) {
   const [text, setText] = useState('')
-  const [visible, setVisible] = useState(false)
   const dispatch = useDispatch()
 
   const _onInitialized = (state, reason) => {
@@ -34,6 +34,7 @@ function MainScene(props) {
         shadowOpacity={0.9}
       />
       <PortalOne />
+      {/* <TrainPortal /> */}
     </ViroARScene>
   )
 }

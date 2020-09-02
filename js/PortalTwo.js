@@ -32,7 +32,7 @@ export const PortalTwo = () => {
   const _onClick = () => {
     setKeyFound(true)
     setText('You found the key! Exit to find the next portal!')
-    setPortalPosition([0, -1, -1.8])
+    setPortalPosition([0.3, -1, -1.8])
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
     dispatch(foundObjectThunk(true)) // for inv.
@@ -94,8 +94,8 @@ export const PortalTwo = () => {
 
     <ViroText
       text={text}
-      scale={[0.5, 0.5, 0.5]}
-      position={[0, 1, -2]}
+      scale={[0.1, 0.1, 0.1]}
+      position={[0.3, 1, -2]}
     />
     <Viro3DObject
       source={require('./res/3dObjects/Key_B_02.obj')}
@@ -104,7 +104,7 @@ export const PortalTwo = () => {
         require('./res/3dObjects/keyB_tx.bmp'),
       ]}
       type="OBJ"
-      position={[0.8, 0.1, -0.2]}
+      position={[1, -0.1, -0.3]}
       scale={[0.015, 0.015, 0.015]}
       onClick={_onClick}
       visible={!keyFound}
