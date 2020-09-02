@@ -111,9 +111,8 @@ export const PortalOne = () => {
             loop={false}
           />
         )}
-        {/* <ViroNode
-            <Game />
-          </ViroNode> */}
+
+        <Game />
       </ViroPortalScene>
 
       {levelComplete && <PortalTwo />}
