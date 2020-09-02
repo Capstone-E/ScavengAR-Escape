@@ -17,13 +17,14 @@ import PortalTwo from './PortalTwo';
 
 export const PortalOne = () => {
   const standardPortalSize = [0.75, 1.5, 0.1];
-  const zeroPortalSize = [0, 0, 0];
+  const zeroSize = [0, 0, 0];
 
   const [text, setText] = useState('Solve the puzzle and find the key');
   const [insidePortal, setInsidePortal] = useState(false);
   const [portalPosition, setPortalPosition] = useState([0, -1, -2]);
   const [portalSize, setPortalSize] = useState(standardPortalSize);
   const [portalVisible, setPortalVisible] = useState(true);
+  const [campSize, setCampSize] = useState([0.015, 0.015, 0.015]);
   const [keyFound, setKeyFound] = useState(false);
 
   const objectFoundStatus = useSelector((state) => state.objectsStatus);
@@ -32,7 +33,7 @@ export const PortalOne = () => {
   const _onClick = () => {
     setKeyFound(true);
     setText('You found the key! Exit to find the next portal!');
-    setPortalPosition([0.01, -1, -1.8]);
+    setPortalPosition([0, -1, -1.8]);
     setPortalSize(standardPortalSize);
     setPortalVisible(true);
     dispatch(foundObjectThunk(true)); // for inv.
@@ -40,13 +41,14 @@ export const PortalOne = () => {
 
   const _onPortalEnter = () => {
     setInsidePortal(true);
-    setPortalSize(zeroPortalSize);
+    setPortalSize(zeroSize);
   };
 
   const _onPortalExit = () => {
     setInsidePortal(false);
     setPortalVisible(false);
-    setPortalSize(zeroPortalSize);
+    setPortalSize(zeroSize);
+    setCampSize(zeroSize);
   };
 
   let levelComplete = keyFound && !insidePortal;
@@ -67,13 +69,9 @@ export const PortalOne = () => {
           visible={portalVisible}
         >
           <Viro3DObject
-            source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
-            resources={[
-              require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
-              require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
-              require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
-              require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
-            ]}
+            source={require('./res/FBXtoVRX/camping.vrx')}
+            position={[0.3, -1.35, -1]}
+            scale={campSize}
             type="VRX"
             visible={portalVisible}
             // onLoadStart={}
