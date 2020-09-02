@@ -1,14 +1,11 @@
 'use strict';
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { foundObjectThunk } from '../store/objectState';
 import {
   ViroText,
   ViroAmbientLight,
   ViroPortal,
   ViroPortalScene,
   Viro3DObject,
-  ViroNode
 } from 'react-viro';
 
 export const TrainPortal = () => {
@@ -20,19 +17,6 @@ export const TrainPortal = () => {
   const [ portalPosition, setPortalPosition ] = useState([1, -1, -2])
   const [ portalSize, setPortalSize ] = useState(standardPortalSize)
   const [ portalVisible, setPortalVisible ] = useState(true)
-  const [ keyFound, setKeyFound ] = useState(false)
-
-  const objectFoundStatus = useSelector((state) => state.objectsStatus);
-  const dispatch = useDispatch();
-
-  const _onClick = () => {
-    setKeyFound(true)
-    setText('You found the key! Exit to find the next portal!')
-    setPortalPosition([-1, -1, -2])
-    setPortalSize(standardPortalSize)
-    setPortalVisible(true)
-    dispatch(foundObjectThunk(true)) // for inv.
-  }
 
   const _onPortalEnter = () => {
     setInsidePortal(true)
@@ -45,58 +29,52 @@ export const TrainPortal = () => {
     setPortalSize(zeroPortalSize)
   }
 
-  let levelComplete = keyFound && !insidePortal
-
   return (
-      <ViroPortalScene
-    passable={true}
-    dragType="FixedDistance"
-    onDrag={() => {}}
-    onPortalEnter={_onPortalEnter}
-    onPortalExit={_onPortalExit}
-  >
-    <ViroAmbientLight color="#ffffff" intensity={500} />
-    <ViroPortal
-      position={portalPosition}
-      scale={portalSize}
-      visible={portalVisible}
+    <ViroPortalScene
+      passable={true}
+      dragType="FixedDistance"
+      onDrag={() => {}}
+      onPortalEnter={_onPortalEnter}
+      onPortalExit={_onPortalExit}
     >
+      <ViroAmbientLight color="#ffffff" intensity={500} />
+      <ViroPortal
+        position={portalPosition}
+        scale={portalSize}
+        visible={portalVisible}
+      >
+        <Viro3DObject
+          source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
+          resources={[
+            require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
+            require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
+            require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
+            require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
+          ]}
+          type="VRX"
+          visible={portalVisible}
+          // onLoadStart={}
+          // onLoadEnd={}
+        />
+      </ViroPortal>
+    {/* object for the room */}
       <Viro3DObject
-        source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
-        resources={[
-          require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
-          require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
-          require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
-          require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
-        ]}
+        source={require('./res/FBXtoVRX/model.vrx')}
+        // position={[0.5, -1.8, -1]}
+        // scale={[0.015, 0.015, 0.015]}
         type="VRX"
         visible={portalVisible}
         // onLoadStart={}
         // onLoadEnd={}
       />
-    </ViroPortal>
-    {/* object for the room */}
-    <Viro3DObject
-      source={require('./res/FBXtoVRX/model.vrx')}
-      // position={[0.5, -1.8, -1]}
-      // scale={[0.015, 0.015, 0.015]}
-      type="VRX"
-      visible={portalVisible}
-      // onLoadStart={}
-      // onLoadEnd={}
-    />
+      <ViroText
+        text={text}
+        scale={[0.5, 0.5, 0.5]}
+        position={[0, 1, -2]}
+      />
 
-    <ViroText
-      text={text}
-      scale={[0.5, 0.5, 0.5]}
-      position={[0, 1, -2]}
-    />
-
-      </ViroPortalScene>
-
+    </ViroPortalScene>
   )
-
 }
-
 
 module.exports = TrainPortal;

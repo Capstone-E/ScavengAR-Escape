@@ -3,12 +3,12 @@ import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
 import PortalOne from './PortalOne'
+// import TrainPortal from './TrainPortal'
 
 const Smoke = require('./SmokeEffect')
 
 function MainScene(props) {
   const [text, setText] = useState('')
-  const [visible, setVisible] = useState(false)
   const dispatch = useDispatch()
 
   const _onInitialized = (state, reason) => {
@@ -36,6 +36,7 @@ function MainScene(props) {
       />
       <Smoke />
       <PortalOne />
+      {/* <TrainPortal /> */}
     </ViroARScene>
   )
 }

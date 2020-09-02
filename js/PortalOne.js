@@ -33,7 +33,7 @@ export const PortalOne = () => {
   const _onClick = () => {
     setKeyFound(true)
     setText('You found the key! Exit to find the next portal!')
-    setPortalPosition([0, -1, -1.8])
+    setPortalPosition([0.3, -1, -1.8])
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
     dispatch(foundObjectThunk(true)) // for inv.
@@ -96,8 +96,8 @@ export const PortalOne = () => {
 
           <ViroText
             text={text}
-            scale={[0.5, 0.5, 0.5]}
-            position={[0, 0, -1.5]}
+            scale={[0.1, 0.1, 0.1]}
+            position={[0.3, 0, -1.5]}
           />
           <Viro3DObject
             source={require('./res/3dObjects/Key_B_02.obj')}
@@ -124,6 +124,7 @@ export const PortalOne = () => {
         </ViroPortalScene>
 
         {levelComplete && <PortalTwo />}
+
     </ViroNode>
   )
 
