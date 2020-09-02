@@ -14,29 +14,33 @@ import {
   ViroNode,
   ViroBox,
   ViroText,
+  ViroButton,
 } from 'react-viro';
+
 import { StyleSheet, View, Text } from 'react-native';
 import { Box } from './Board';
-
 export default class Game extends Component {
   constructor(props) {
     super(props);
-    // this.handlReset = this.handleReset.bind(this);
     this.state = {
+      vsPc: true,
       playerOne: 'X',
       computer: 'O',
       playerTurn: true,
       board: ['', '', '', '', '', '', '', '', ''],
     };
+    this.handlReset = this.handlReset.bind(this);
   }
-  handleBoxClick(i, moreMoves) {
-    let updateBoard = this.state.board;
-    updateBoard[i] = this.state.playerOne;
-    this.setState({ board: updateBoard });
-    let computerMove = bestMove(updateBoard);
-    if (computerMove !== -4) {
-      updateBoard[computerMove] = this.state.computer;
-      this.setState({ board: updateBoard });
+  handleBoxClick(index, playerTurn) {
+    if (this.state.board[index] === '' && playerTurn === true) {
+      let newBoard = this.state.board;
+      newBoard[index] = this.state.playerOne;
+      this.setState({ board: newBoard });
+      let computerMove = bestMove(newBoard);
+      if (computerMove !== -4) newBoard[computerMove] = this.state.computer;
+      this.setState({ board: newBoard });
+    } else {
+      console.log('handleclick hits but is broked');
     }
   }
   handlReset() {
@@ -47,22 +51,37 @@ export default class Game extends Component {
   }
   render() {
     let decideWinner = winner(this.state.board);
-    // if (decideWinner !== null) alert(decideWinner + ' won!');
+    let playerTurn = decideWinner === null ? true : false;
+
+    // if (decideWinner !== null) try again | you won!
+
     return (
-      <ViroFlexView position={[0, 0, -3]}>
-        <ViroQuad
-          position={[0, 1, 0]}
-          height={1.5}
-          width={1.5}
-          materials={['board']}
-        />
-      </ViroFlexView>
+      <ViroNode>
+        <ViroFlexView background={['board']}>
+          {this.state.board.map((cell, index) => {
+            return (
+              <ViroQuad
+                key={`board${index}`}
+                onClick={this.handleBoxClick(index).bind(this)}
+              >
+                {cell}
+              </ViroQuad>
+            );
+          })}
+        </ViroFlexView>
+      </ViroNode>
     );
   }
 }
 ViroMaterials.createMaterials({
   board: {
     diffuseTexture: require('../res/ticGrid.png'),
+  },
+  theX: {
+    diffuseTexture: require('../res/theticX.png'),
+  },
+  theO: {
+    diffuseTexture: require('../res/theticO.png'),
   },
 });
 

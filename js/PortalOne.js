@@ -112,7 +112,7 @@ export const PortalOne = () => {
           />
         )}
 
-        <Game />
+        {/* <Game /> */}
       </ViroPortalScene>
 
       {levelComplete && <PortalTwo />}
