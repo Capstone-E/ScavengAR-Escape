@@ -1,6 +1,9 @@
 import React from 'react'
 import {ViroParticleEmitter, ViroNode} from 'react-viro'
 
+// figment AR animations
+// BSD License information found in root directory under LICENSE
+
 function getSmoke() {
   var views = []
   views.push(
