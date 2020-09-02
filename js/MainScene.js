@@ -19,7 +19,6 @@ function MainScene(props) {
   }
   const _onCameraARHitTest = (results) => {}
 
-
   return (
     <ViroARScene onTrackingUpdated={_onInitialized} onCameraARHitTest={_onCameraARHitTest}>
       <ViroAmbientLight color="#ffffff" intensity={500} />
@@ -39,7 +38,7 @@ function MainScene(props) {
   )
 }
 
-export default MainScene
+module.exports = MainScene
 
 ViroMaterials.createMaterials({
   grid: {
