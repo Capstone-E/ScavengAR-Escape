@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 
 import {View, Text, StyleSheet, FlatList, TouchableHighlight, Image} from 'react-native'
 
-import keyImage from './res/keyImage.png';
-import keyImageTwo from './res/keyImageTwo.png';
+import keyImage from './res/croppedKey.png';
+import shadowKey from './res/blackNWhite.png';
 
 const Inventory = () => {
 
@@ -18,23 +18,20 @@ const Inventory = () => {
         horizontal={true}
         contentContainerStyle={style.listViewContainer}
         data={[
-          { key: objectFoundStatus[0] ? keyImage  : 'Slot One Locked'},
-          { key: objectFoundStatus[1] ? keyImageTwo  : 'Slot Two Locked'},
-          // { key: objectFoundStatus[2] ? keyImage : 'Slot Three Locked' },
-          // { key: objectFoundStatus[3] ? keyImage : 'Slot Four Locked' },
-          // { key: objectFoundStatus[4] ? keyImage : 'Slot Five Locked' },
-
+          { key: objectFoundStatus[0] ? 'One'  : 'Slot One Locked'},
+          { key: objectFoundStatus[1] ? 'Two'  : 'Slot Two Locked'},
         ]}
         renderItem={({ item }) => (
           <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
-            <View style={{height: 50, width: 60}}>
+            <View style={{height: 70, width: 130}}>
               {
               (item.key[0] !== 'S') ?
-                <Image style={{height: 50, width: 50, paddingLeft: 3, borderRadius: 5}} source={item.key} />
+                <Image style={style.image} source={keyImage} />
                 :
-                <Text style={style.textStyle}>{item.key}</Text>
+                <Image style={style.image} source={shadowKey} />
               }       
             </View>
+
           </TouchableHighlight>
         )}
         keyExtractor={(item) => item.key.toString()} // for warning about key and string
@@ -42,6 +39,7 @@ const Inventory = () => {
         showsHorizontalScrollIndicator={false}
         directionalLockEnabled={true}
         removeClippedSubviews={false}
+        scrollEnabled={false}
       />
     </View>
   );
@@ -53,34 +51,40 @@ const style = StyleSheet.create({
     height: 80,
     borderTopWidth: 0.5,
     borderColor: '#800000',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
   },
   listViewContainer: {
     height: 72,
-    paddingStart: 5
+    paddingStart: '3%',
   },
   buttons: {
-    height: 60,
-    width: 70,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 5,
-    marginRight: 5,
-    marginLeft: 5,
+    height: 70,
+    width: 'auto',
+    paddingTop: 1,
+    paddingBottom: 1,
+    paddingLeft: 1,
+    marginLeft: 40,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: 'rgba(255, 255, 255, 1 )',
+    backgroundColor: 'black',
     borderRadius: 20,
-    borderWidth: 0.1,
-    borderColor: '#800000'
   },
   textStyle: {
     marginTop: 12,
     textAlign: 'center',
     fontSize: 10,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
     alignSelf: 'center'
+  },
+  image: {
+    height: 60, 
+    width: 130, 
+    paddingLeft: 3, 
+    borderRadius: 15,
+    margin: 'auto',
+    borderWidth: 2,
+    borderColor: '#800000'
   }
 })
 
