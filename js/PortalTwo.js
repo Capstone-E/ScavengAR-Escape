@@ -9,6 +9,7 @@ import {
   ViroPortalScene,
   Viro3DObject,
   ViroNode,
+  ViroSound,
 } from 'react-viro';
 import Game from './TICTACTOE/TICTACTOE';
 
@@ -87,17 +88,6 @@ export const PortalTwo = () => {
         // onLoadEnd={}
       />
 
-      {/* object for the room */}
-      <Viro3DObject
-        source={require('./res/FBXtoVRX/beach.vrx')}
-        position={[0.5, -1.8, -1]}
-        scale={[0.015, 0.015, 0.015]}
-        type="VRX"
-        visible={portalVisible}
-        // onLoadStart={}
-        // onLoadEnd={}
-      />
-
       <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
       <Viro3DObject
         source={require('./res/3dObjects/Key_B_02.obj')}
@@ -111,6 +101,15 @@ export const PortalTwo = () => {
         onClick={_onClick}
         visible={!keyFound}
       />
+      {objectFoundStatus[1] && (
+        <ViroSound
+          source={require('./res/sound/unlock.wav')}
+          volume={1.0}
+          paused={false}
+          muted={false}
+          loop={false}
+        />
+      )}
       {/* <ViroNode
       <Game />
     </ViroNode> */}

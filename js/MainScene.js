@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use strict';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -9,6 +10,12 @@ import {
   ViroConstants,
   ViroSpotLight,
 } from 'react-viro';
+=======
+'use strict'
+import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
+>>>>>>> e35e81502ff561ba640928aa0557457742a2e574
 
 import PortalOne from './PortalOne';
 import Game from './TICTACTOE/TICTACTOE';
@@ -27,8 +34,11 @@ function MainScene(props) {
   };
   const _onCameraARHitTest = (results) => {};
 
+<<<<<<< HEAD
   const sendObjectsStatus = (status) => dispatch(foundObjectThunk(status));
 
+=======
+>>>>>>> e35e81502ff561ba640928aa0557457742a2e574
   return (
     <ViroARScene
       onTrackingUpdated={_onInitialized}
@@ -52,7 +62,11 @@ function MainScene(props) {
   );
 }
 
+<<<<<<< HEAD
 export default MainScene;
+=======
+module.exports = MainScene
+>>>>>>> e35e81502ff561ba640928aa0557457742a2e574
 
 ViroMaterials.createMaterials({
   grid: {

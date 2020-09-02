@@ -26,7 +26,7 @@ import {
   setNavigator,
 } from './store/navigator';
 
-import MainScene from './js/MainScene';
+const MainScene = require('./js/MainScene');
 
 function Main() {
   const navigator = useSelector((state) => state.navigator);

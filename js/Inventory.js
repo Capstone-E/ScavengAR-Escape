@@ -1,46 +1,51 @@
 'use strict'
 
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import {View, Text, StyleSheet, FlatList, TouchableHighlight, Image} from 'react-native'
 
-import keyImage from './res/keyImage.png'
+import keyImage from './res/keyImage.png';
+import keyImageTwo from './res/keyImageTwo.png';
 
-class Inventory extends Component {
-  render() {
-    return (
-      <View style={style.outerContainer}>
-        <FlatList
-          horizontal={true}
-          contentContainerStyle={style.listViewContainer}
-          data={[
-            {key: this.props.objectsStatus[0] ? keyImage : 'Slot One Locked'},
-            {key: this.props.objectsStatus[1] ? keyImage : 'Slot Two Locked'}
-            // { key: this.props.objectsStatus[2] ? keyImage : 'Slot Three Locked' },
-            // { key: this.props.objectsStatus[3] ? keyImage : 'Slot Four Locked' },
-            // { key: this.props.objectsStatus[4] ? keyImage : 'Slot Five Locked' },
-          ]}
-          renderItem={({item}) => (
-            <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
-              <View style={{height: 50, width: 60}}>
-                {item.key[0] !== 'S' ? (
-                  <Image style={{height: 50, width: 50, paddingLeft: 3, borderRadius: 5}} source={item.key} />
-                ) : (
-                  <Text style={style.textStyle}>{item.key}</Text>
-                )}
-              </View>
-            </TouchableHighlight>
-          )}
-          keyExtractor={(item) => item.toString()} // for warning about key and string
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          directionalLockEnabled={true}
-          removeClippedSubviews={false}
-        />
-      </View>
-    )
-  }
+const Inventory = () => {
+
+  const objectFoundStatus = useSelector((state) => state.objectsStatus);
+
+  return (
+    <View style={style.outerContainer}>
+      <FlatList
+        horizontal={true}
+        contentContainerStyle={style.listViewContainer}
+        data={[
+          { key: objectFoundStatus[0] ? keyImage  : 'Slot One Locked'},
+          { key: objectFoundStatus[1] ? keyImageTwo  : 'Slot Two Locked'},
+          // { key: objectFoundStatus[2] ? keyImage : 'Slot Three Locked' },
+          // { key: objectFoundStatus[3] ? keyImage : 'Slot Four Locked' },
+          // { key: objectFoundStatus[4] ? keyImage : 'Slot Five Locked' },
+
+        ]}
+        renderItem={({ item }) => (
+          <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
+            <View style={{height: 50, width: 60}}>
+              {
+              (item.key[0] !== 'S') ?
+                <Image style={{height: 50, width: 50, paddingLeft: 3, borderRadius: 5}} source={item.key} />
+                :
+                <Text style={style.textStyle}>{item.key}</Text>
+              }       
+            </View>
+          </TouchableHighlight>
+        )}
+        keyExtractor={(item) => item.key.toString()} // for warning about key and string
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        directionalLockEnabled={true}
+        removeClippedSubviews={false}
+      />
+    </View>
+  );
+  
 }
 
 const style = StyleSheet.create({
@@ -79,8 +84,4 @@ const style = StyleSheet.create({
   }
 })
 
-const mapState = (state) => {
-  return {objectsStatus: state.objectsStatus}
-}
-
-export default connect(mapState)(Inventory)
+export default Inventory;
