@@ -7,34 +7,40 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import React from 'react'
+import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {Text, View, StyleSheet, TouchableHighlight, StatusBar} from 'react-native'
+import {Text, View, StyleSheet, TouchableHighlight, StatusBar, ImageBackground} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
 import HintButton from './js/HintButton'
 import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
 
 const MainScene = require('./js/MainScene')
+const image = require('./js/res/RE7.jpg')
 
 function Main() {
+  const [imageLoaded, setImageLoaded] = useState(false)
   const navigator = useSelector((state) => state.navigator)
   const dispatch = useDispatch()
 
   const newGameScreen = () => {
     return (
       <View style={localStyles.outer}>
-        <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Welcome to ScavangARescape</Text>
-          <Text style={localStyles.titleText}>Can you escape?</Text>
-          <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(AR_NAVIGATOR))}>
-            <Text style={localStyles.buttonText}>Yes</Text>
-          </TouchableHighlight>
+        <ImageBackground source={image} style={localStyles.image} onLoad={onLoad} />
+        {imageLoaded && (
+          <View style={localStyles.inner}>
+            <Text style={localStyles.titleText}>Welcome to ScavangARescape</Text>
+            <Text style={localStyles.titleText}>Can you escape?</Text>
+            <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(AR_NAVIGATOR))}>
+              <Text style={localStyles.buttonText}>Yes</Text>
+            </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(HOW_TO_PLAY))}>
-            <Text style={localStyles.buttonText}>How To Play</Text>
-          </TouchableHighlight>
-        </View>
+            <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(HOW_TO_PLAY))}>
+              <Text style={localStyles.buttonText}>How To Play</Text>
+            </TouchableHighlight>
+          </View>
+        )}
+        {!imageLoaded && <Text style={{color: 'red', fontSize: 90}}>...</Text>}
       </View>
     )
   }
@@ -42,27 +48,35 @@ function Main() {
   const howToPlayScreen = () => {
     return (
       <View style={localStyles.outer}>
-        <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>
-            1. Start With Back Against A Wall Or With Plenty Room In Front Of Camera
-          </Text>
-          <Text style={localStyles.titleText}>2. Pan Camera Slowly</Text>
+        <ImageBackground source={image} style={localStyles.image} onLoad={onLoad} />
+        {imageLoaded && (
+          <View style={localStyles.inner}>
+            <Text style={localStyles.titleText}>
+              1. Start With Back Against A Wall Or With Plenty Room In Front Of Camera
+            </Text>
+            <Text style={localStyles.titleText}>2. Pan Camera Slowly</Text>
 
-          <Text style={localStyles.titleText}>3. Enter Portals To Complete Puzzles And Find Keys</Text>
-          <Text style={localStyles.titleText}>4. Click Keys To Exit Portal</Text>
-          <Text style={localStyles.titleText}>5. Find All Keys Or Complete All Puzzles To Win The Game</Text>
+            <Text style={localStyles.titleText}>3. Enter Portals To Complete Puzzles And Find Keys</Text>
+            <Text style={localStyles.titleText}>4. Click Keys To Exit Portal</Text>
+            <Text style={localStyles.titleText}>5. Find All Keys Or Complete All Puzzles To Win The Game</Text>
 
-          <TouchableHighlight
-            style={localStyles.buttons}
-            onPress={() => {
-              dispatch(setNavigator(UNSET))
-            }}
-          >
-            <Text style={localStyles.buttonText}>Back</Text>
-          </TouchableHighlight>
-        </View>
+            <TouchableHighlight
+              style={localStyles.buttons}
+              onPress={() => {
+                dispatch(setNavigator(UNSET))
+              }}
+            >
+              <Text style={localStyles.buttonText}>Back</Text>
+            </TouchableHighlight>
+          </View>
+        )}
+        {!imageLoaded && <Text style={{color: 'red', fontSize: 90}}>...</Text>}
       </View>
     )
+  }
+
+  const onLoad = () => {
+    setImageLoaded(true)
   }
 
   if (navigator === UNSET) {
@@ -98,7 +112,7 @@ const localStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'black'
+    justifyContent: 'center'
   },
   titleText: {
     paddingTop: 30,
@@ -123,6 +137,16 @@ const localStyles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff'
+  },
+  image: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: null,
+    height: '100%'
+    //opacity: 0.8,
   },
   exitButton: {
     height: 50,
