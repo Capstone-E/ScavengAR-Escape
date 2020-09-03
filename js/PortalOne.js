@@ -69,14 +69,18 @@ export const PortalOne = () => {
           visible={portalVisible}
         >
           <Viro3DObject
-            source={require('./res/FBXtoVRX/camping.vrx')}
-            position={[0.3, -1.35, -1]}
-            scale={campSize}
-            type="VRX"
-            visible={portalVisible}
-            // onLoadStart={}
-            // onLoadEnd={}
-          />
+              source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
+              resources={[
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
+                require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
+              ]}
+              type="VRX"
+              visible={portalVisible}
+              // onLoadStart={}
+              // onLoadEnd={}
+            />
         </ViroPortal>
         {/* object for the room */}
         <Viro3DObject
