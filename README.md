@@ -54,11 +54,11 @@ ScavengARescape was built using Viro-ReactNative
 
 ### FOR FURTHER READING ###
 
-[Viro Quick-Start Guide](https://docs.viromedia.com/docs/quick-start)
-[Viro AR tutorial](https://docs.viromedia.com/docs/tutorial-ar)
-[NGROK documentation](https://ngrok.com/docs)
+- [Viro Quick-Start Guide](https://docs.viromedia.com/docs/quick-start)
+- [Viro AR tutorial](https://docs.viromedia.com/docs/tutorial-ar)
+- [NGROK documentation](https://ngrok.com/docs)
 
-## *THE TEAM BEHIND SCAVENGARESCAPE* ##
+## *The team behind ScavengARescape* ##
 
 (in alphabetical order)
 
