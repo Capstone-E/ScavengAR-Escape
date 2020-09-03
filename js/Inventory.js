@@ -3,7 +3,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import {View, Text, StyleSheet, FlatList, TouchableHighlight, Image} from 'react-native'
+import {View, StyleSheet, FlatList, TouchableHighlight, Image} from 'react-native'
 
 import keyImage from './res/croppedKey.png';
 import shadowKey from './res/blackNWhite.png';
@@ -26,19 +26,15 @@ const Inventory = () => {
             <View style={{height: 70, width: 130}}>
               {
               (item.key[0] !== 'S') ?
-                <Image style={style.image} source={keyImage} />
+                <Image style={style.image} source={keyImage} /> // changes to this image when key(s) is clicked/dragged
                 :
-                <Image style={style.image} source={shadowKey} />
+                <Image style={style.image} source={shadowKey} /> // will show this image when key(s) is not yet found
               }       
             </View>
 
           </TouchableHighlight>
         )}
         keyExtractor={(item) => item.key.toString()} // for warning about key and string
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        directionalLockEnabled={true}
-        removeClippedSubviews={false}
         scrollEnabled={false}
       />
     </View>
