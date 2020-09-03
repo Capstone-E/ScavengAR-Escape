@@ -4,8 +4,8 @@ import {Alert, Modal, StyleSheet, Text, TouchableHighlight, View} from 'react-na
 const HintButton = () => {
   const hintsArr = [
     `First Hint: A key in a tent? Well that makes no sense.`,
-    `Second Hint: --- --- --- ---`,
-    `Final Hint: --- ---- ---- ---`
+    `Second Hint: "A blanket for violets, a blanket for suns, where you find both is where I am" - a key`,
+    `Final Hint: You have to pay to hop a train`
   ]
   const [modalVisible, setModalVisible] = useState(false)
   const [count, setCount] = useState(0)
@@ -91,7 +91,7 @@ const HintButton = () => {
           }}
           underlayColor="#00000000"
         >
-          <Text style={styles.textStyle}> ?</Text>
+          <Text style={styles.textStyle}>Hints</Text>
         </TouchableHighlight>
       </View>
     </View>
