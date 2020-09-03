@@ -1,27 +1,36 @@
-'use strict'
-import React, {useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
-import PortalOne from './PortalOne'
+'use strict';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  ViroMaterials,
+  ViroARScene,
+  ViroAmbientLight,
+  ViroConstants,
+  ViroSpotLight,
+} from 'react-viro';
+import PortalOne from './PortalOne';
 // import TrainPortal from './TrainPortal'
 
-const Smoke = require('./SmokeEffect')
+const Smoke = require('./SmokeEffect');
 
 function MainScene(props) {
-  const [text, setText] = useState('')
-  const dispatch = useDispatch()
+  const [text, setText] = useState('');
+  const dispatch = useDispatch();
 
   const _onInitialized = (state, reason) => {
     if (state == ViroConstants.TRACKING_NORMAL) {
-      setText('Find the key!')
+      setText('Find the key!');
     } else if (state == ViroConstants.TRACKING_NONE) {
-      setText('Oopsie! Something is wrong with your AR. Restart and try again')
+      setText('Oopsie! Something is wrong with your AR. Restart and try again');
     }
-  }
-  const _onCameraARHitTest = (results) => {}
+  };
+  const _onCameraARHitTest = (results) => {};
 
   return (
-    <ViroARScene onTrackingUpdated={_onInitialized} onCameraARHitTest={_onCameraARHitTest}>
+    <ViroARScene
+      onTrackingUpdated={_onInitialized}
+      onCameraARHitTest={_onCameraARHitTest}
+    >
       <ViroAmbientLight color="#ffffff" intensity={500} />
       <ViroSpotLight
         innerAngle={5}
@@ -38,13 +47,13 @@ function MainScene(props) {
       <PortalOne />
       {/* <TrainPortal /> */}
     </ViroARScene>
-  )
+  );
 }
 
-module.exports = MainScene
+module.exports = MainScene;
 
 ViroMaterials.createMaterials({
   grid: {
-    diffuseTexture: require('./res/grid_bg.jpg')
-  }
-})
+    diffuseTexture: require('./res/grid_bg.jpg'),
+  },
+});

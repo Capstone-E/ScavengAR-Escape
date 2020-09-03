@@ -9,25 +9,25 @@ import {
 } from 'react-viro';
 
 export const TrainPortal = () => {
-  const standardPortalSize = [0.75, 1.5, 0.1]
-  const zeroPortalSize = [0, 0, 0]
+  const standardPortalSize = [0.75, 1.5, 0.1];
+  const zeroPortalSize = [0, 0, 0];
 
-  const [ text, setText ] = useState('Solve the puzzle and find the key')
-  const [ insidePortal, setInsidePortal ] = useState(false)
-  const [ portalPosition, setPortalPosition ] = useState([1, -1, -2])
-  const [ portalSize, setPortalSize ] = useState(standardPortalSize)
-  const [ portalVisible, setPortalVisible ] = useState(true)
+  const [text, setText] = useState('Solve the puzzle and find the key');
+  const [insidePortal, setInsidePortal] = useState(false);
+  const [portalPosition, setPortalPosition] = useState([1, -1, -2]);
+  const [portalSize, setPortalSize] = useState(standardPortalSize);
+  const [portalVisible, setPortalVisible] = useState(true);
 
   const _onPortalEnter = () => {
-    setInsidePortal(true)
-    setPortalSize(zeroPortalSize)
-  }
+    setInsidePortal(true);
+    setPortalSize(zeroPortalSize);
+  };
 
   const _onPortalExit = () => {
-    setInsidePortal(false)
-    setPortalVisible(false)
-    setPortalSize(zeroPortalSize)
-  }
+    setInsidePortal(false);
+    setPortalVisible(false);
+    setPortalSize(zeroPortalSize);
+  };
 
   return (
     <ViroPortalScene
@@ -57,7 +57,7 @@ export const TrainPortal = () => {
           // onLoadEnd={}
         />
       </ViroPortal>
-    {/* object for the room */}
+      {/* object for the room */}
       <Viro3DObject
         source={require('./res/FBXtoVRX/model.vrx')}
         // position={[0.5, -1.8, -1]}
@@ -67,14 +67,9 @@ export const TrainPortal = () => {
         // onLoadStart={}
         // onLoadEnd={}
       />
-      <ViroText
-        text={text}
-        scale={[0.5, 0.5, 0.5]}
-        position={[0, 1, -2]}
-      />
-
+      <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
     </ViroPortalScene>
-  )
-}
+  );
+};
 
 module.exports = TrainPortal;
