@@ -3,7 +3,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import {View, Text, StyleSheet, FlatList, TouchableHighlight, Image} from 'react-native'
+import {View, StyleSheet, FlatList, TouchableHighlight, Image} from 'react-native'
 
 import keyImage from './res/croppedKey.png';
 import shadowKey from './res/blackNWhite.png';
@@ -35,10 +35,6 @@ const Inventory = () => {
           </TouchableHighlight>
         )}
         keyExtractor={(item) => item.key.toString()} // for warning about key and string
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        directionalLockEnabled={true}
-        removeClippedSubviews={false}
         scrollEnabled={false}
       />
     </View>
