@@ -3,11 +3,11 @@
 
 This project was made as part of our final project in the Grace Hopper Program at Fullstack Academy. Our aim was to learn about the technology required to build an AR experience.
 
-~~ScavengARescape was built using Viro-ReactNative~~
+~ScavengARescape was built using Viro-ReactNative~
 
 ### REQUIREMENTS ###
 
-* This app is only available for demo by using the Testbed feature of the ViroMedia App. You must first download the app onto your mobile device (available on Google Play and the App Store) *
+* This app is only available for demo by using the Testbed feature of the ViroMedia App. You must first download the app onto your mobile device (available on Google Play and the App Store)
 
 - After cloning, CD into the ScavengAR-Escape directory and `npm install`
 
@@ -15,7 +15,9 @@ This project was made as part of our final project in the Grace Hopper Program a
 
 - `npm start`
 
-- Once 'start' has launched, you will first see an attempt to connect to the NGROK server. If you are using NGROK, the server must connect and you will know it was successful when a green box is displayed with the NGROK http address. You may need to `CTRL-C` and `npm start` a few times to get the NGROK server to connect properly. It is notoriously finicky. **IF YOU ARE USING THE IP ADDRESS METHOD, YOU DO NOT NEED TO WAIT FOR THE GREEN BOX TO DISPLAY, YOU MAY CONTINUE TO THE NEXT STEP**
+-  IF YOU ARE USING THE IP ADDRESS METHOD, YOU MAY SKIP THIS STEP. FOR NGROK: Once 'start' has launched, you will first see an attempt to connect to the NGROK server. If you are using NGROK, the server must connect and you will know it was successful when a green box is displayed with the NGROK http address. You may need to `CTRL-C` and `npm start` a few times to get the NGROK server to connect properly. It is notoriously finicky.
+
+
 
 - 'Start' will load a few more things and you will be successful when the screen displays "Loading dependency graph, done."
 
@@ -35,7 +37,7 @@ This project was made as part of our final project in the Grace Hopper Program a
 
 - Once you have launched and the AR engine has centered itself, you may move the device around freely. Please be careful not to move too quickly however, as the AR tracking cannot keep up with rapid movements.
 
-**TO RELOAD / REFRESH THE GAME, PLEASE ~~SHAKE~~ YOUR DEVICE TO BRING UP THE OPTIONS MENU, YOU CAN SELECT RELOAD FROM HERE**
+**TO RELOAD / REFRESH THE GAME, PLEASE ~SHAKE~ YOUR DEVICE TO BRING UP THE OPTIONS MENU, YOU CAN SELECT RELOAD FROM HERE**
 
 --------------------------------------------------
 
