@@ -27,7 +27,7 @@ export const PortalOne = () => {
   const zeroSize = [0, 0, 0];
 
   // local game state for each level
-  const [text, setText] = useState('Solve the puzzle and find the key');
+  const [text, setText] = useState('Find the key and come back to exit');
   const [insidePortal, setInsidePortal] = useState(false);
   const [portalPosition, setPortalPosition] = useState([0, -1, -2]);
   const [portalSize, setPortalSize] = useState(standardPortalSize);
@@ -41,7 +41,7 @@ export const PortalOne = () => {
   //action that occurs after key is collected
   const _onClick = () => {
     setKeyFound(true);
-    setText('You found the key! Exit to find the next portal!');
+    setText('You found the key! Exit and find the next portal!');
     setPortalPosition([0.3, -1, -1.8]);
     setPortalSize(standardPortalSize);
     setPortalVisible(true);
@@ -97,7 +97,7 @@ export const PortalOne = () => {
         {/* 3D object is the room / environment inside the portal */}
         <Viro3DObject
           source={require('./res/FBXtoVRX/camping.vrx')}
-          position={[0.3, -1.05, -1]}
+          position={[0.3, -1.09, -1]}
           scale={[0.015, 0.015, 0.015]}
           type="VRX"
           visible={portalVisible}
@@ -106,7 +106,7 @@ export const PortalOne = () => {
         <ViroText
           text={text}
           scale={[0.1, 0.1, 0.1]}
-          position={[0.3, 0, -1.5]}
+          position={[0, 0, -1.5]}
         />
 
         {/* 3D object is interactable key inside portal */}

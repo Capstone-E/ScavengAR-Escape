@@ -11,7 +11,8 @@ import {
   ViroARTrackingTargets,
   ViroARImageMarker,
   ViroText,
-  ViroSound
+  ViroSound,
+  ViroARScene
 } from 'react-viro';
 
 export const FinalePortal = () => {
@@ -19,14 +20,18 @@ export const FinalePortal = () => {
 
   // local game state
   const [ text, setText ] = useState('Find a Metrocard in real life, scan it with your phone to escape')
+  const [ postEffect, setPostEffect ] = useState()
 
   // triggers when final action is complete
   const _onAnchorFound = () => {
+    setPostEffect('grayscale')
     setText('You Win!!! Thanks for playing!')
   }
 
   return (
-    <ViroNode>
+    <ViroARScene
+    postProcessEffects={postEffect}
+    >
       <ViroText
       text={text}
       scale={[0.8, 0.8, 0.8]}
@@ -46,7 +51,7 @@ export const FinalePortal = () => {
       loop={false}
       />
       </ViroARImageMarker>
-    </ViroNode>
+    </ViroARScene>
   )
 }
 
