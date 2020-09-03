@@ -17,7 +17,7 @@ import {
   ViroNode,
   ViroSound,
 } from 'react-viro';
-import Game from './TICTACTOE/TICTACTOE';
+
 import PortalTwo from './PortalTwo';
 
 export const PortalOne = () => {
