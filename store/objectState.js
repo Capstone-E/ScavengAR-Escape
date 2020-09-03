@@ -9,11 +9,11 @@ const foundObject = (objectStatus) => ({
 
 // thunk creator 
 export const foundObjectThunk = (objectStatus) => (dispatch) => {
-    dispatch(foundObject(objectStatus)) // ex. key
+    dispatch(foundObject(objectStatus)) // will return with value true if key is collected
 }
 
 // reducer 
-const initalState =  []
+const initalState =  [] // each value will signify that a key was collected
 
 const reducer = (state = initalState, action) => {
     switch (action.type) {
