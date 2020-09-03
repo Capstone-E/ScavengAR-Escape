@@ -29,7 +29,7 @@ function Main() {
         <ImageBackground source={image} style={localStyles.image} onLoad={onLoad} />
         {imageLoaded && (
           <View style={localStyles.inner}>
-            <Text style={localStyles.titleText}>Welcome to ScavangARescape</Text>
+            <Text style={localStyles.titleText}>Welcome to ScavengARescape</Text>
             <Text style={localStyles.titleText}>Can you escape?</Text>
             <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(AR_NAVIGATOR))}>
               <Text style={localStyles.buttonText}>Yes</Text>
