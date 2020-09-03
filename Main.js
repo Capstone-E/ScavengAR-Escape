@@ -31,10 +31,13 @@ function Main() {
           <View style={localStyles.inner}>
             <Text style={localStyles.titleText}>Welcome to ScavengARescape</Text>
             <Text style={localStyles.titleText}>Can you escape?</Text>
+
+            {/* Clicking "Yes" button will begin game */}
             <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(AR_NAVIGATOR))}>
               <Text style={localStyles.buttonText}>Yes</Text>
             </TouchableHighlight>
 
+            {/* Clicking "How To Play" will show users game instructions */}
             <TouchableHighlight style={localStyles.buttons} onPress={() => dispatch(setNavigator(HOW_TO_PLAY))}>
               <Text style={localStyles.buttonText}>How To Play</Text>
             </TouchableHighlight>
@@ -55,11 +58,11 @@ function Main() {
               1. Start With Back Against A Wall Or With Plenty Room In Front Of Camera
             </Text>
             <Text style={localStyles.titleText}>2. Pan Camera Slowly</Text>
-
             <Text style={localStyles.titleText}>3. Enter Portals To Complete Puzzles And Find Keys</Text>
             <Text style={localStyles.titleText}>4. Click Keys To Exit Portal</Text>
             <Text style={localStyles.titleText}>5. Find All Keys Or Complete All Puzzles To Win The Game</Text>
 
+            {/* Back button takes users back to New Game screen */}
             <TouchableHighlight
               style={localStyles.buttons}
               onPress={() => {
@@ -75,10 +78,13 @@ function Main() {
     )
   }
 
+  // onLoad is used to make sure background image renders before any additional components
   const onLoad = () => {
     setImageLoaded(true)
   }
 
+  // Check nagivation state and render approprate components
+  // Options include => ("UNSET", "AR_NAVIGATION", "HOW_TO_PLAY")
   if (navigator === UNSET) {
     return newGameScreen()
   } else if (navigator === AR_NAVIGATOR) {
