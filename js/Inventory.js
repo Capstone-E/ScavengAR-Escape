@@ -26,9 +26,9 @@ const Inventory = () => {
             <View style={{height: 70, width: 130}}>
               {
               (item.key[0] !== 'S') ?
-                <Image style={style.image} source={keyImage} />
+                <Image style={style.image} source={keyImage} /> // changes to this image when key(s) is clicked/dragged
                 :
-                <Image style={style.image} source={shadowKey} />
+                <Image style={style.image} source={shadowKey} /> // will show this image when key(s) is not yet found
               }       
             </View>
 
