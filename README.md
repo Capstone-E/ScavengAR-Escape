@@ -1,9 +1,9 @@
-# ~ScavengARescape~ #
+# ScavengARescape #
 ## *An augmented reality escape adventure!* ##
 
 This project was made as part of our final project in the Grace Hopper Program at Fullstack Academy. Our aim was to learn about the technology required to build an AR experience.
 
-~ScavengARescape was built using Viro-ReactNative~
+ScavengARescape was built using Viro-ReactNative
 
 ### REQUIREMENTS ###
 
@@ -37,7 +37,7 @@ This project was made as part of our final project in the Grace Hopper Program a
 
 - Once you have launched and the AR engine has centered itself, you may move the device around freely. Please be careful not to move too quickly however, as the AR tracking cannot keep up with rapid movements.
 
-**TO RELOAD / REFRESH THE GAME, PLEASE ~SHAKE~ YOUR DEVICE TO BRING UP THE OPTIONS MENU, YOU CAN SELECT RELOAD FROM HERE**
+**TO RELOAD / REFRESH THE GAME, PLEASE *SHAKE* YOUR DEVICE TO BRING UP THE OPTIONS MENU, YOU CAN SELECT RELOAD FROM HERE**
 
 --------------------------------------------------
 
