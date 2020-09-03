@@ -35,6 +35,7 @@ export const PortalOne = () => {
   const [campSize, setCampSize] = useState([0.015, 0.015, 0.015]);
   const [keyFound, setKeyFound] = useState(false);
 
+  // retrieves key's found status (state)
   const objectFoundStatus = useSelector((state) => state.objectsStatus);
   const dispatch = useDispatch();
 
@@ -45,7 +46,7 @@ export const PortalOne = () => {
     setPortalPosition([0.3, -1, -1.8]);
     setPortalSize(standardPortalSize);
     setPortalVisible(true);
-    dispatch(foundObjectThunk(true)); // for inv.
+    dispatch(foundObjectThunk(true)); // updates state in the redux store
   };
 
   // shrinks portal to zero to avoid issues while inside the portal
@@ -122,6 +123,7 @@ export const PortalOne = () => {
           onClick={_onClick}
           visible={!keyFound}
         />
+        {/* Sound effect for when key is dragged and exit portal appears */}
         {objectFoundStatus[0] && (
           <ViroSound
             source={require('./res/sound/unlock.wav')}
