@@ -58,6 +58,8 @@ const HintButton = () => {
             <Text style={styles.modalText}>5. Find All Keys Or Complete All Puzzles To Win The Game</Text>
             <Text style={styles.modalText}>HINTS {count}/3</Text>
             {hintView()}
+
+            {/* Button to hind hints modal */}
             <TouchableHighlight
               style={{...styles.hideButton, backgroundColor: '#800000'}}
               onPress={() => {
@@ -81,6 +83,7 @@ const HintButton = () => {
           width: 80
         }}
       >
+        {/* Button to display hints modal and hints */}
         <TouchableHighlight
           style={{...styles.openButton}}
           onPress={() => {
