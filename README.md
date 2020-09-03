@@ -18,7 +18,6 @@ ScavengARescape was built using Viro-ReactNative
 -  IF YOU ARE USING THE IP ADDRESS METHOD, YOU MAY SKIP THIS STEP. FOR NGROK: Once 'start' has launched, you will first see an attempt to connect to the NGROK server. If you are using NGROK, the server must connect and you will know it was successful when a green box is displayed with the NGROK http address. You may need to `CTRL-C` and `npm start` a few times to get the NGROK server to connect properly. It is notoriously finicky.
 
 
-
 - 'Start' will load a few more things and you will be successful when the screen displays "Loading dependency graph, done."
 
 - Launch the ViroMedia App, select from the top-left menu `</> Enter Testbed`. You will then be prompted to enter your NGROK URL or an IP address.

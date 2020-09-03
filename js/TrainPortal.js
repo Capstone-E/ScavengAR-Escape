@@ -1,4 +1,9 @@
 'use strict';
+
+/*
+TRAIN PORTAL - Currently deactivated final scene to the game. Load was too heavy to include seamlessly without game crashing. Currently there is a substitute image in place where 3D train platform object originally intended
+*/
+
 import React, { useState } from 'react';
 import {
   ViroText,
@@ -9,20 +14,25 @@ import {
 } from 'react-viro';
 
 export const TrainPortal = () => {
+
+  // standard rendering sizes for consistency
   const standardPortalSize = [0.75, 1.5, 0.1];
   const zeroPortalSize = [0, 0, 0];
 
+  // local game state for each level
   const [text, setText] = useState('Solve the puzzle and find the key');
   const [insidePortal, setInsidePortal] = useState(false);
   const [portalPosition, setPortalPosition] = useState([1, -1, -2]);
   const [portalSize, setPortalSize] = useState(standardPortalSize);
   const [portalVisible, setPortalVisible] = useState(true);
 
+   // shrinks portal to zero to avoid issues while inside the portal
   const _onPortalEnter = () => {
     setInsidePortal(true);
     setPortalSize(zeroPortalSize);
   };
 
+  // this is not technically needed, as this is the end of the game. It has been left in to avoid other issues during testing.
   const _onPortalExit = () => {
     setInsidePortal(false);
     setPortalVisible(false);
@@ -43,6 +53,8 @@ export const TrainPortal = () => {
         scale={portalSize}
         visible={portalVisible}
       >
+
+        {/* 3D object is the FRAME of the portal */}
         <Viro3DObject
           source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
           resources={[
@@ -53,19 +65,14 @@ export const TrainPortal = () => {
           ]}
           type="VRX"
           visible={portalVisible}
-          // onLoadStart={}
-          // onLoadEnd={}
         />
       </ViroPortal>
-      {/* object for the room */}
+
+      {/* 3D object is the room / environment inside the portal, this is a placeholder until we have a good 3D train platform */}
       <Viro3DObject
         source={require('./res/FBXtoVRX/model.vrx')}
-        // position={[0.5, -1.8, -1]}
-        // scale={[0.015, 0.015, 0.015]}
         type="VRX"
         visible={portalVisible}
-        // onLoadStart={}
-        // onLoadEnd={}
       />
       <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
     </ViroPortalScene>
