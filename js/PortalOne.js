@@ -38,9 +38,7 @@ export const PortalOne = () => {
   const objectFoundStatus = useSelector((state) => state.objectsStatus);
   const dispatch = useDispatch();
 
-
   //action that occurs after key is collected
-
   const _onClick = () => {
     setKeyFound(true);
     setText('You found the key! Exit to find the next portal!');
@@ -49,7 +47,6 @@ export const PortalOne = () => {
     setPortalVisible(true);
     dispatch(foundObjectThunk(true)); // for inv.
   };
-
 
   // shrinks portal to zero to avoid issues while inside the portal
   const _onPortalEnter = () => {
