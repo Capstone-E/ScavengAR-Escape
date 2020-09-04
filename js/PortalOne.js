@@ -99,7 +99,7 @@ export const PortalOne = () => {
         <Viro3DObject
           source={require('./res/FBXtoVRX/camping.vrx')}
           position={[0.3, -1.09, -1]}
-          scale={[0.015, 0.015, 0.015]}
+          scale={campSize}
           type="VRX"
           visible={portalVisible}
         />

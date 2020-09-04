@@ -24,6 +24,7 @@ export const TrainPortal = () => {
   const [insidePortal, setInsidePortal] = useState(false);
   const [portalPosition, setPortalPosition] = useState([1, -1, -2]);
   const [portalSize, setPortalSize] = useState(standardPortalSize);
+  const [trainSize, setTrainSize] = useState([0.009, 0.009, 0.009])
   const [portalVisible, setPortalVisible] = useState(true);
 
    // shrinks portal to zero to avoid issues while inside the portal
@@ -71,6 +72,8 @@ export const TrainPortal = () => {
       {/* 3D object is the room / environment inside the portal */}
       <Viro3DObject
         source={require('./res/FBXtoVRX/train.vrx')}
+        position={[-1.75, -1.95, -.1]}
+        scale={trainSize}
         type="VRX"
         visible={portalVisible}
       />

@@ -7,12 +7,12 @@ FINALE - Final step in the game
 
 
 import {
-  ViroARScene,
   ViroARTrackingTargets,
   ViroARImageMarker,
   ViroText,
   ViroSound,
-  ViroARScene
+  ViroNode,
+  Viro360Image
 } from 'react-viro';
 
 export const FinalePortal = () => {
@@ -20,18 +20,16 @@ export const FinalePortal = () => {
 
   // local game state
   const [ text, setText ] = useState('Find a Metrocard in real life, scan it with your phone to escape')
-  const [ postEffect, setPostEffect ] = useState()
+  const [black, setBlack] = useState([0, 0, 0])
 
   // triggers when final action is complete
   const _onAnchorFound = () => {
-    setPostEffect('grayscale')
+    setBlack([0.1, 0.1, 0.1])
     setText('You Win!!! Thanks for playing!')
   }
 
   return (
-    <ViroARScene
-    postProcessEffects={postEffect}
-    >
+    <ViroNode>
       <ViroText
       text={text}
       scale={[0.8, 0.8, 0.8]}
@@ -50,12 +48,17 @@ export const FinalePortal = () => {
       muted={false}
       loop={false}
       />
+      <Viro360Image
+            source={require('./res/black.jpg')}
+            type="OBJ"
+            scale={black}
+          />
       </ViroARImageMarker>
-    </ViroARScene>
+      </ViroNode>
   )
 }
 
-// declares targe for image recognition
+// declares target for image recognition
 ViroARTrackingTargets.createTargets({
   targetMetrocard: {
     source: require('./res/metrocard.png'),

@@ -10,8 +10,8 @@ import {
 } from 'react-viro';
 // import PortalOne from './PortalOne';
 // import PortalTwo from './PortalTwo.js'
-import FinalePortal from './FinalePortal.js'
-// import TrainPortal from './TrainPortal'
+// import FinalePortal from './FinalePortal.js'
+import TrainPortal from './TrainPortal'
 
 const Smoke = require('./SmokeEffect');
 
@@ -48,8 +48,8 @@ function MainScene(props) {
       <Smoke />
       {/* <PortalOne /> */}
       {/* <PortalTwo /> */}
-      <FinalePortal />
-      {/* <TrainPortal /> */}
+      {/* <FinalePortal /> */}
+      <TrainPortal />
     </ViroARScene>
   );
 }
