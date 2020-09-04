@@ -1,5 +1,4 @@
-The 3d images aren't loading in the center, you need to drag them down to be in side of them.
-Hoping this can be fixed with some Viro magic!
+Need to give credit to the sources used in readme
 
 - [ ] camping.vrx
       https://poly.google.com/view/3nj59_uuCbM
@@ -11,3 +10,5 @@ Hoping this can be fixed with some Viro magic!
       https://poly.google.com/view/2mg94-lj5DS
 - [ ] forge.vrx
       https://poly.google.com/view/2ZnLsJJL4Pe
+- [ ] train.vrx
+      https://sketchfab.com/3d-models/low-poly-american-metro-station-1fd4898142864627a52702061d0ee0f9#download
