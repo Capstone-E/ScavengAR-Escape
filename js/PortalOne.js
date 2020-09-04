@@ -59,7 +59,7 @@ export const PortalOne = (props) => {
 
   // when the level is complete update
   if (levelComplete) {
-    setPortal(true, portalName)
+    dispatch(setPortal(true, portalName))
   }
 
   return (
