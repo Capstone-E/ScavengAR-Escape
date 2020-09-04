@@ -1,15 +1,24 @@
 'use strict'
 import React, {useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
+import {PORTAL_ONE, PORTAL_TWO, TRAIN_PORTAL, FINAL_PORTAL, setPortal} from '../store/portalNaivigator'
+import {TrainPortal} from './TrainPortal'
 
 const Smoke = require('./SmokeEffect')
+const PortalOne = require('./PortalOne')
+const PortalTwo = require('./PortalTwo')
+const FinalePortal = require('./FinalePortal')
 
 function MainScene() {
   const [text, setText] = useState('')
+  const portals = useSelector((state) => state.portalNav)
+  const {portalOne, portalTwo, finalPortal, trainPortal} = portals
+  const dispatch = useDispatch()
 
-  // set states to track if portal is completed or not
-  const [portalOne, setPortalOne] = useState({done: false})
-  const [portalTwo, setPortalTwo] = useState({done: false})
+  if (portalOne && portalTwo) {
+    dispatch(setPortal(true, TRAIN_PORTAL))
+  }
 
   const _onInitialized = (state, reason) => {
     if (state == ViroConstants.TRACKING_NORMAL) {
@@ -22,18 +31,19 @@ function MainScene() {
 
   // function to conditionally render portals
   const handlePortals = () => {
-    if (portalOne.done === false) {
-      const PortalOne = require('./PortalOne')
-      return <PortalOne setPortalOne={setPortalOne} />
-    } else if (portalOne.done === true && portalTwo.done === false) {
-      const PortalTwo = require('./PortalTwo')
-      return <PortalTwo setPortalTwo={setPortalTwo} />
-    } else if (portalOne.done && portalTwo.done) {
-      const FinalePortal = require('./FinalePortal')
+    if (portalOne === false) {
+      return <PortalOne setPortal={setPortal} portalName={PORTAL_ONE} />
+    } else if (portalOne && !portalTwo) {
+      return <PortalTwo setPortal={setPortal} portalName={PORTAL_TWO} />
+    } else if (finalPortal) {
+      dispatch(setPortal(true, FINAL_PORTAL))
       return <FinalePortal />
-    }
+    } else if (trainPortal) {
+      return <TrainPortal />
+    } else return null
   }
 
+  console.log('portals', portals)
   return (
     <ViroARScene onTrackingUpdated={_onInitialized} onCameraARHitTest={_onCameraARHitTest}>
       <ViroAmbientLight color="#ffffff" intensity={500} />
@@ -49,9 +59,8 @@ function MainScene() {
         shadowOpacity={0.9}
       />
       <Smoke />
-
-      {/* {call handle portals to render the correct portal based on state} */}
-      {handlePortals()}
+      {/* call handle portals to render the correct portal based on state */}
+      {/* {handlePortals()} */}
     </ViroARScene>
   )
 }

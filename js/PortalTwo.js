@@ -10,7 +10,7 @@ import {foundObjectThunk} from '../store/objectState'
 import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroNode, ViroSound} from 'react-viro'
 
 export const PortalTwo = (props) => {
-  const {setPortalTwo} = props
+  const {setPortal, portalName} = props
 
   // standard rendering sizes for consistency
   const standardPortalSize = [0.75, 1.5, 0.1]
@@ -58,7 +58,7 @@ export const PortalTwo = (props) => {
 
   // when the level is complete update
   if (levelComplete) {
-    setPortalTwo({done: true})
+    setPortal(true, portalName)
   }
 
   return (

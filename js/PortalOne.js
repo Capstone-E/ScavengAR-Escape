@@ -11,7 +11,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroNode, ViroSound} from 'react-viro'
 
 export const PortalOne = (props) => {
-  const {setPortalOne} = props
+  const {setPortal, portalName} = props
 
   // standard rendering sizes for consistency
   const standardPortalSize = [0.75, 1.5, 0.1]
@@ -59,7 +59,7 @@ export const PortalOne = (props) => {
 
   // when the level is complete update
   if (levelComplete) {
-    setPortalOne({done: true})
+    setPortal(true, portalName)
   }
 
   return (
