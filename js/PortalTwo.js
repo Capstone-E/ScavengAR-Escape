@@ -1,69 +1,66 @@
-'use strict';
+'use strict'
 
 /*
 PORTAL TWO - Second step in the game, it's completiion leads to FINALE
 */
 
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { foundObjectThunk } from '../store/objectState';
-import {
-  ViroText,
-  ViroAmbientLight,
-  ViroPortal,
-  ViroPortalScene,
-  Viro3DObject,
-  ViroNode,
-  ViroSound,
-} from 'react-viro';
+import React, {useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {foundObjectThunk} from '../store/objectState'
+import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroNode, ViroSound} from 'react-viro'
 
-import FinalePortal from './FinalePortal';
+import FinalePortal from './FinalePortal'
 
-export const PortalTwo = () => {
+export const PortalTwo = (props) => {
+  const {setPortalTwo} = props
 
   // standard rendering sizes for consistency
-  const standardPortalSize = [0.75, 1.5, 0.1];
-  const zeroSize = [0, 0, 0];
+  const standardPortalSize = [0.75, 1.5, 0.1]
+  const zeroSize = [0, 0, 0]
 
   // local game state for each level
-  const [text, setText] = useState('Solve the puzzle and find the key');
-  const [insidePortal, setInsidePortal] = useState(false);
-  const [portalPosition, setPortalPosition] = useState([1, -1, -2]);
-  const [portalSize, setPortalSize] = useState(standardPortalSize);
-  const [portalVisible, setPortalVisible] = useState(true);
-  const [beachSize, setBeachSize] = useState([0.015, 0.015, 0.015]);
-  const [keyFound, setKeyFound] = useState(false);
+  const [text, setText] = useState('Solve the puzzle and find the key')
+  const [insidePortal, setInsidePortal] = useState(false)
+  const [portalPosition, setPortalPosition] = useState([1, -1, -2])
+  const [portalSize, setPortalSize] = useState(standardPortalSize)
+  const [portalVisible, setPortalVisible] = useState(true)
+  const [beachSize, setBeachSize] = useState([0.015, 0.015, 0.015])
+  const [keyFound, setKeyFound] = useState(false)
 
   // retrieves key's found status (state)
-  const objectFoundStatus = useSelector((state) => state.objectsStatus);
-  const dispatch = useDispatch();
+  const objectFoundStatus = useSelector((state) => state.objectsStatus)
+  const dispatch = useDispatch()
 
   //action that occurs after key is collected
   const _onClick = () => {
-    setKeyFound(true);
-    setText('You found the key! Exit to find the next portal!');
-    setPortalPosition([0.3, -1, -1.8]);
-    setPortalSize(standardPortalSize);
-    setPortalVisible(true);
-    dispatch(foundObjectThunk(true)); // updates state in the redux store
-  };
+    setKeyFound(true)
+    setText('You found the key! Exit to find the next portal!')
+    setPortalPosition([0.3, -1, -1.8])
+    setPortalSize(standardPortalSize)
+    setPortalVisible(true)
+    dispatch(foundObjectThunk(true)) // updates state in the redux store
+  }
 
   // shrinks portal to zero to avoid issues while inside the portal
   const _onPortalEnter = () => {
-    setInsidePortal(true);
-    setPortalSize(zeroSize);
-  };
+    setInsidePortal(true)
+    setPortalSize(zeroSize)
+  }
 
   // disables this portal in order to enable Finale
   const _onPortalExit = () => {
-    setInsidePortal(false);
-    setPortalVisible(false);
-    setPortalSize(zeroSize);
-    setBeachSize(zeroSize);
-  };
+    setInsidePortal(false)
+    setPortalVisible(false)
+    setPortalSize(zeroSize)
+    setBeachSize(zeroSize)
+  }
 
   // necessary for triggering Finale to render
-  let levelComplete = keyFound && !insidePortal;
+  let levelComplete = keyFound && !insidePortal
+
+  if (levelComplete) {
+    setPortalTwo({done: true})
+  }
 
   return (
     <ViroNode>
@@ -75,19 +72,15 @@ export const PortalTwo = () => {
         onPortalExit={_onPortalExit}
       >
         <ViroAmbientLight color="#ffffff" intensity={500} />
-        <ViroPortal
-          position={portalPosition}
-          scale={portalSize}
-          visible={portalVisible}
-        >
-        {/* 3D object is the FRAME of the portal */}
+        <ViroPortal position={portalPosition} scale={portalSize} visible={portalVisible}>
+          {/* 3D object is the FRAME of the portal */}
           <Viro3DObject
             source={require('./res/ARPortals/portal_res/door/portal_archway/portal_archway.vrx')}
             resources={[
               require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_diffuse.png'),
               require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_normal.png'),
               require('./res/ARPortals/portal_res/door/portal_archway/portal_archway_specular.png'),
-              require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png'),
+              require('./res/ARPortals/portal_res/door/portal_archway/portal_entry.png')
             ]}
             type="VRX"
             visible={portalVisible}
@@ -108,10 +101,7 @@ export const PortalTwo = () => {
         {/* 3D object is interactable key inside portal */}
         <Viro3DObject
           source={require('./res/3dObjects/Key_B_02.obj')}
-          resources={[
-            require('./res/3dObjects/Key_B_02.mtl'),
-            require('./res/3dObjects/keyB_tx.bmp'),
-          ]}
+          resources={[require('./res/3dObjects/Key_B_02.mtl'), require('./res/3dObjects/keyB_tx.bmp')]}
           type="OBJ"
           position={[1, -0.1, -0.3]}
           scale={[0.015, 0.015, 0.015]}
@@ -133,7 +123,7 @@ export const PortalTwo = () => {
       {/* Conditional rendering Finale */}
       {levelComplete && <FinalePortal />}
     </ViroNode>
-  );
-};
+  )
+}
 
-module.exports = PortalTwo;
+module.exports = PortalTwo
