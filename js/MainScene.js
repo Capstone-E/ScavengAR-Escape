@@ -6,6 +6,8 @@ const Smoke = require('./SmokeEffect')
 
 function MainScene() {
   const [text, setText] = useState('')
+
+  // set states to track if portal is completed or not
   const [portalOne, setPortalOne] = useState({done: false})
   const [portalTwo, setPortalTwo] = useState({done: false})
 
@@ -18,6 +20,7 @@ function MainScene() {
   }
   const _onCameraARHitTest = (results) => {}
 
+  // function to conditionally render portals
   const handlePortals = () => {
     if (portalOne.done === false) {
       const PortalOne = require('./PortalOne')
@@ -46,6 +49,8 @@ function MainScene() {
         shadowOpacity={0.9}
       />
       <Smoke />
+
+      {/* {call handle portals to render the correct portal based on state} */}
       {handlePortals()}
     </ViroARScene>
   )

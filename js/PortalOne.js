@@ -57,6 +57,7 @@ export const PortalOne = (props) => {
   // necessary for triggering Portal Two to render
   let levelComplete = keyFound && !insidePortal
 
+  // when the level is complete update
   if (levelComplete) {
     setPortalOne({done: true})
   }
