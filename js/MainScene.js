@@ -17,7 +17,7 @@ function MainScene() {
   const dispatch = useDispatch()
 
   if (portalOne && portalTwo) {
-    dispatch(setPortal(true, TRAIN_PORTAL))
+    dispatch(setPortal(true, FINAL_PORTAL))
   }
 
   const _onInitialized = (state, reason) => {
@@ -35,15 +35,15 @@ function MainScene() {
       return <PortalOne setPortal={setPortal} portalName={PORTAL_ONE} />
     } else if (portalOne && !portalTwo) {
       return <PortalTwo setPortal={setPortal} portalName={PORTAL_TWO} />
-    } else if (finalPortal) {
-      dispatch(setPortal(true, FINAL_PORTAL))
-      return <FinalePortal />
+    } else if (finalPortal && !trainPortal) {
+      // finalportal will turn train portal true so it can render
+      return <FinalePortal setPortal={setPortal} portalName={TRAIN_PORTAL} />
     } else if (trainPortal) {
       return <TrainPortal />
     } else return null
   }
 
-  console.log('portals', portals)
+  console.log('portalOne, portalTwo, finalPortal, trainPortal', portalOne, portalTwo, finalPortal, trainPortal)
   return (
     <ViroARScene onTrackingUpdated={_onInitialized} onCameraARHitTest={_onCameraARHitTest}>
       <ViroAmbientLight color="#ffffff" intensity={500} />
@@ -60,7 +60,7 @@ function MainScene() {
       />
       <Smoke />
       {/* call handle portals to render the correct portal based on state */}
-      {/* {handlePortals()} */}
+      {handlePortals()}
     </ViroARScene>
   )
 }
