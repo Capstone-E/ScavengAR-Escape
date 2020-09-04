@@ -75,3 +75,7 @@ ScavengARescape was built using Viro-ReactNative
 - [Fullstack Instructor David Patlut](http://www.github.com/dpatlut)
 
 ## Source Credit
+
+- [Camping Scene: Alex “SAFFY” Safayan](https://poly.google.com/view/3nj59_uuCbM)
+- [Beach Scene: Erica Nguyen](https://poly.google.com/view/2mg94-lj5DS)
+- [Train Station: Fr0g](https://sketchfab.com/3d-models/low-poly-american-metro-station-1fd4898142864627a52702061d0ee0f9#download)
