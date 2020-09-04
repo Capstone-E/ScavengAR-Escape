@@ -8,7 +8,9 @@ import {
   ViroConstants,
   ViroSpotLight,
 } from 'react-viro';
-import PortalOne from './PortalOne';
+// import PortalOne from './PortalOne';
+// import PortalTwo from './PortalTwo.js'
+import FinalePortal from './FinalePortal.js'
 // import TrainPortal from './TrainPortal'
 
 const Smoke = require('./SmokeEffect');
@@ -44,7 +46,9 @@ function MainScene(props) {
         shadowOpacity={0.9}
       />
       <Smoke />
-      <PortalOne />
+      {/* <PortalOne /> */}
+      {/* <PortalTwo /> */}
+      <FinalePortal />
       {/* <TrainPortal /> */}
     </ViroARScene>
   );

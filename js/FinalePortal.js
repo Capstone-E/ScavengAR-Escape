@@ -7,7 +7,7 @@ FINALE - Final step in the game
 
 
 import {
-  ViroNode,
+  ViroARScene,
   ViroARTrackingTargets,
   ViroARImageMarker,
   ViroText,
