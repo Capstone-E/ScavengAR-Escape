@@ -68,9 +68,9 @@ export const TrainPortal = () => {
         />
       </ViroPortal>
 
-      {/* 3D object is the room / environment inside the portal, this is a placeholder until we have a good 3D train platform */}
+      {/* 3D object is the room / environment inside the portal */}
       <Viro3DObject
-        source={require('./res/FBXtoVRX/model.vrx')}
+        source={require('./res/FBXtoVRX/train.vrx')}
         type="VRX"
         visible={portalVisible}
       />
