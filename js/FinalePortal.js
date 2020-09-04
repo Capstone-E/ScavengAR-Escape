@@ -7,7 +7,7 @@ FINALE - Final step in the game
 
 
 import {
-  ViroNode,
+  ViroARScene,
   ViroARTrackingTargets,
   ViroARImageMarker,
   ViroText,
@@ -26,7 +26,9 @@ export const FinalePortal = () => {
   }
 
   return (
-    <ViroNode>
+    <ViroARScene
+    postProcessEffects={postEffect}
+    >
       <ViroText
       text={text}
       scale={[0.8, 0.8, 0.8]}
@@ -46,7 +48,7 @@ export const FinalePortal = () => {
       loop={false}
       />
       </ViroARImageMarker>
-    </ViroNode>
+    </ViroARScene>
   )
 }
 
