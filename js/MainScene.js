@@ -1,8 +1,6 @@
 'use strict'
 import React, {useState} from 'react'
-import {useDispatch} from 'react-redux'
 import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
-import PortalOne from './PortalOne'
 
 const Smoke = require('./SmokeEffect')
 
@@ -10,8 +8,6 @@ function MainScene() {
   const [text, setText] = useState('')
   const [portalOne, setPortalOne] = useState({done: false})
   const [portalTwo, setPortalTwo] = useState({done: false})
-
-  const dispatch = useDispatch()
 
   const _onInitialized = (state, reason) => {
     if (state == ViroConstants.TRACKING_NORMAL) {
@@ -24,13 +20,14 @@ function MainScene() {
 
   const handlePortals = () => {
     if (portalOne.done === false) {
+      const PortalOne = require('./PortalOne')
       return <PortalOne setPortalOne={setPortalOne} />
     } else if (portalOne.done === true && portalTwo.done === false) {
       const PortalTwo = require('./PortalTwo')
       return <PortalTwo setPortalTwo={setPortalTwo} />
     } else if (portalOne.done && portalTwo.done) {
-      const TrainPortal = require('./TrainPortal')
-      return <TrainPortal />
+      const FinalePortal = require('./FinalePortal')
+      return <FinalePortal />
     }
   }
 

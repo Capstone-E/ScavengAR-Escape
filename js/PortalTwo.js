@@ -9,8 +9,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import {foundObjectThunk} from '../store/objectState'
 import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroNode, ViroSound} from 'react-viro'
 
-import FinalePortal from './FinalePortal'
-
 export const PortalTwo = (props) => {
   const {setPortalTwo} = props
 
@@ -119,9 +117,6 @@ export const PortalTwo = (props) => {
           />
         )}
       </ViroPortalScene>
-
-      {/* Conditional rendering Finale */}
-      {levelComplete && <FinalePortal />}
     </ViroNode>
   )
 }
