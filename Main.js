@@ -117,7 +117,6 @@ function Main() {
     setImageLoaded(true)
   }
 
-  console.log('Parent Navigator =>', navigator)
   // Check nagivation state and render approprate components
   // Options include => ("UNSET", "AR_NAVIGATION", "HOW_TO_PLAY", "YOU_WIN")
   if (navigator === UNSET) {
