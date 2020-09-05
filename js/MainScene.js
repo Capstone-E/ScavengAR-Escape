@@ -1,24 +1,30 @@
 'use strict'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
-import {PORTAL_ONE, PORTAL_TWO, TRAIN_PORTAL, FINAL_PORTAL, setPortal} from '../store/portalNaivigator'
-import {TrainPortal} from './TrainPortal'
+import {PORTAL_ONE, PORTAL_TWO, TRAIN_PORTAL, FINAL_PORTAL, REMOVE_PORTALS, setPortal} from '../store/portalNaivigator'
+import {YOU_WIN, setNavigator} from '../store/navigator'
 
 const Smoke = require('./SmokeEffect')
 const PortalOne = require('./PortalOne')
 const PortalTwo = require('./PortalTwo')
 const FinalePortal = require('./FinalePortal')
+const TrainPortal = require('./TrainPortal')
 
 function MainScene() {
   const [text, setText] = useState('')
-  const portals = useSelector((state) => state.portalNav)
-  const {portalOne, portalTwo, finalPortal, trainPortal} = portals
+  const {portalOne, portalTwo, finalPortal, trainPortal, gameWon} = useSelector((state) => state.portalNav)
   const dispatch = useDispatch()
 
-  if (portalOne && portalTwo) {
-    dispatch(setPortal(true, FINAL_PORTAL))
-  }
+  // wrap dispatch in useEffect to stop infinite re-render error
+  useEffect(
+    () => {
+      if (portalOne && portalTwo) {
+        dispatch(setPortal(true, FINAL_PORTAL))
+      }
+    },
+    [portalOne, portalTwo]
+  )
 
   const _onInitialized = (state, reason) => {
     if (state == ViroConstants.TRACKING_NORMAL) {
@@ -31,19 +37,32 @@ function MainScene() {
 
   // function to conditionally render portals
   const handlePortals = () => {
-    if (portalOne === false) {
-      return <PortalOne setPortal={setPortal} portalName={PORTAL_ONE} />
-    } else if (portalOne && !portalTwo) {
-      return <PortalTwo setPortal={setPortal} portalName={PORTAL_TWO} />
-    } else if (finalPortal && !trainPortal) {
-      // finalportal will turn train portal true so it can render
-      return <FinalePortal setPortal={setPortal} portalName={TRAIN_PORTAL} />
-    } else if (trainPortal) {
-      return <TrainPortal />
-    } else return null
+    if (!gameWon) {
+      if (portalOne === false) {
+        return <PortalOne setPortal={setPortal} portalName={PORTAL_ONE} />
+      } else if (portalOne && !portalTwo) {
+        return <PortalTwo setPortal={setPortal} portalName={PORTAL_TWO} />
+      } else if (finalPortal && !trainPortal) {
+        // finalportal will turn train portal true so it can render next
+        return <FinalePortal setPortal={setPortal} portalName={TRAIN_PORTAL} />
+      } else if (trainPortal && !gameWon) {
+        return <TrainPortal setPortal={setPortal} portalName={REMOVE_PORTALS} />
+      }
+    } else {
+      console.log('YOU WIN!!!')
+      dispatch(setNavigator(YOU_WIN))
+      return null
+    }
   }
 
-  console.log('portalOne, portalTwo, finalPortal, trainPortal', portalOne, portalTwo, finalPortal, trainPortal)
+  console.log(
+    'portalOne, portalTwo, finalPortal, trainPortal, gameWon',
+    portalOne,
+    portalTwo,
+    finalPortal,
+    trainPortal,
+    gameWon
+  )
   return (
     <ViroARScene onTrackingUpdated={_onInitialized} onCameraARHitTest={_onCameraARHitTest}>
       <ViroAmbientLight color="#ffffff" intensity={500} />
