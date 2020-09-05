@@ -12,6 +12,7 @@ import {ViroNode, ViroARTrackingTargets, ViroARImageMarker, ViroText, ViroSound}
 export const FinalePortal = (props) => {
   const dispatch = useDispatch()
   const {setPortal, portalName} = props
+  let wasDispatched = false
 
   // local game state
   const [text, setText] = useState('Find a Metrocard in real life, scan it with your phone to escape')
@@ -19,7 +20,12 @@ export const FinalePortal = (props) => {
   // triggers when final action is complete
   const _onAnchorFound = () => {
     setText('You Win!!! Thanks for playing!')
-    dispatch(setPortal(true, portalName))
+
+    /// stops infinite re-render error
+    if (wasDispatched === false) {
+      wasDispatched = true
+      dispatch(setPortal(true, portalName))
+    }
   }
 
   return (
