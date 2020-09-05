@@ -49,20 +49,11 @@ function MainScene() {
         return <TrainPortal setPortal={setPortal} portalName={REMOVE_PORTALS} />
       }
     } else {
-      console.log('YOU WIN!!!')
       dispatch(setNavigator(YOU_WIN))
       return null
     }
   }
 
-  console.log(
-    'portalOne, portalTwo, finalPortal, trainPortal, gameWon',
-    portalOne,
-    portalTwo,
-    finalPortal,
-    trainPortal,
-    gameWon
-  )
   return (
     <ViroARScene onTrackingUpdated={_onInitialized} onCameraARHitTest={_onCameraARHitTest}>
       <ViroAmbientLight color="#ffffff" intensity={500} />
