@@ -13,7 +13,7 @@ import {Text, View, StyleSheet, TouchableHighlight, StatusBar, ImageBackground} 
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
 import HintButton from './js/HintButton'
-import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
+import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator, YOU_WIN} from './store/navigator'
 
 const MainScene = require('./js/MainScene')
 const image = require('./js/res/RE7.jpg')
@@ -78,16 +78,30 @@ function Main() {
     )
   }
 
-  // onLoad is used to make sure background image renders before any additional components
-  const onLoad = () => {
-    setImageLoaded(true)
+  const youWinScreen = () => {
+    return (
+      <View style={localStyles.outer}>
+        <ImageBackground source={image} style={localStyles.image} onLoad={onLoad} />
+        {imageLoaded && (
+          <View style={localStyles.inner}>
+            <Text style={localStyles.titleText}>CONGRATULATIONS!!</Text>
+
+            {/* Back button takes users back to New Game screen */}
+            <TouchableHighlight
+              style={localStyles.buttons}
+              onPress={() => {
+                dispatch(setNavigator(UNSET))
+              }}
+            >
+              <Text style={localStyles.buttonText}>Back</Text>
+            </TouchableHighlight>
+          </View>
+        )}
+      </View>
+    )
   }
 
-  // Check nagivation state and render approprate components
-  // Options include => ("UNSET", "AR_NAVIGATION", "HOW_TO_PLAY")
-  if (navigator === UNSET) {
-    return newGameScreen()
-  } else if (navigator === AR_NAVIGATOR) {
+  const ARView = () => {
     return (
       <View style={{flex: 1}}>
         <StatusBar hidden={false} />
@@ -96,8 +110,24 @@ function Main() {
         <Inventory />
       </View>
     )
+  }
+
+  // onLoad is used to make sure background image renders before any additional components
+  const onLoad = () => {
+    setImageLoaded(true)
+  }
+
+  console.log('Parent Navigator =>', navigator)
+  // Check nagivation state and render approprate components
+  // Options include => ("UNSET", "AR_NAVIGATION", "HOW_TO_PLAY", "YOU_WIN")
+  if (navigator === UNSET) {
+    return newGameScreen()
+  } else if (navigator === AR_NAVIGATOR) {
+    return ARView()
   } else if (navigator === HOW_TO_PLAY) {
     return howToPlayScreen()
+  } else if (navigator === YOU_WIN) {
+    return youWinScreen()
   }
 }
 
