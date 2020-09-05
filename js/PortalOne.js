@@ -11,8 +11,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroNode, ViroSound} from 'react-viro'
 
 export const PortalOne = (props) => {
-  const {setPortal, portalName} = props
-
   // standard rendering sizes for consistency
   const standardPortalSize = [0.75, 1.5, 0.1]
   const zeroSize = [0, 0, 0]
@@ -54,11 +52,10 @@ export const PortalOne = (props) => {
     setCampSize(zeroSize)
   }
 
+  const {setPortal, portalName} = props
   // necessary for triggering Portal Two to render
-  let levelComplete = keyFound && !insidePortal
-
-  // when the level is complete update
-  if (levelComplete) {
+  // when the level is complete update portal status to true
+  if (keyFound && !insidePortal) {
     dispatch(setPortal(true, portalName))
   }
 
