@@ -2,6 +2,7 @@
 export const AR_NAVIGATOR = 'AR_NAVIGATOR'
 export const HOW_TO_PLAY = 'HOW_TO_PLAY'
 export const UNSET = 'UNSET'
+export const YOU_WIN = 'YOU_WIN'
 
 // ACTION CREATORS
 const setNavigatorAC = (navigatorType) => ({
@@ -30,6 +31,8 @@ export default function(state = initialState, action) {
       return UNSET
     case HOW_TO_PLAY:
       return HOW_TO_PLAY
+    case YOU_WIN:
+      return YOU_WIN
     default:
       return state
   }
