@@ -28,9 +28,13 @@ export const TrainPortal = () => {
   const [portalVisible, setPortalVisible] = useState(true);
 
    // shrinks portal to zero to avoid issues while inside the portal
-  const _onPortalEnter = () => {
+   const _onPortalEnter = () => {
     setInsidePortal(true);
-    setPortalSize(zeroPortalSize);
+    setPortalSize(zeroSize);
+    setTimeout(() => {
+      setTrainSize(zeroSize)
+      setText('You Win!!! Thanks for playing!')},
+      25000)
   };
 
   // this is not technically needed, as this is the end of the game. It has been left in to avoid other issues during testing.
@@ -77,7 +81,7 @@ export const TrainPortal = () => {
         type="VRX"
         visible={portalVisible}
       />
-      <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
+      <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 0, 0]} />
     </ViroPortalScene>
   );
 };

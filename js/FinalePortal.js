@@ -20,10 +20,10 @@ export const FinalePortal = () => {
   // local game state
   const [ text, setText ] = useState('Find a Metrocard in real life, scan it with your phone to escape')
 
-  // triggers when final action is complete
-  const _onAnchorFound = () => {
-    setText('You Win!!! Thanks for playing!')
-  }
+  // // triggers when final action is complete
+  // const _onAnchorFound = () => {
+  //   setText('You Win!!! Thanks for playing!')
+  // }
 
   return (
     <ViroNode>
