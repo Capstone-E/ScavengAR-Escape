@@ -11,7 +11,9 @@ const ExitButton = () => {
   const navigator = useSelector((state) => state.navigator)
 
   const handleOnClick = () => {
+    // sent setPortal false status because game was not won, we are just exiting and resetting portal status
     dispatch(setPortal(false, REMOVE_PORTALS))
+    // unset to send user back to new game screen
     dispatch(setNavigator(UNSET))
   }
 
