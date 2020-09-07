@@ -19,7 +19,6 @@ export const FinalePortal = (props) => {
 
   // triggers when final action is complete
   const _onAnchorFound = () => {
-    setText('You Win!!! Thanks for playing!')
 
     /// stops infinite re-render error
     if (wasDispatched === false) {
@@ -34,7 +33,7 @@ export const FinalePortal = (props) => {
 
       {/* Establishes action after image recognition */}
       <ViroARImageMarker target={'targetMetrocard'} onAnchorFound={_onAnchorFound}>
-        <ViroSound source={require('./res/sound/you-win.wav')} volume={1.0} paused={false} muted={false} loop={false} />
+
       </ViroARImageMarker>
     </ViroNode>
   )
