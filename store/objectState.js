@@ -3,7 +3,7 @@
 const FOUND_OBJECT = 'FOUND_OBJECT';
 
 // action creator 
-const foundObject = (objectStatus) => ({
+export const foundObject = (objectStatus) => ({
     type: FOUND_OBJECT, objectStatus
 })
 
@@ -13,7 +13,9 @@ export const foundObjectThunk = (objectStatus) => (dispatch) => {
 }
 
 // reducer 
-const initalState =  [] // each value will signify that a key was collected
+// const initalState =  [] // each value will signify that a key was collected
+// const initalState = [true]; // one key render
+const initalState = [true, true] // two keys render
 
 const reducer = (state = initalState, action) => {
     switch (action.type) {
