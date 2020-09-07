@@ -16,7 +16,7 @@ import HintButton from './js/HintButton'
 import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
 
 const MainScene = require('./js/MainScene')
-const image = require('./js/res/brain_maze.png')
+const image = require('./js/res/train.png')
 
 function Main() {
   const [imageLoaded, setImageLoaded] = useState(false)
