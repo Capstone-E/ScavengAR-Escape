@@ -1,50 +1,40 @@
-'use strict';
-import React, { useState } from 'react';
+'use strict'
+import React, {useState} from 'react'
 
 /*
 FINALE - Final step in the game
 */
 
+import {useDispatch} from 'react-redux'
 
-import {
-  ViroNode,
-  ViroARTrackingTargets,
-  ViroARImageMarker,
-  ViroText,
-  ViroSound
-} from 'react-viro';
+import {ViroNode, ViroARTrackingTargets, ViroARImageMarker, ViroText, ViroSound} from 'react-viro'
 
-export const FinalePortal = () => {
-
+export const FinalePortal = (props) => {
+  const dispatch = useDispatch()
+  const {setPortal, portalName} = props
+  let wasDispatched = false
 
   // local game state
-  const [ text, setText ] = useState('Find a Metrocard in real life, scan it with your phone to escape')
+  const [text, setText] = useState('Find a Metrocard in real life, scan it with your phone to escape')
 
   // triggers when final action is complete
   const _onAnchorFound = () => {
     setText('You Win!!! Thanks for playing!')
+
+    /// stops infinite re-render error
+    if (wasDispatched === false) {
+      wasDispatched = true
+      dispatch(setPortal(true, portalName))
+    }
   }
 
   return (
     <ViroNode>
-      <ViroText
-      text={text}
-      scale={[0.8, 0.8, 0.8]}
-      position={[0, 0, -2]}
-    />
+      <ViroText text={text} scale={[0.8, 0.8, 0.8]} position={[0, 0, -2]} />
 
-    {/* Establishes action after image recognition */}
-      <ViroARImageMarker
-        target={'targetMetrocard'}
-        onAnchorFound={_onAnchorFound}
-      >
-      <ViroSound
-      source={require('./res/sound/you-win.wav')}
-      volume={1.0}
-      paused={false}
-      muted={false}
-      loop={false}
-      />
+      {/* Establishes action after image recognition */}
+      <ViroARImageMarker target={'targetMetrocard'} onAnchorFound={_onAnchorFound}>
+        <ViroSound source={require('./res/sound/you-win.wav')} volume={1.0} paused={false} muted={false} loop={false} />
       </ViroARImageMarker>
     </ViroNode>
   )
@@ -55,8 +45,8 @@ ViroARTrackingTargets.createTargets({
   targetMetrocard: {
     source: require('./res/metrocard.png'),
     orientation: 'Up',
-    physicalWidth: 0.1,
-  },
-});
+    physicalWidth: 0.1
+  }
+})
 
-module.exports = FinalePortal;
+module.exports = FinalePortal

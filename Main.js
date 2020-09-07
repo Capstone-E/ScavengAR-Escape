@@ -12,8 +12,10 @@ import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar, ImageBackground} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
+import ExitButton from './js/ExitButton'
 import HintButton from './js/HintButton'
-import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
+import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator, YOU_WIN} from './store/navigator'
+import {REMOVE_PORTALS, setPortal} from './store/portalNaivigator'
 
 const MainScene = require('./js/MainScene')
 const image = require('./js/res/brain_maze.png')
@@ -74,26 +76,57 @@ function Main() {
     )
   }
 
+  const youWinScreen = () => {
+    return (
+      <View style={localStyles.outer}>
+        <ImageBackground source={image} style={localStyles.image} onLoad={onLoad} />
+        {imageLoaded && (
+          <View style={localStyles.inner}>
+            <Text style={localStyles.titleText}>CONGRATULATIONS!!</Text>
+
+            {/* Start New Game button takes users back to New Game screen */}
+            <TouchableHighlight
+              style={localStyles.buttons}
+              onPress={() => {
+                dispatch(setPortal(false, REMOVE_PORTALS))
+                dispatch(setNavigator(UNSET))
+              }}
+            >
+              <Text style={localStyles.buttonText}>Start New Game</Text>
+            </TouchableHighlight>
+          </View>
+        )}
+      </View>
+    )
+  }
+
+  const ARView = () => {
+    return (
+      <View style={{flex: 1}}>
+        <StatusBar hidden={false} />
+        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
+        <HintButton />
+        <ExitButton />
+        <Inventory />
+      </View>
+    )
+  }
+
   // onLoad is used to make sure background image renders before any additional components
   const onLoad = () => {
     setImageLoaded(true)
   }
 
   // Check nagivation state and render approprate components
-  // Options include => ("UNSET", "AR_NAVIGATION", "HOW_TO_PLAY")
+  // Options include => ("UNSET", "AR_NAVIGATION", "HOW_TO_PLAY", "YOU_WIN")
   if (navigator === UNSET) {
     return newGameScreen()
   } else if (navigator === AR_NAVIGATOR) {
-    return (
-      <View style={{flex: 1}}>
-        <StatusBar hidden={false} />
-        <ViroARSceneNavigator initialScene={{scene: MainScene}} />
-        <HintButton />
-        <Inventory />
-      </View>
-    )
+    return ARView()
   } else if (navigator === HOW_TO_PLAY) {
     return howToPlayScreen()
+  } else if (navigator === YOU_WIN) {
+    return youWinScreen()
   }
 }
 
