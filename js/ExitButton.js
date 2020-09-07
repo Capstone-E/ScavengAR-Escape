@@ -5,6 +5,7 @@ import {Text, TouchableHighlight, View, StyleSheet} from 'react-native'
 
 import {UNSET, setNavigator} from '../store/navigator'
 import {REMOVE_PORTALS, setPortal} from '../store/portalNaivigator'
+import {resetObject, RESET} from '../store/objectState'
 
 const ExitButton = () => {
   const dispatch = useDispatch()
@@ -15,6 +16,8 @@ const ExitButton = () => {
     dispatch(setPortal(false, REMOVE_PORTALS))
     // unset to send user back to new game screen
     dispatch(setNavigator(UNSET))
+    // reset inventory
+    dispatch(resetObject(RESET))
   }
 
   if (navigator !== UNSET) {

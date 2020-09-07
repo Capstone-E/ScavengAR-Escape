@@ -15,6 +15,7 @@ import Inventory from './js/Inventory'
 import ExitButton from './js/ExitButton'
 import HintButton from './js/HintButton'
 import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator, YOU_WIN} from './store/navigator'
+import {REMOVE_PORTALS, setPortal} from './store/portalNaivigator'
 
 const MainScene = require('./js/MainScene')
 const image = require('./js/res/brain_maze.png')
@@ -87,6 +88,7 @@ function Main() {
             <TouchableHighlight
               style={localStyles.buttons}
               onPress={() => {
+                dispatch(setPortal(false, REMOVE_PORTALS))
                 dispatch(setNavigator(UNSET))
               }}
             >

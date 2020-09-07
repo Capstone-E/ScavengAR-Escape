@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {ViroMaterials, ViroARScene, ViroAmbientLight, ViroConstants, ViroSpotLight} from 'react-viro'
 import {PORTAL_ONE, PORTAL_TWO, TRAIN_PORTAL, FINAL_PORTAL, REMOVE_PORTALS, setPortal} from '../store/portalNaivigator'
 import {YOU_WIN, setNavigator} from '../store/navigator'
+import {resetObject, RESET} from '../store/objectState'
 
 const Smoke = require('./SmokeEffect')
 const PortalOne = require('./PortalOne')
@@ -50,6 +51,8 @@ function MainScene() {
       }
     } else {
       dispatch(setNavigator(YOU_WIN))
+      dispatch(resetObject(RESET))
+
       return null
     }
   }
