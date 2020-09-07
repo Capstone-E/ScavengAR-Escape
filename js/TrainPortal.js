@@ -5,7 +5,7 @@ TRAIN PORTAL - Currently deactivated final scene to the game. Load was too heavy
 */
 
 import React, {useState} from 'react'
-import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject} from 'react-viro'
+import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroSound, ViroNode} from 'react-viro'
 import {useDispatch} from 'react-redux'
 
 export const TrainPortal = (props) => {
@@ -20,13 +20,14 @@ export const TrainPortal = (props) => {
   const [portalSize, setPortalSize] = useState(standardPortalSize)
   const [trainSize, setTrainSize] = useState([0.009, 0.009, 0.009])
   const [portalVisible, setPortalVisible] = useState(true)
+  const [playSound, setPlaySound] = useState(false)
   const dispatch = useDispatch()
   const {setPortal, portalName} = props
 
+
   // shrinks portal to zero to avoid issues while inside the portal
   const _onPortalEnter = () => {
-    // setInsidePortal(true)
-    // setPortalSize(zeroPortalSize)
+    setPlaySound(true)
     setTimeout(() => {
       dispatch(setPortal(true, portalName))
     }, 10000)
@@ -40,7 +41,8 @@ export const TrainPortal = (props) => {
   }
 
   return (
-    <ViroPortalScene
+    <ViroNode>
+      <ViroPortalScene
       passable={true}
       dragType="FixedDistance"
       onDrag={() => {}}
@@ -71,8 +73,10 @@ export const TrainPortal = (props) => {
         type="VRX"
         visible={portalVisible}
       />
-      <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
+      <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 0, 0]} />
     </ViroPortalScene>
+      {playSound && <ViroSound source={require('./res/sound/you-win.wav')} volume={1.0} paused={false} muted={false} loop={false} />}
+    </ViroNode>
   )
 }
 
