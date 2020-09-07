@@ -124,9 +124,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    padding: 12,
+    padding: 5,
     elevation: 2,
-    height: 5
+    height: 25
   },
   hideButton: {
     backgroundColor: '#800000',
