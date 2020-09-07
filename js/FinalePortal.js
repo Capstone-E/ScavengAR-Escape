@@ -23,10 +23,10 @@ export const FinalePortal = () => {
   const [black, setBlack] = useState([0, 0, 0])
 
   // triggers when final action is complete
-  const _onAnchorFound = () => {
-    setBlack([0.1, 0.1, 0.1])
-    setText('You Win!!! Thanks for playing!')
-  }
+  // const _onAnchorFound = () => {
+  //   setBlack([0.1, 0.1, 0.1])
+
+  // }
 
   return (
     <ViroNode>
@@ -39,7 +39,7 @@ export const FinalePortal = () => {
     {/* Establishes action after image recognition */}
       <ViroARImageMarker
         target={'targetMetrocard'}
-        onAnchorFound={_onAnchorFound}
+        // onAnchorFound={_onAnchorFound}
       >
       <ViroSound
       source={require('./res/sound/you-win.wav')}

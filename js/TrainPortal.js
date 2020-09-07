@@ -17,10 +17,10 @@ export const TrainPortal = () => {
 
   // standard rendering sizes for consistency
   const standardPortalSize = [0.75, 1.5, 0.1];
-  const zeroPortalSize = [0, 0, 0];
+  const zeroSize = [0, 0, 0];
 
   // local game state for each level
-  const [text, setText] = useState('Solve the puzzle and find the key');
+  const [text, setText] = useState('');
   const [insidePortal, setInsidePortal] = useState(false);
   const [portalPosition, setPortalPosition] = useState([1, -1, -2]);
   const [portalSize, setPortalSize] = useState(standardPortalSize);
@@ -30,14 +30,18 @@ export const TrainPortal = () => {
    // shrinks portal to zero to avoid issues while inside the portal
   const _onPortalEnter = () => {
     setInsidePortal(true);
-    setPortalSize(zeroPortalSize);
+    setPortalSize(zeroSize);
+    setTimeout(() => {
+      setTrainSize(zeroSize)
+      setText('You Win!!! Thanks for playing!')},
+      25000)
   };
 
   // this is not technically needed, as this is the end of the game. It has been left in to avoid other issues during testing.
   const _onPortalExit = () => {
     setInsidePortal(false);
     setPortalVisible(false);
-    setPortalSize(zeroPortalSize);
+    setPortalSize(zeroSize);
   };
 
   return (
@@ -77,7 +81,7 @@ export const TrainPortal = () => {
         type="VRX"
         visible={portalVisible}
       />
-      <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 1, -2]} />
+      <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 0, 0]} />
     </ViroPortalScene>
   );
 };
