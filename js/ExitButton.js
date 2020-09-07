@@ -4,10 +4,16 @@ import {useSelector, useDispatch} from 'react-redux'
 import {Text, TouchableHighlight, View, StyleSheet} from 'react-native'
 
 import {UNSET, setNavigator} from '../store/navigator'
+import {REMOVE_PORTALS, setPortal} from '../store/portalNaivigator'
 
 const ExitButton = () => {
   const dispatch = useDispatch()
   const navigator = useSelector((state) => state.navigator)
+
+  const handleOnClick = () => {
+    dispatch(setPortal(false, REMOVE_PORTALS))
+    dispatch(setNavigator(UNSET))
+  }
 
   if (navigator !== UNSET) {
     return (
@@ -35,12 +41,8 @@ const ExitButton = () => {
             width: 80
           }}
         >
-          <TouchableHighlight
-            style={{...styles.openButton}}
-            onPress={() => dispatch(setNavigator(UNSET))}
-            underlayColor="#00000000"
-          >
-            <Text style={{color: 'white'}}>X</Text>
+          <TouchableHighlight style={{...styles.openButton}} onPress={() => handleOnClick()} underlayColor="#00000000">
+            <Text style={{color: 'white'}}>Exit</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -55,9 +57,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    padding: 12,
+    padding: 5,
     elevation: 2,
-    height: 5
+    height: 25
   }
 })
 

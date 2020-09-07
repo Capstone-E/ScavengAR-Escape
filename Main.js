@@ -12,6 +12,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {Text, View, StyleSheet, TouchableHighlight, StatusBar, ImageBackground} from 'react-native'
 import {ViroARSceneNavigator} from 'react-viro'
 import Inventory from './js/Inventory'
+import ExitButton from './js/ExitButton'
 import HintButton from './js/HintButton'
 import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator, YOU_WIN} from './store/navigator'
 
@@ -82,14 +83,14 @@ function Main() {
           <View style={localStyles.inner}>
             <Text style={localStyles.titleText}>CONGRATULATIONS!!</Text>
 
-            {/* Back button takes users back to New Game screen */}
+            {/* Start New Game button takes users back to New Game screen */}
             <TouchableHighlight
               style={localStyles.buttons}
               onPress={() => {
                 dispatch(setNavigator(UNSET))
               }}
             >
-              <Text style={localStyles.buttonText}>Back</Text>
+              <Text style={localStyles.buttonText}>Start New Game</Text>
             </TouchableHighlight>
           </View>
         )}
@@ -103,6 +104,7 @@ function Main() {
         <StatusBar hidden={false} />
         <ViroARSceneNavigator initialScene={{scene: MainScene}} />
         <HintButton />
+        <ExitButton />
         <Inventory />
       </View>
     )
