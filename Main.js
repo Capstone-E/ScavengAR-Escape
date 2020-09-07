@@ -51,29 +51,25 @@ function Main() {
   const howToPlayScreen = () => {
     return (
       <View style={localStyles.outer}>
-        <ImageBackground source={image} style={localStyles.htpimage} onLoad={onLoad} />
-        {imageLoaded && (
-          <View style={localStyles.inner}>
-            <Text style={localStyles.titleText}>
-              1. Start With Back Against A Wall Or With Plenty Room In Front Of Camera
-            </Text>
-            <Text style={localStyles.titleText}>2. Pan Camera Slowly</Text>
-            <Text style={localStyles.titleText}>3. Enter Portals To Complete Puzzles And Find Keys</Text>
-            <Text style={localStyles.titleText}>4. Click Keys To Exit Portal</Text>
-            <Text style={localStyles.titleText}>5. Find All Keys Or Complete All Puzzles To Win The Game</Text>
+        <View style={localStyles.inner}>
+          <Text style={localStyles.titleText}>
+            1. Start With Back Against A Wall Or With Plenty Room In Front Of Camera
+          </Text>
+          <Text style={localStyles.titleText}>2. Pan Camera Slowly</Text>
+          <Text style={localStyles.titleText}>3. Enter Portals To Complete Puzzles And Find Keys</Text>
+          <Text style={localStyles.titleText}>4. Click Keys To Exit Portal</Text>
+          <Text style={localStyles.titleText}>5. Find All Keys Or Complete All Puzzles To Win The Game</Text>
 
-            {/* Back button takes users back to New Game screen */}
-            <TouchableHighlight
-              style={localStyles.buttons}
-              onPress={() => {
-                dispatch(setNavigator(UNSET))
-              }}
-            >
-              <Text style={localStyles.buttonText}>Back</Text>
-            </TouchableHighlight>
-          </View>
-        )}
-        {!imageLoaded && <Text style={{color: 'red', fontSize: 90}}>...</Text>}
+          {/* Back button takes users back to New Game screen */}
+          <TouchableHighlight
+            style={localStyles.buttons}
+            onPress={() => {
+              dispatch(setNavigator(UNSET))
+            }}
+          >
+            <Text style={localStyles.buttonText}>Back</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     )
   }
@@ -152,15 +148,6 @@ const localStyles = StyleSheet.create({
     bottom: 0,
     width: null,
     height: '58%'
-  },
-  htpimage: {
-    position: 'absolute',
-    top: 0,
-    left: 200,
-    right: 0,
-    bottom: 0,
-    width: null,
-    height: '50%'
   },
   exitButton: {
     height: 50,
