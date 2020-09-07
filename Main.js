@@ -16,7 +16,7 @@ import HintButton from './js/HintButton'
 import {AR_NAVIGATOR, UNSET, HOW_TO_PLAY, setNavigator} from './store/navigator'
 
 const MainScene = require('./js/MainScene')
-const image = require('./js/res/RE7.jpg')
+const image = require('./js/res/brain_maze.png')
 
 function Main() {
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -51,7 +51,7 @@ function Main() {
   const howToPlayScreen = () => {
     return (
       <View style={localStyles.outer}>
-        <ImageBackground source={image} style={localStyles.image} onLoad={onLoad} />
+        <ImageBackground source={image} style={localStyles.htpimage} onLoad={onLoad} />
         {imageLoaded && (
           <View style={localStyles.inner}>
             <Text style={localStyles.titleText}>
@@ -146,13 +146,21 @@ const localStyles = StyleSheet.create({
   },
   image: {
     position: 'absolute',
-    top: 0,
+    top: 15,
     left: 0,
     right: 0,
     bottom: 0,
     width: null,
-    height: '100%'
-    //opacity: 0.8,
+    height: '58%'
+  },
+  htpimage: {
+    position: 'absolute',
+    top: 0,
+    left: 200,
+    right: 0,
+    bottom: 0,
+    width: null,
+    height: '50%'
   },
   exitButton: {
     height: 50,
