@@ -22,13 +22,15 @@ const Inventory = () => {
           { key: 'keyTwo', foundStatus: objectFoundStatus.keyTwo},
         ]}
         renderItem={({ item }) => (
-          <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
+          <TouchableHighlight style={style.buttons}>
             <View style={{height: 70, width: 130}}>
               {
               (item.foundStatus) ?
-                <Image style={style.image} source={keyImage} /> // changes to this image when key(s) is clicked/dragged
+                // will change to this image when key(s) is clicked/dragged
+                <Image style={style.image} source={keyImage} /> 
                 :
-                <Image style={style.image} source={shadowKey} /> // will show this image when key(s) is not yet found
+                // will show this image when key(s) is not yet found
+                <Image style={style.image} source={shadowKey} /> 
               }       
             </View>
 
