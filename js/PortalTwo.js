@@ -108,7 +108,7 @@ export const PortalTwo = (props) => {
           visible={!keyFound}
         />
         {/* Sound effect for when key is dragged and exit portal appears */}
-        {objectFoundStatus[1] && (
+        {objectFoundStatus.keyTwo && (
           <ViroSound
             source={require('./res/sound/unlock.wav')}
             volume={1.0}
