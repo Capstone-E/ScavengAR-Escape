@@ -1,7 +1,7 @@
 'use strict'
 
 /*
-TRAIN PORTAL - Currently deactivated final scene to the game. Load was too heavy to include seamlessly without game crashing. Currently there is a substitute image in place where 3D train platform object originally intended
+TRAIN PORTAL - GAME END
 */
 
 import React, {useState} from 'react'
@@ -14,7 +14,7 @@ export const TrainPortal = (props) => {
   const zeroPortalSize = [0, 0, 0]
 
   // local game state for each level
-  const [text, setText] = useState('Solve the puzzle and find the key')
+  const [text, setText] = useState('')
   const [insidePortal, setInsidePortal] = useState(false)
   const [portalPosition, setPortalPosition] = useState([1, -1, -2])
   const [portalSize, setPortalSize] = useState(standardPortalSize)
@@ -25,19 +25,12 @@ export const TrainPortal = (props) => {
   const {setPortal, portalName} = props
 
 
-  // shrinks portal to zero to avoid issues while inside the portal
+  // Plays final sound clip and exits game after 10 seconds
   const _onPortalEnter = () => {
     setPlaySound(true)
     setTimeout(() => {
       dispatch(setPortal(true, portalName))
     }, 10000)
-  }
-
-  // this is not technically needed, as this is the end of the game. It has been left in to avoid other issues during testing.
-  const _onPortalExit = () => {
-    setInsidePortal(false)
-    setPortalVisible(false)
-    setPortalSize(zeroPortalSize)
   }
 
   return (
@@ -47,7 +40,6 @@ export const TrainPortal = (props) => {
       dragType="FixedDistance"
       onDrag={() => {}}
       onPortalEnter={_onPortalEnter}
-      onPortalExit={_onPortalExit}
     >
       <ViroAmbientLight color="#ffffff" intensity={500} />
       <ViroPortal position={portalPosition} scale={portalSize} visible={portalVisible}>
