@@ -6,13 +6,13 @@ export const RESET = 'RESET'
 
 // action creator
 // will return with value true if key is collected
-export const foundObjectOne = (objectStatus) => ({ 
+export const foundKeyOne = (objectStatus) => ({ 
   type: FOUND_KEY_ONE,
   objectStatus
 })
 
 // will return with value true if key is collected
-export const foundObjectTwo = (objectStatus) => ({ 
+export const foundKeyTwo = (objectStatus) => ({ 
     type: FOUND_KEY_TWO,
     objectStatus
 })
@@ -33,9 +33,9 @@ const initalState = {
 
 const reducer = (state = initalState, action) => {
   switch (action.type) {
-    case FOUND_OBJECT_ONE:
+    case FOUND_KEY_ONE:
       return {...state, keyOne: action.objectStatus}
-    case FOUND_OBJECT_TWO:
+    case FOUND_KEY_TWO:
     return {...state, keyTwo: action.objectStatus}
     case RESET: // will change later if this works
       return []
