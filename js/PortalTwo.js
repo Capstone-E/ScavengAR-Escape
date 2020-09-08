@@ -17,7 +17,7 @@ export const PortalTwo = (props) => {
   const zeroSize = [0, 0, 0]
 
   // local game state for each level
-  const [text, setText] = useState('Solve the puzzle and find the key')
+  const [text, setText] = useState('Find the key')
   const [insidePortal, setInsidePortal] = useState(false)
   const [portalPosition, setPortalPosition] = useState([1, -1, -2])
   const [portalSize, setPortalSize] = useState(standardPortalSize)
