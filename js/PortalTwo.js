@@ -6,7 +6,7 @@ PORTAL TWO - Second step in the game, it's completiion leads to FINALE
 
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {foundObjectThunk} from '../store/objectState'
+import {foundObject} from '../store/objectState'
 import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroNode, ViroSound} from 'react-viro'
 
 export const PortalTwo = (props) => {
@@ -36,7 +36,7 @@ export const PortalTwo = (props) => {
     setPortalPosition([0.3, -1, -1.8])
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
-    dispatch(foundObjectThunk(true)) // updates state in the redux store
+    dispatch(foundObject(true)) // updates state in the redux store
   }
 
   // shrinks portal to zero to avoid issues while inside the portal

@@ -3,7 +3,7 @@ const FOUND_OBJECT = 'FOUND_OBJECT'
 export const RESET = 'RESET'
 
 // action creator
-const foundObject = (objectStatus) => ({
+export const foundObject = (objectStatus) => ({ // will return with value true if key is collected
   type: FOUND_OBJECT,
   objectStatus
 })
@@ -12,10 +12,6 @@ export const resetObject = () => ({
   type: RESET
 })
 
-// thunk creator
-export const foundObjectThunk = (objectStatus) => (dispatch) => {
-  dispatch(foundObject(objectStatus)) // will return with value true if key is collected
-}
 
 // reducer
 const initalState = [] // each value will signify that a key was collected
