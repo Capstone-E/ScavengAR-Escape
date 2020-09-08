@@ -1,7 +1,7 @@
 'use strict'
 
 /*
-PORTAL TWO - Second step in the game, it's completiion leads to FINALE
+PORTAL TWO - Second step in the game, its completiion leads to FINALE
 */
 
 import React, {useState} from 'react'

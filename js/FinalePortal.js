@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 
 /*
-FINALE - Final step in the game
+FINALE - Final step in the game that leads to exit scene - TRAIN PORTAL
 */
 
 import {useDispatch} from 'react-redux'
