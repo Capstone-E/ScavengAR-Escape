@@ -5,7 +5,7 @@ PORTAL ONE - First step in the game, it's completiion leads to PORTAL TWO
 */
 
 import React, {useState} from 'react'
-import {foundObjectThunk} from '../store/objectState'
+import {foundKeyOne} from '../store/objectState'
 import {useSelector, useDispatch} from 'react-redux'
 
 import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroNode, ViroSound} from 'react-viro'
@@ -35,7 +35,7 @@ export const PortalOne = (props) => {
     setPortalPosition([0.3, -1, -1.8])
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
-    dispatch(foundObjectThunk(true)) // updates state in the redux store
+    dispatch(foundKeyOne(true)) // updates state in the redux store
   }
 
   // shrinks portal to zero to avoid issues while inside the portal
@@ -106,7 +106,7 @@ export const PortalOne = (props) => {
           visible={!keyFound}
         />
         {/* Sound effect for when key is dragged and exit portal appears */}
-        {objectFoundStatus[0] && (
+        {objectFoundStatus.keyOne && (
           <ViroSound
             source={require('./res/sound/unlock.wav')}
             volume={1.0}
