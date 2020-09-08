@@ -34,7 +34,6 @@ const Inventory = () => {
 
           </TouchableHighlight>
         )}
-        // keyExtractor={(item) => item.key.toString()} // for warning about key and string
         scrollEnabled={false}
       />
     </View>
