@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 
 /*
-FINALE - Final step in the game
+FINALE - Final step in the game that leads to exit scene - TRAIN PORTAL
 */
 
 import {useDispatch} from 'react-redux'
@@ -29,7 +29,7 @@ export const FinalePortal = (props) => {
 
   return (
     <ViroNode>
-      <ViroText text={text} scale={[0.8, 0.8, 0.8]} position={[0, 0, -2]} />
+      <ViroText text={text} scale={[0.8, 0.8, 0.8]} position={[0, 0, 0]} />
 
       {/* Establishes action after image recognition */}
       <ViroARImageMarker target={'targetMetrocard'} onAnchorFound={_onAnchorFound}>

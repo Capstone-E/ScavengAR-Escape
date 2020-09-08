@@ -9,7 +9,7 @@ import keyImage from './res/croppedKey.png';
 import shadowKey from './res/blackNWhite.png';
 
 const Inventory = () => {
-
+  // this should return an object with keyStatuses
   const objectFoundStatus = useSelector((state) => state.objectsStatus);
 
   return (
@@ -18,23 +18,24 @@ const Inventory = () => {
         horizontal={true}
         contentContainerStyle={style.listViewContainer}
         data={[
-          { key: objectFoundStatus[0] ? 'One'  : 'Slot One Locked'},
-          { key: objectFoundStatus[1] ? 'Two'  : 'Slot Two Locked'},
+          { key: 'keyOne', foundStatus: objectFoundStatus.keyOne},
+          { key: 'keyTwo', foundStatus: objectFoundStatus.keyTwo},
         ]}
         renderItem={({ item }) => (
-          <TouchableHighlight style={style.buttons} underlayColor={'#68a0ff'}>
+          <TouchableHighlight style={style.buttons}>
             <View style={{height: 70, width: 130}}>
               {
-              (item.key[0] !== 'S') ?
-                <Image style={style.image} source={keyImage} /> // changes to this image when key(s) is clicked/dragged
+              (item.foundStatus) ?
+                // will change to this image when key(s) is clicked/dragged
+                <Image style={style.image} source={keyImage} /> 
                 :
-                <Image style={style.image} source={shadowKey} /> // will show this image when key(s) is not yet found
+                // will show this image when key(s) is not yet found
+                <Image style={style.image} source={shadowKey} /> 
               }       
             </View>
 
           </TouchableHighlight>
         )}
-        keyExtractor={(item) => item.key.toString()} // for warning about key and string
         scrollEnabled={false}
       />
     </View>

@@ -1,12 +1,12 @@
 'use strict'
 
 /*
-PORTAL TWO - Second step in the game, it's completiion leads to FINALE
+PORTAL TWO - Second step in the game, its completiion leads to FINALE
 */
 
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {foundObjectThunk} from '../store/objectState'
+import {foundKeyTwo} from '../store/objectState'
 import {ViroText, ViroAmbientLight, ViroPortal, ViroPortalScene, Viro3DObject, ViroNode, ViroSound} from 'react-viro'
 
 export const PortalTwo = (props) => {
@@ -17,7 +17,7 @@ export const PortalTwo = (props) => {
   const zeroSize = [0, 0, 0]
 
   // local game state for each level
-  const [text, setText] = useState('Solve the puzzle and find the key')
+  const [text, setText] = useState('Find the key')
   const [insidePortal, setInsidePortal] = useState(false)
   const [portalPosition, setPortalPosition] = useState([1, -1, -2])
   const [portalSize, setPortalSize] = useState(standardPortalSize)
@@ -36,7 +36,7 @@ export const PortalTwo = (props) => {
     setPortalPosition([0.3, -1, -1.8])
     setPortalSize(standardPortalSize)
     setPortalVisible(true)
-    dispatch(foundObjectThunk(true)) // updates state in the redux store
+    dispatch(foundKeyTwo(true)) // updates state in the redux store
   }
 
   // shrinks portal to zero to avoid issues while inside the portal
@@ -108,7 +108,7 @@ export const PortalTwo = (props) => {
           visible={!keyFound}
         />
         {/* Sound effect for when key is dragged and exit portal appears */}
-        {objectFoundStatus[1] && (
+        {objectFoundStatus.keyTwo && (
           <ViroSound
             source={require('./res/sound/unlock.wav')}
             volume={1.0}
