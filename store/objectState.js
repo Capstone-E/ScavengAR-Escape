@@ -1,5 +1,4 @@
 // action
-const FOUND_OBJECT = 'FOUND_OBJECT'
 const FOUND_KEY_ONE = 'FOUND_KEY_ONE'
 const FOUND_KEY_TWO = 'FOUND_KEY_TWO'
 export const RESET = 'RESET'
@@ -23,8 +22,6 @@ export const resetObject = () => ({
 
 
 // reducer
-// const initalState = [] // each value will signify that a key was collected
-
 // each value will signify that a key was collected
 const initalState = {
     keyOne: false,
