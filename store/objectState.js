@@ -37,8 +37,8 @@ const reducer = (state = initalState, action) => {
       return {...state, keyOne: action.objectStatus}
     case FOUND_KEY_TWO:
     return {...state, keyTwo: action.objectStatus}
-    case RESET: // will change later if this works
-      return []
+    case RESET:
+      return initalState
     default:
       return state
   }
