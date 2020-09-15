@@ -64,7 +64,7 @@ ScavengARescape was built using Viro-ReactNative
 
 (in alphabetical order)
 
-- [Kali](http://www.github/SlowGen)
+- [Kali](http://www.github.com/SlowGen)
 - [Kristi Nanco](http://www.github.com/knanco)
 - [Ashlee Pitock](http://www.github.com/AshleeKP)
 - [Mona Zheng](http://www.github.com/catmemberMona)
