@@ -45,14 +45,17 @@ const Inventory = () => {
 
 const style = StyleSheet.create({
   outerContainer: {
+    flex: .1,
     height: 80,
     borderTopWidth: 0.5,
     borderColor: '#800000',
     backgroundColor: 'black',
   },
   listViewContainer: {
+    flex: 1,
     height: 72,
-    paddingStart: '3%',
+    flexDirection: 'row',
+    justifyContent: "space-around",
   },
   buttons: {
     height: 70,
@@ -60,7 +63,6 @@ const style = StyleSheet.create({
     paddingTop: 1,
     paddingBottom: 1,
     paddingLeft: 1,
-    marginLeft: 40,
     marginTop: 5,
     marginBottom: 5,
     backgroundColor: 'black',
